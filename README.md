@@ -1,1 +1,1 @@
-# model_checking_on_fair_atomic_swaps
+# model_checking_on_hedged_atomic_swaps
