@@ -29,7 +29,7 @@ To simulate different behaviors of parties, we treat each proposed asset transfe
 
 Since each smart contract is modeled as a process, and participants take step to modify the state the smart contract, the steps in the protocol can be distributed to ordered steps in each contract. Thus, in each process, we have ordered steps that should take place in that smart contract(or blockchain).
 
-Since the deviating behaviors are reduced to messing up orders of steps or skipping steps, we captured the first kind of behaviors as well as conforming behaviors by the nature of model checker which takes different interleaves of steps in each process. Each step is an either statement. A party either take this step according to the protocol or skip the step. By this design, we also captured the second kind of deviating behaviors.
+Since the deviating behaviors are reduced to messing up orders of steps or skipping steps, we captured the first kind of behaviors as well as conforming behaviors by the nature of model checker which takes different interleaves of steps in each process. Each step is an if statement. A party takes this step according to the protocol if the smart contract permits and otherwise skip the step, for example, if the step is tranversed after timeout. By this design, we also captured the second kind of deviating behaviors.
 ### Count time
 We maintain a seperate process  called clock to count time.
 
