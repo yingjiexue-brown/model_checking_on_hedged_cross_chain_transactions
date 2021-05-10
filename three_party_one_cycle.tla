@@ -1,4 +1,4 @@
- ------------------------- MODULE three_party_swap_with_premium -------------------------
+ ------------------------- MODULE three_party_one_cycle-------------------------
 
 EXTENDS Integers, TLC
 (* --algorithm example

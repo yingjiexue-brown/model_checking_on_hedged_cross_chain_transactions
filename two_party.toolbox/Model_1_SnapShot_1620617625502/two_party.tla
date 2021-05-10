@@ -220,7 +220,7 @@ fair process Clock = CLOCK begin tik:
  end process
 
 end algorithm; *)
-\* BEGIN TRANSLATION - the hash of the PCal code: PCal-6e780c1da78f4c966b4b3f0b76be7092
+\* BEGIN TRANSLATION - the hash of the PCal code: PCal-34c5dbff6f64bacac376da15cc5583fa
 VARIABLES asset_contract, premium_contract, hashkey, wallet, clock, 
           step_taken, step_considered, conforming, pc
 
@@ -310,7 +310,7 @@ AS1 == /\ pc[BITCOIN] = "AS1"
        /\ UNCHANGED << hashkey, wallet, clock >>
 
 AS4 == /\ pc[BITCOIN] = "AS4"
-       /\ IF step_taken[SAS1]/\clock<=asset_contract["ALICE"].timeout/\ asset_contract["ALICE"].state= ESCROW
+       /\ IF step_taken[SAS1]/\step_taken[SAS3]/\clock<=asset_contract["ALICE"].timeout/\ asset_contract["ALICE"].state= ESCROW
              THEN /\ asset_contract' = [asset_contract EXCEPT !["ALICE"].state = REDEEMED]
                   /\ premium_contract' = [premium_contract EXCEPT !["BOB"].state = REFUNDED]
                   /\ wallet' = [wallet EXCEPT !["BOB"].balance = wallet["BOB"].balance +asset_contract'["ALICE"].balance,
@@ -325,14 +325,12 @@ AS4 == /\ pc[BITCOIN] = "AS4"
                              /\ UNCHANGED << asset_contract, premium_contract, 
                                              wallet >>
                   /\ UNCHANGED step_taken
-       /\ IF ~step_taken'[SAS3]/\ step_taken'[SAS4]
-             THEN /\ conforming' = [conforming EXCEPT ![ALICE] = FALSE]
-             ELSE /\ IF ~step_considered[SAS3] /\ clock<=hashkey["B2A"].deadline
+       /\ IF ~step_considered[SAS3] /\ clock<=hashkey["B2A"].deadline
+             THEN /\ conforming' = [conforming EXCEPT ![BOB] = FALSE]
+             ELSE /\ IF step_taken'[SAS3]/\step_taken'[SAS1]/\~step_taken'[SAS4]
                         THEN /\ conforming' = [conforming EXCEPT ![BOB] = FALSE]
-                        ELSE /\ IF step_taken'[SAS3]/\step_taken'[SAS1]/\~step_taken'[SAS4]
-                                   THEN /\ conforming' = [conforming EXCEPT ![BOB] = FALSE]
-                                   ELSE /\ TRUE
-                                        /\ UNCHANGED conforming
+                        ELSE /\ TRUE
+                             /\ UNCHANGED conforming
        /\ step_considered' = [step_considered EXCEPT ![SAS4] = TRUE]
        /\ pc' = [pc EXCEPT ![BITCOIN] = "Done"]
        /\ UNCHANGED << hashkey, clock >>
@@ -438,6 +436,6 @@ Spec == /\ Init /\ [][Next]_vars
 
 Termination == <>(\A self \in ProcSet: pc[self] = "Done")
 
-\* END TRANSLATION - the hash of the generated TLA code (remove to silence divergence warnings): TLA-6f8c31d9980ddf5b702e312e3b8f6b90
+\* END TRANSLATION - the hash of the generated TLA code (remove to silence divergence warnings): TLA-579e7b31cc18d73dcad1eb298f483e6c
 
 ====

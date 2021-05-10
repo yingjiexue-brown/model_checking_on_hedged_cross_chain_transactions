@@ -1,4 +1,4 @@
------------------------ MODULE four_processes -----------------------
+----------------------- MODULE three_party_two_cycles -----------------------
 EXTENDS Integers, TLC
 (* --algorithm example
 (*
