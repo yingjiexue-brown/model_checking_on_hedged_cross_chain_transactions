@@ -7,21 +7,24 @@ variables
    \* a contract has three subcontracts: asset_contract and premium_escrow_contract and  premium_redeem_contract
     \* A swap contract has balance, timeout is initialized as -1 and it will be changed after it is escrowed;
     \* a deadline to be escrowed
+    
+    \* all name field A2B,B2C, etc denotes the acr for asset transfer in the graph 
+    
     asset_contract = [A2B |->[balance |->100, timeout |-> -1, state |-> INIT,deadline |-> 6],
                      B2C |->[balance |->50, timeout |-> -1, state |-> INIT,deadline |-> 7],
                      B2A |->[balance |->50, timeout |-> -1, state |-> INIT,deadline |-> 7],
                      C2A |->[balance |->50, timeout |-> -1, state |-> INIT,deadline |-> 8]
                      ],
-                     
-    premium_escrow_contract = [A2B |->[balance |->10, timeout |-> -1, state |-> INIT,deadline |-> 0],
-                                B2C |->[balance |->5, timeout |-> -1, state |-> INIT,deadline |-> 1],
-                                B2A |->[balance |->5, timeout |-> -1, state |-> INIT,deadline |-> 1],
-                                C2A |->[balance |->5, timeout |-> -1, state |-> INIT,deadline |-> 2]
+                
+    premium_escrow_contract = [A2B |->[balance |->7, timeout |-> -1, state |-> INIT,deadline |-> 0],
+                                B2C |->[balance |->3.5, timeout |-> -1, state |-> INIT,deadline |-> 1],
+                                B2A |->[balance |->3.5, timeout |-> -1, state |-> INIT,deadline |-> 1],
+                                C2A |->[balance |->3.5, timeout |-> -1, state |-> INIT,deadline |-> 2]
                                 ],
                      
-    premium_redeem_contract_sa = [A_ON_CA|->[balance |->3, timeout |-> -1, state |-> INIT,deadline |-> 3],
-                                  A_ON_BA |->[balance |->2, timeout |-> -1, state |-> INIT,deadline |-> 3],
-                                  CA_ON_BC |->[balance |->2, timeout |-> -1, state |-> INIT,deadline |-> 4],
+    premium_redeem_contract_sa = [A_ON_CA|->[balance |->2, timeout |-> -1, state |-> INIT,deadline |-> 3],
+                                  A_ON_BA |->[balance |->1.5, timeout |-> -1, state |-> INIT,deadline |-> 3],
+                                  CA_ON_BC |->[balance |->1.5, timeout |-> -1, state |-> INIT,deadline |-> 4],
                                   BA_ON_AB |->[balance |->1, timeout |-> -1, state |-> INIT,deadline |-> 4],
                                   BCA_ON_AB |->[balance |->1, timeout |-> -1, state |-> INIT,deadline |-> 5]  
                                   ],
@@ -34,7 +37,7 @@ variables
                         BCA_ON_AB |->[timeout |-> 11, state |-> INIT]
                         ],                                 
     
-    wallet = [ALICE |-> [balance|-> 100+10+5,input|->115], BOB|-> [balance|-> 100+10+2,input|->112],CAROL |->[balance|->50+5+2,input|->57]],
+    wallet = [ALICE |-> [balance|-> 100+7+3.5,input|->110.5], BOB|-> [balance|-> 100+7+2,input|->109],CAROL |->[balance|->50+3.5+2.5,input|->56]],
     \* global clock
     clock = 0,
     \* indicating whether a step is considered in the model
@@ -62,12 +65,15 @@ define
  ended == ending[0]/\ending[1]/\ending[2]/\ending[3]
  
  \* below are properties that we are interested to check
- conformingliveness == /\ \A x \in PARTIES: ended/\conforming[x]
+ conformingliveness == /\ \A x \in PARTIES: ended/\conforming[x]\* helper to decide each party's conformity
+ walletliveness == (ended /\ \A x\in PARTIES: conforming[x]) => (\A x \in PARTIES:wallet[x].balance=wallet[x].input)
+ contractliveness == (conformingliveness) => (\A x \in SWPCN, y \in PATHSIGS: asset_contract[x].state=REDEEMED/\premium_redeem_contract_sa[y].state = REFUNDED/\premium_escrow_contract[x].state =REFUNDED2)
+
+ \* safety
  nounderwater == /\ \A x \in PARTIES: ended/\conforming[x]=>wallet[x].balance>=wallet[x].input
  compensated == /\ \A x\in PARTIES:  ended/\asset_contract[party_contract_map[x]].state=REFUNDED/\conforming[x]=>wallet[x].balance>=wallet[x].input+1
  compensated_BA == ended /\ conforming["BOB"]/\asset_contract["B2A"].state = REFUNDED =>wallet["BOB"].balance>=wallet["BOB"].input+1
- contractliveness == (ended /\ \A x\in PARTIES: conforming[x]) => (\A x \in SWPCN, y \in PATHSIGS: asset_contract[x].state=REDEEMED/\premium_redeem_contract_sa[y].state = REFUNDED/\premium_escrow_contract[x].state =REFUNDED2)
- walletliveness == (ended /\ \A x\in PARTIES: conforming[x]) => (\A x \in PARTIES:wallet[x].balance=wallet[x].input)
+ contractliveness == (conformingliveness) => (\A x \in SWPCN, y \in PATHSIGS: asset_contract[x].state=REDEEMED/\premium_redeem_contract_sa[y].state = REFUNDED/\premium_escrow_contract[x].state =REFUNDED2)
  constant == wallet["ALICE"].balance+wallet["BOB"].balance+wallet["CAROL"].balance
  constant_expect == wallet["ALICE"].input+wallet["BOB"].input+wallet["CAROL"].input
 end define;
@@ -524,7 +530,7 @@ fair process Clock = CLOCK begin tick:
 
 
 end algorithm; *)
-\* BEGIN TRANSLATION - the hash of the PCal code: PCal-2a663c36010534d2242343cb32fd60f3
+\* BEGIN TRANSLATION - the hash of the PCal code: PCal-a21c3672194351872e9bcb971bc5a602
 VARIABLES asset_contract, premium_escrow_contract, premium_redeem_contract_sa, 
           path_signature_sa, wallet, clock, step_considered, conforming, 
           step_taken, ending, party_contract_map, pc
@@ -571,14 +577,14 @@ Init == (* Global variables *)
                             B2A |->[balance |->50, timeout |-> -1, state |-> INIT,deadline |-> 7],
                             C2A |->[balance |->50, timeout |-> -1, state |-> INIT,deadline |-> 8]
                             ]
-        /\ premium_escrow_contract = [A2B |->[balance |->10, timeout |-> -1, state |-> INIT,deadline |-> 0],
-                                       B2C |->[balance |->5, timeout |-> -1, state |-> INIT,deadline |-> 1],
-                                       B2A |->[balance |->5, timeout |-> -1, state |-> INIT,deadline |-> 1],
-                                       C2A |->[balance |->5, timeout |-> -1, state |-> INIT,deadline |-> 2]
+        /\ premium_escrow_contract = [A2B |->[balance |->7, timeout |-> -1, state |-> INIT,deadline |-> 0],
+                                       B2C |->[balance |->3.5, timeout |-> -1, state |-> INIT,deadline |-> 1],
+                                       B2A |->[balance |->3.5, timeout |-> -1, state |-> INIT,deadline |-> 1],
+                                       C2A |->[balance |->3.5, timeout |-> -1, state |-> INIT,deadline |-> 2]
                                        ]
-        /\ premium_redeem_contract_sa = [A_ON_CA|->[balance |->3, timeout |-> -1, state |-> INIT,deadline |-> 3],
-                                         A_ON_BA |->[balance |->2, timeout |-> -1, state |-> INIT,deadline |-> 3],
-                                         CA_ON_BC |->[balance |->2, timeout |-> -1, state |-> INIT,deadline |-> 4],
+        /\ premium_redeem_contract_sa = [A_ON_CA|->[balance |->2, timeout |-> -1, state |-> INIT,deadline |-> 3],
+                                         A_ON_BA |->[balance |->1.5, timeout |-> -1, state |-> INIT,deadline |-> 3],
+                                         CA_ON_BC |->[balance |->1.5, timeout |-> -1, state |-> INIT,deadline |-> 4],
                                          BA_ON_AB |->[balance |->1, timeout |-> -1, state |-> INIT,deadline |-> 4],
                                          BCA_ON_AB |->[balance |->1, timeout |-> -1, state |-> INIT,deadline |-> 5]
                                          ]
@@ -588,7 +594,7 @@ Init == (* Global variables *)
                                BA_ON_AB |->[timeout |-> 10, state |-> INIT],
                                BCA_ON_AB |->[timeout |-> 11, state |-> INIT]
                                ]
-        /\ wallet = [ALICE |-> [balance|-> 100+10+5,input|->115], BOB|-> [balance|-> 100+10+2,input|->112],CAROL |->[balance|->50+5+2,input|->57]]
+        /\ wallet = [ALICE |-> [balance|-> 100+7+3.5,input|->110.5], BOB|-> [balance|-> 100+7+2,input|->109],CAROL |->[balance|->50+3.5+2.5,input|->56]]
         /\ clock = 0
         /\ step_considered = [s \in STEPS |->FALSE]
         /\ conforming = [p \in  PARTIES |->TRUE]
@@ -1157,5 +1163,5 @@ Spec == /\ Init /\ [][Next]_vars
 
 Termination == <>(\A self \in ProcSet: pc[self] = "Done")
 
-\* END TRANSLATION - the hash of the generated TLA code (remove to silence divergence warnings): TLA-22754b5f0810a34cc15d599a99239ea8
+\* END TRANSLATION - the hash of the generated TLA code (remove to silence divergence warnings): TLA-8b9d45b8d77614f18900ae093ad00d83
 ====

@@ -53,8 +53,9 @@ define
  ending == /\step_considered[SAS4]/\step_considered[SAS3]
  
  \* properties that we are interested to check
- 
- liveness == (/\ending/\conforming[ALICE]/\conforming[BOB])=>(/\premium_contract["ALICE"].state=REFUNDED /\premium_contract["BOB"].state=REFUNDED/\asset_contract["ALICE"].state=REDEEMED /\asset_contract["BOB"].state=REDEEMED)
+ \* 
+ liveness_pre == /\ending/\conforming[ALICE]/\conforming[BOB] \*helper function to see this can be achieved
+ liveness == (liveness_pre)=>(/\premium_contract["ALICE"].state=REFUNDED /\premium_contract["BOB"].state=REFUNDED/\asset_contract["ALICE"].state=REDEEMED /\asset_contract["BOB"].state=REDEEMED)
  \* hedged
  compensated_alice == (/\ending/\conforming[ALICE]/\asset_contract["ALICE"].state=REFUNDED) => wallet["ALICE"].balance>=wallet["ALICE"].init+1
  compensated_bob == (/\ending/\conforming[BOB]/\asset_contract["BOB"].state=REFUNDED) => wallet["BOB"].balance>=wallet["BOB"].init+1
@@ -133,7 +134,7 @@ fair process bitcoin = BITCOIN begin
     end if;
     
     \* this part determines the whether they are conforming 
-    if  ~step_taken[SAS3]/\step_taken[SAS2]/\ step_taken[SAS4] then
+    if ~(asset_contract["BOB"].state= REDEEMED) /\ step_taken[SAS4] then
           conforming[ALICE]:= FALSE; 
     elsif ~step_considered[SAS3] /\ clock<=hashkey["B2A"].deadline then
           conforming[BOB]:= FALSE; 
@@ -224,7 +225,7 @@ fair process Clock = CLOCK begin tik:
  end process
 
 end algorithm; *)
-\* BEGIN TRANSLATION - the hash of the PCal code: PCal-473e7ebcfc6a5f70208154912c4629c1
+\* BEGIN TRANSLATION - the hash of the PCal code: PCal-a77d30b11479f1dfc335ae681d7a45d2
 VARIABLES asset_contract, premium_contract, hashkey, wallet, clock, 
           step_taken, step_considered, conforming, pc
 
@@ -240,7 +241,8 @@ ending == /\step_considered[SAS4]/\step_considered[SAS3]
 
 
 
-liveness == (/\ending/\conforming[ALICE]/\conforming[BOB])=>(/\premium_contract["ALICE"].state=REFUNDED /\premium_contract["BOB"].state=REFUNDED/\asset_contract["ALICE"].state=REDEEMED /\asset_contract["BOB"].state=REDEEMED)
+liveness_pre == /\ending/\conforming[ALICE]/\conforming[BOB]
+liveness == (liveness_pre)=>(/\premium_contract["ALICE"].state=REFUNDED /\premium_contract["BOB"].state=REFUNDED/\asset_contract["ALICE"].state=REDEEMED /\asset_contract["BOB"].state=REDEEMED)
 
 compensated_alice == (/\ending/\conforming[ALICE]/\asset_contract["ALICE"].state=REFUNDED) => wallet["ALICE"].balance>=wallet["ALICE"].init+1
 compensated_bob == (/\ending/\conforming[BOB]/\asset_contract["BOB"].state=REFUNDED) => wallet["BOB"].balance>=wallet["BOB"].init+1
@@ -336,7 +338,7 @@ AS4 == /\ pc[BITCOIN] = "AS4"
                              /\ UNCHANGED << asset_contract, premium_contract, 
                                              wallet >>
                   /\ UNCHANGED step_taken
-       /\ IF ~step_taken'[SAS3]/\step_taken'[SAS2]/\ step_taken'[SAS4]
+       /\ IF ~(asset_contract'["BOB"].state= REDEEMED) /\ step_taken'[SAS4]
              THEN /\ conforming' = [conforming EXCEPT ![ALICE] = FALSE]
              ELSE /\ IF ~step_considered[SAS3] /\ clock<=hashkey["B2A"].deadline
                         THEN /\ conforming' = [conforming EXCEPT ![BOB] = FALSE]
@@ -456,6 +458,6 @@ Spec == /\ Init /\ [][Next]_vars
 
 Termination == <>(\A self \in ProcSet: pc[self] = "Done")
 
-\* END TRANSLATION - the hash of the generated TLA code (remove to silence divergence warnings): TLA-700c49ba814da733f5c329b2606f6ef9
+\* END TRANSLATION - the hash of the generated TLA code (remove to silence divergence warnings): TLA-7e4971695b9f459bb40fddb3d93b2e2a
 
 ====

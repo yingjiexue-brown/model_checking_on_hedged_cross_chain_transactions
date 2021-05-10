@@ -135,9 +135,9 @@ S_B_R:\* clock =8,Bob redeems
          end if;
     end if;
   
-    if step_taken[A_R]/\step_taken[B_E]/\~step_taken[C_R]/\step_taken[B_R] then
+    if ~(asset_contract["BOB"].state= REDEEMED)/\(asset_contract["CAROL"].state= REDEEMED)/\step_taken[B_R] then
       conforming[CAROL]:=FALSE;
-    elsif step_taken[C_E]/\~step_taken[A_R]/\step_taken[B_R] then
+    elsif ~(asset_contract["CAROL"].state= REDEEMED)/\step_taken[B_R] then
       conforming[ALICE]:=FALSE;
     elsif ~step_considered[C_R]/\clock<= hashkey["B2C"].deadline then
        conforming[BOB]:=FALSE;
@@ -211,7 +211,7 @@ S_C_R:\*clock =7, carol redeems
            ||wallet["CAROL"].balance := wallet["CAROL"].balance-premium_contract["CAROL"].balance
            end if;
     end if;
-    if  step_taken[C_E]/\~step_taken[A_R]/\step_taken[C_R] then
+    if  ~(asset_contract["CAROL"].state= REDEEMED)/\step_taken[C_R] then
          conforming[ALICE]:=FALSE;
     elsif ~step_considered[A_R] /\ clock<= hashkey["C2A"].deadline then
        conforming[CAROL]:=FALSE;
@@ -304,7 +304,7 @@ fair process Clock = CLOCK begin tick:
  
 
 end algorithm; *)
-\* BEGIN TRANSLATION - the hash of the PCal code: PCal-8411467c2c5a6579580492d9fd64d495
+\* BEGIN TRANSLATION - the hash of the PCal code: PCal-65ec476cecbbaff9e76e695926566b71
 VARIABLES asset_contract, premium_contract, wallet, hashkey, clock, 
           step_considered, conforming, step_taken, pc
 
@@ -419,9 +419,9 @@ S_B_R == /\ pc[BITCOIN] = "S_B_R"
                                /\ UNCHANGED << asset_contract, 
                                                premium_contract, wallet >>
                     /\ UNCHANGED step_taken
-         /\ IF step_taken'[A_R]/\step_taken'[B_E]/\~step_taken'[C_R]/\step_taken'[B_R]
+         /\ IF ~(asset_contract'["BOB"].state= REDEEMED)/\(asset_contract'["CAROL"].state= REDEEMED)/\step_taken'[B_R]
                THEN /\ conforming' = [conforming EXCEPT ![CAROL] = FALSE]
-               ELSE /\ IF step_taken'[C_E]/\~step_taken'[A_R]/\step_taken'[B_R]
+               ELSE /\ IF ~(asset_contract'["CAROL"].state= REDEEMED)/\step_taken'[B_R]
                           THEN /\ conforming' = [conforming EXCEPT ![ALICE] = FALSE]
                           ELSE /\ IF ~step_considered[C_R]/\clock<= hashkey["B2C"].deadline
                                      THEN /\ conforming' = [conforming EXCEPT ![BOB] = FALSE]
@@ -502,7 +502,7 @@ S_C_R == /\ pc[LITECOIN] = "S_C_R"
                                /\ UNCHANGED << asset_contract, 
                                                premium_contract, wallet >>
                     /\ UNCHANGED step_taken
-         /\ IF step_taken'[C_E]/\~step_taken'[A_R]/\step_taken'[C_R]
+         /\ IF ~(asset_contract'["CAROL"].state= REDEEMED)/\step_taken'[C_R]
                THEN /\ conforming' = [conforming EXCEPT ![ALICE] = FALSE]
                ELSE /\ IF ~step_considered[A_R] /\ clock<= hashkey["C2A"].deadline
                           THEN /\ conforming' = [conforming EXCEPT ![CAROL] = FALSE]
@@ -623,5 +623,5 @@ Spec == /\ Init /\ [][Next]_vars
 
 Termination == <>(\A self \in ProcSet: pc[self] = "Done")
 
-\* END TRANSLATION - the hash of the generated TLA code (remove to silence divergence warnings): TLA-ecf78f6f3ebce22dfe53b691839d7b40
+\* END TRANSLATION - the hash of the generated TLA code (remove to silence divergence warnings): TLA-e31a9420d0ba253d4d18d7e9bb10327b
 ====
