@@ -133,7 +133,7 @@ fair process bitcoin = BITCOIN begin
     end if;
     
     \* this part determines the whether they are conforming 
-    if  ~step_taken[SAS3]/\step_taken[SAS2]/\ step_taken[SAS4] then
+    if  ~step_taken[SAS3]/\ step_taken[SAS4] then
           conforming[ALICE]:= FALSE; 
     elsif ~step_considered[SAS3] /\ clock<=hashkey["B2A"].deadline then
           conforming[BOB]:= FALSE; 
@@ -224,7 +224,7 @@ fair process Clock = CLOCK begin tik:
  end process
 
 end algorithm; *)
-\* BEGIN TRANSLATION - the hash of the PCal code: PCal-473e7ebcfc6a5f70208154912c4629c1
+\* BEGIN TRANSLATION - the hash of the PCal code: PCal-ef416f24f86abfe9088ea9190dfbbf4f
 VARIABLES asset_contract, premium_contract, hashkey, wallet, clock, 
           step_taken, step_considered, conforming, pc
 
@@ -336,7 +336,7 @@ AS4 == /\ pc[BITCOIN] = "AS4"
                              /\ UNCHANGED << asset_contract, premium_contract, 
                                              wallet >>
                   /\ UNCHANGED step_taken
-       /\ IF ~step_taken'[SAS3]/\step_taken'[SAS2]/\ step_taken'[SAS4]
+       /\ IF ~step_taken'[SAS3]/\ step_taken'[SAS4]
              THEN /\ conforming' = [conforming EXCEPT ![ALICE] = FALSE]
              ELSE /\ IF ~step_considered[SAS3] /\ clock<=hashkey["B2A"].deadline
                         THEN /\ conforming' = [conforming EXCEPT ![BOB] = FALSE]
@@ -456,6 +456,6 @@ Spec == /\ Init /\ [][Next]_vars
 
 Termination == <>(\A self \in ProcSet: pc[self] = "Done")
 
-\* END TRANSLATION - the hash of the generated TLA code (remove to silence divergence warnings): TLA-700c49ba814da733f5c329b2606f6ef9
+\* END TRANSLATION - the hash of the generated TLA code (remove to silence divergence warnings): TLA-a6fd6dd00cb5a3e5f0edd8344b05acda
 
 ====

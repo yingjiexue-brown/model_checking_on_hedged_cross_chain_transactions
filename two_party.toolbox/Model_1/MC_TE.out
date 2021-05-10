@@ -2,7 +2,7 @@
 TLC2 Version 2.15 of Day Month 20?? (rev: eb3ff99)
 @!@!@ENDMSG 2262 @!@!@
 @!@!@STARTMSG 2187:0 @!@!@
-Running breadth-first search Model-Checking with fp 11 and seed -5471760106064059074 with 4 workers on 8 cores with 1214MB heap and 2730MB offheap memory [pid: 81659] (Mac OS X 10.16 x86_64, AdoptOpenJDK 14.0.1 x86_64, OffHeapDiskFPSet, DiskStateQueue).
+Running breadth-first search Model-Checking with fp 1 and seed 7498527170391882919 with 4 workers on 8 cores with 1214MB heap and 2730MB offheap memory [pid: 84353] (Mac OS X 10.16 x86_64, AdoptOpenJDK 14.0.1 x86_64, OffHeapDiskFPSet, DiskStateQueue).
 @!@!@ENDMSG 2187 @!@!@
 @!@!@STARTMSG 2220:0 @!@!@
 Starting SANY...
@@ -25,7 +25,7 @@ Semantic processing of module MC
 SANY finished.
 @!@!@ENDMSG 2219 @!@!@
 @!@!@STARTMSG 2185:0 @!@!@
-Starting... (2021-05-09 23:34:59)
+Starting... (2021-05-10 10:36:25)
 @!@!@ENDMSG 2185 @!@!@
 @!@!@STARTMSG 2212:0 @!@!@
 Implied-temporal checking--satisfiability problem has 1 branches.
@@ -34,616 +34,670 @@ Implied-temporal checking--satisfiability problem has 1 branches.
 Computing initial states...
 @!@!@ENDMSG 2189 @!@!@
 @!@!@STARTMSG 2190:0 @!@!@
-Finished computing initial states: 1 distinct state generated at 2021-05-09 23:35:00.
+Finished computing initial states: 1 distinct state generated at 2021-05-10 10:36:26.
 @!@!@ENDMSG 2190 @!@!@
 @!@!@STARTMSG 2200:0 @!@!@
-Progress(20) at 2021-05-09 23:35:01: 8,685 states generated, 4,508 distinct states found, 0 states left on queue.
+Progress(20) at 2021-05-10 10:36:27: 8,955 states generated, 4,670 distinct states found, 0 states left on queue.
 @!@!@ENDMSG 2200 @!@!@
 @!@!@STARTMSG 2192:0 @!@!@
-Checking temporal properties for the complete state space with 4508 total distinct states at (2021-05-09 23:35:01)
+Checking temporal properties for the complete state space with 4670 total distinct states at (2021-05-10 10:36:27)
 @!@!@ENDMSG 2192 @!@!@
 @!@!@STARTMSG 2267:0 @!@!@
-Finished checking temporal properties in 00s at 2021-05-09 23:35:01
+Finished checking temporal properties in 00s at 2021-05-10 10:36:27
 @!@!@ENDMSG 2267 @!@!@
 @!@!@STARTMSG 2193:0 @!@!@
 Model checking completed. No error has been found.
   Estimates of the probability that TLC did not check all reachable states
   because two distinct states had the same fingerprint:
-  calculated (optimistic):  val = 1.0E-12
+  calculated (optimistic):  val = 1.1E-12
 @!@!@ENDMSG 2193 @!@!@
 @!@!@STARTMSG 2201:0 @!@!@
-The coverage statistics at 2021-05-09 23:35:01
+The coverage statistics at 2021-05-10 10:36:27
 @!@!@ENDMSG 2201 @!@!@
 @!@!@STARTMSG 2773:0 @!@!@
-<Init line 253, col 1 to line 253, col 4 of module two_party>: 1:1
+<Init line 257, col 1 to line 257, col 4 of module two_party>: 1:1
 @!@!@ENDMSG 2773 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 254, col 9 to line 266, col 65 of module two_party: 1
+  line 258, col 9 to line 270, col 65 of module two_party: 1
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2772:0 @!@!@
-<DP2 line 268, col 1 to line 268, col 3 of module two_party>: 21:196
+<DP2 line 272, col 1 to line 272, col 3 of module two_party>: 24:196
 @!@!@ENDMSG 2772 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 268, col 11 to line 268, col 29 of module two_party: 4705
+  line 272, col 11 to line 272, col 29 of module two_party: 4867
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 268, col 11 to line 268, col 21 of module two_party: 4509
+  |line 272, col 11 to line 272, col 21 of module two_party: 4671
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 269, col 14 to line 269, col 91 of module two_party: 196
+  line 273, col 14 to line 273, col 91 of module two_party: 196
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 269, col 14 to line 269, col 53 of module two_party: 196
+  |line 273, col 14 to line 273, col 53 of module two_party: 196
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 269, col 58 to line 269, col 91 of module two_party: 26
+  |line 273, col 58 to line 273, col 91 of module two_party: 26
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 270, col 19 to line 273, col 69 of module two_party: 26
+  line 274, col 19 to line 277, col 69 of module two_party: 26
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 274, col 22 to line 274, col 25 of module two_party: 170
+  line 278, col 22 to line 278, col 25 of module two_party: 170
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 275, col 22 to line 275, col 65 of module two_party: 170
+  line 279, col 22 to line 279, col 65 of module two_party: 170
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 276, col 14 to line 276, col 81 of module two_party: 196
+  line 280, col 14 to line 280, col 81 of module two_party: 196
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 276, col 14 to line 276, col 35 of module two_party: 196
+  |line 280, col 14 to line 280, col 35 of module two_party: 196
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 276, col 39 to line 276, col 81 of module two_party: 14
+  |line 280, col 39 to line 280, col 81 of module two_party: 14
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 277, col 19 to line 277, col 69 of module two_party: 2
+  line 281, col 19 to line 281, col 69 of module two_party: 2
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 278, col 25 to line 278, col 61 of module two_party: 194
+  line 282, col 25 to line 282, col 61 of module two_party: 194
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 278, col 25 to line 278, col 41 of module two_party: 194
+  |line 282, col 25 to line 282, col 41 of module two_party: 194
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 278, col 44 to line 278, col 61 of module two_party: 130
+  |line 282, col 44 to line 282, col 61 of module two_party: 130
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 279, col 30 to line 279, col 80 of module two_party: 114
+  line 283, col 30 to line 283, col 80 of module two_party: 114
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 280, col 36 to line 280, col 72 of module two_party: 80
+  line 284, col 36 to line 284, col 72 of module two_party: 80
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 280, col 36 to line 280, col 53 of module two_party: 80
+  |line 284, col 36 to line 284, col 53 of module two_party: 80
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 280, col 56 to line 280, col 72 of module two_party: 64
+  |line 284, col 56 to line 284, col 72 of module two_party: 64
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 281, col 41 to line 281, col 91 of module two_party: 8
+  line 285, col 41 to line 285, col 91 of module two_party: 8
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 282, col 44 to line 282, col 47 of module two_party: 72
+  line 286, col 44 to line 286, col 47 of module two_party: 72
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 283, col 44 to line 283, col 63 of module two_party: 72
+  line 287, col 44 to line 287, col 63 of module two_party: 72
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 284, col 11 to line 284, col 68 of module two_party: 196
+  line 288, col 11 to line 288, col 68 of module two_party: 196
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 285, col 11 to line 285, col 46 of module two_party: 196
+  line 289, col 11 to line 289, col 46 of module two_party: 196
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 286, col 11 to line 286, col 64 of module two_party: 196
+  line 290, col 11 to line 290, col 64 of module two_party: 196
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2772:0 @!@!@
-<AS1 line 288, col 1 to line 288, col 3 of module two_party>: 92:549
+<AS1 line 292, col 1 to line 292, col 3 of module two_party>: 100:548
 @!@!@ENDMSG 2772 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 288, col 11 to line 288, col 29 of module two_party: 5058
+  line 292, col 11 to line 292, col 29 of module two_party: 5219
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 288, col 11 to line 288, col 21 of module two_party: 4509
+  |line 292, col 11 to line 292, col 21 of module two_party: 4671
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 289, col 14 to line 289, col 114 of module two_party: 549
+  line 293, col 14 to line 293, col 114 of module two_party: 548
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 289, col 14 to line 289, col 74 of module two_party: 549
+  |line 293, col 14 to line 293, col 74 of module two_party: 548
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  ||line 289, col 14 to line 289, col 29 of module two_party: 549
+  ||line 293, col 14 to line 293, col 29 of module two_party: 548
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  ||line 289, col 34 to line 289, col 74 of module two_party: 379
+  ||line 293, col 34 to line 293, col 74 of module two_party: 378
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 289, col 79 to line 289, col 114 of module two_party: 95
+  |line 293, col 79 to line 293, col 114 of module two_party: 94
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 290, col 22 to line 292, col 107 of module two_party: 95
+  line 294, col 22 to line 296, col 107 of module two_party: 94
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 293, col 22 to line 293, col 69 of module two_party: 95
+  line 297, col 22 to line 297, col 69 of module two_party: 94
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 294, col 22 to line 294, col 47 of module two_party: 95
+  line 298, col 22 to line 298, col 47 of module two_party: 94
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 295, col 25 to line 295, col 60 of module two_party: 454
+  line 299, col 25 to line 299, col 60 of module two_party: 454
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 296, col 30 to line 296, col 103 of module two_party: 284
+  line 300, col 30 to line 300, col 103 of module two_party: 284
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 297, col 33 to line 297, col 36 of module two_party: 170
+  line 301, col 33 to line 301, col 36 of module two_party: 170
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 298, col 33 to line 298, col 58 of module two_party: 170
+  line 302, col 33 to line 302, col 58 of module two_party: 170
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 299, col 22 to line 299, col 63 of module two_party: 454
+  line 303, col 22 to line 303, col 63 of module two_party: 454
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 300, col 14 to line 300, col 79 of module two_party: 549
+  line 304, col 14 to line 304, col 79 of module two_party: 548
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 301, col 22 to line 301, col 71 of module two_party: 0
+  line 305, col 22 to line 305, col 71 of module two_party: 0
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 302, col 25 to line 302, col 61 of module two_party: 549
+  line 306, col 25 to line 306, col 61 of module two_party: 548
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 302, col 25 to line 302, col 41 of module two_party: 549
+  |line 306, col 25 to line 306, col 41 of module two_party: 548
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 302, col 44 to line 302, col 61 of module two_party: 379
+  |line 306, col 44 to line 306, col 61 of module two_party: 378
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 303, col 30 to line 303, col 82 of module two_party: 284
+  line 307, col 30 to line 307, col 82 of module two_party: 284
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 304, col 36 to line 304, col 72 of module two_party: 265
+  line 308, col 36 to line 308, col 72 of module two_party: 264
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 304, col 36 to line 304, col 53 of module two_party: 265
+  |line 308, col 36 to line 308, col 53 of module two_party: 264
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 304, col 56 to line 304, col 72 of module two_party: 170
+  |line 308, col 56 to line 308, col 72 of module two_party: 170
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 305, col 44 to line 305, col 93 of module two_party: 0
+  line 309, col 44 to line 309, col 93 of module two_party: 0
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 306, col 44 to line 306, col 47 of module two_party: 265
+  line 310, col 44 to line 310, col 47 of module two_party: 264
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 307, col 44 to line 307, col 63 of module two_party: 265
+  line 311, col 44 to line 311, col 63 of module two_party: 264
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 308, col 11 to line 308, col 68 of module two_party: 549
+  line 312, col 11 to line 312, col 68 of module two_party: 548
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 309, col 11 to line 309, col 46 of module two_party: 549
+  line 313, col 11 to line 313, col 46 of module two_party: 548
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 310, col 11 to line 310, col 48 of module two_party: 549
+  line 314, col 11 to line 314, col 48 of module two_party: 548
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2772:0 @!@!@
-<AS4 line 312, col 1 to line 312, col 3 of module two_party>: 235:1598
+<AS4 line 316, col 1 to line 316, col 3 of module two_party>: 256:1599
 @!@!@ENDMSG 2772 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 312, col 11 to line 312, col 29 of module two_party: 6107
+  line 316, col 11 to line 316, col 29 of module two_party: 6270
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 312, col 11 to line 312, col 21 of module two_party: 4509
+  |line 316, col 11 to line 316, col 21 of module two_party: 4671
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 313, col 14 to line 313, col 109 of module two_party: 1598
+  line 317, col 14 to line 317, col 109 of module two_party: 1599
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 313, col 14 to line 313, col 69 of module two_party: 1598
+  |line 317, col 14 to line 317, col 69 of module two_party: 1599
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  ||line 313, col 14 to line 313, col 29 of module two_party: 1598
+  ||line 317, col 14 to line 317, col 29 of module two_party: 1599
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  ||line 313, col 32 to line 313, col 69 of module two_party: 1140
+  ||line 317, col 32 to line 317, col 69 of module two_party: 1141
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 313, col 73 to line 313, col 109 of module two_party: 878
+  |line 317, col 73 to line 317, col 109 of module two_party: 879
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 314, col 19 to line 318, col 69 of module two_party: 878
+  line 318, col 22 to line 318, col 90 of module two_party: 879
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 319, col 25 to line 319, col 80 of module two_party: 720
+  line 319, col 25 to line 319, col 60 of module two_party: 879
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 319, col 25 to line 319, col 40 of module two_party: 720
+  line 320, col 30 to line 320, col 103 of module two_party: 879
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 319, col 44 to line 319, col 80 of module two_party: 262
+  line 322, col 33 to line 322, col 58 of module two_party: 0
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 320, col 30 to line 323, col 135 of module two_party: 262
+  line 323, col 22 to line 324, col 124 of module two_party: 879
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 324, col 33 to line 324, col 36 of module two_party: 458
+  line 325, col 22 to line 325, col 69 of module two_party: 879
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 325, col 33 to line 326, col 54 of module two_party: 458
+  line 326, col 25 to line 326, col 80 of module two_party: 720
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 327, col 22 to line 327, col 41 of module two_party: 720
+  |line 326, col 25 to line 326, col 40 of module two_party: 720
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 328, col 14 to line 328, col 51 of module two_party: 1598
+  |line 326, col 44 to line 326, col 80 of module two_party: 262
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 328, col 14 to line 328, col 31 of module two_party: 1598
+  line 327, col 33 to line 327, col 101 of module two_party: 262
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 328, col 35 to line 328, col 51 of module two_party: 1178
+  line 328, col 36 to line 328, col 71 of module two_party: 262
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 329, col 19 to line 329, col 71 of module two_party: 622
+  line 329, col 41 to line 331, col 146 of module two_party: 262
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 330, col 25 to line 330, col 80 of module two_party: 976
+  line 333, col 44 to line 334, col 65 of module two_party: 0
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 330, col 25 to line 330, col 46 of module two_party: 976
+  line 335, col 33 to line 335, col 36 of module two_party: 458
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 330, col 51 to line 330, col 80 of module two_party: 366
+  line 336, col 33 to line 337, col 54 of module two_party: 458
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 331, col 30 to line 331, col 80 of module two_party: 128
+  line 338, col 22 to line 338, col 41 of module two_party: 720
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 332, col 36 to line 332, col 91 of module two_party: 848
+  line 339, col 14 to line 339, col 70 of module two_party: 1599
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 332, col 36 to line 332, col 71 of module two_party: 848
+  |line 339, col 14 to line 339, col 50 of module two_party: 1599
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  ||line 332, col 36 to line 332, col 52 of module two_party: 848
+  ||line 339, col 14 to line 339, col 31 of module two_party: 1599
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  ||line 332, col 55 to line 332, col 71 of module two_party: 420
+  ||line 339, col 34 to line 339, col 50 of module two_party: 1179
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 332, col 74 to line 332, col 91 of module two_party: 318
+  |line 339, col 54 to line 339, col 70 of module two_party: 592
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 333, col 41 to line 333, col 91 of module two_party: 62
+  line 340, col 19 to line 340, col 71 of module two_party: 318
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 334, col 44 to line 334, col 47 of module two_party: 786
+  line 341, col 25 to line 341, col 80 of module two_party: 1281
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 335, col 44 to line 335, col 63 of module two_party: 786
+  |line 341, col 25 to line 341, col 46 of module two_party: 1281
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 336, col 11 to line 336, col 68 of module two_party: 1598
+  |line 341, col 51 to line 341, col 80 of module two_party: 605
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 337, col 11 to line 337, col 47 of module two_party: 1598
+  line 342, col 30 to line 342, col 80 of module two_party: 311
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 338, col 11 to line 338, col 40 of module two_party: 1598
+  line 343, col 36 to line 343, col 91 of module two_party: 970
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 343, col 36 to line 343, col 71 of module two_party: 970
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||line 343, col 36 to line 343, col 52 of module two_party: 970
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||line 343, col 55 to line 343, col 71 of module two_party: 420
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 343, col 74 to line 343, col 91 of module two_party: 318
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 344, col 41 to line 344, col 91 of module two_party: 62
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 345, col 44 to line 345, col 47 of module two_party: 908
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 346, col 44 to line 346, col 63 of module two_party: 908
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 347, col 11 to line 347, col 68 of module two_party: 1599
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 348, col 11 to line 348, col 47 of module two_party: 1599
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 349, col 11 to line 349, col 40 of module two_party: 1599
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2772:0 @!@!@
-<DP1 line 342, col 1 to line 342, col 3 of module two_party>: 24:233
+<DP1 line 353, col 1 to line 353, col 3 of module two_party>: 21:233
 @!@!@ENDMSG 2772 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 342, col 11 to line 342, col 30 of module two_party: 4742
+  line 353, col 11 to line 353, col 30 of module two_party: 4904
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 342, col 11 to line 342, col 22 of module two_party: 4509
+  |line 353, col 11 to line 353, col 22 of module two_party: 4671
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 343, col 14 to line 343, col 94 of module two_party: 233
+  line 354, col 14 to line 354, col 94 of module two_party: 233
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 343, col 14 to line 343, col 54 of module two_party: 233
+  |line 354, col 14 to line 354, col 54 of module two_party: 233
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 343, col 59 to line 343, col 94 of module two_party: 9
+  |line 354, col 59 to line 354, col 94 of module two_party: 9
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 344, col 19 to line 347, col 69 of module two_party: 9
+  line 355, col 19 to line 358, col 69 of module two_party: 9
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 348, col 22 to line 348, col 25 of module two_party: 224
+  line 359, col 22 to line 359, col 25 of module two_party: 224
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 349, col 22 to line 349, col 65 of module two_party: 224
+  line 360, col 22 to line 360, col 65 of module two_party: 224
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 350, col 14 to line 350, col 31 of module two_party: 233
+  line 361, col 14 to line 361, col 31 of module two_party: 233
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 351, col 19 to line 351, col 71 of module two_party: 224
+  line 362, col 19 to line 362, col 71 of module two_party: 224
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 352, col 22 to line 352, col 25 of module two_party: 9
+  line 363, col 22 to line 363, col 25 of module two_party: 9
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 353, col 22 to line 353, col 41 of module two_party: 9
+  line 364, col 22 to line 364, col 41 of module two_party: 9
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 354, col 11 to line 354, col 68 of module two_party: 233
+  line 365, col 11 to line 365, col 68 of module two_party: 233
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 355, col 11 to line 355, col 47 of module two_party: 233
+  line 366, col 11 to line 366, col 47 of module two_party: 233
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 356, col 11 to line 356, col 64 of module two_party: 233
+  line 367, col 11 to line 367, col 64 of module two_party: 233
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2772:0 @!@!@
-<AS2 line 358, col 1 to line 358, col 3 of module two_party>: 135:560
+<AS2 line 369, col 1 to line 369, col 3 of module two_party>: 126:544
 @!@!@ENDMSG 2772 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 358, col 11 to line 358, col 30 of module two_party: 5069
+  line 369, col 11 to line 369, col 30 of module two_party: 5215
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 358, col 11 to line 358, col 22 of module two_party: 4509
+  |line 369, col 11 to line 369, col 22 of module two_party: 4671
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 359, col 14 to line 359, col 109 of module two_party: 560
+  line 370, col 14 to line 370, col 109 of module two_party: 544
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 359, col 14 to line 359, col 70 of module two_party: 560
+  |line 370, col 14 to line 370, col 70 of module two_party: 544
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  ||line 359, col 14 to line 359, col 29 of module two_party: 560
+  ||line 370, col 14 to line 370, col 29 of module two_party: 544
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  ||line 359, col 34 to line 359, col 70 of module two_party: 336
+  ||line 370, col 34 to line 370, col 70 of module two_party: 320
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 359, col 76 to line 359, col 109 of module two_party: 144
+  |line 370, col 76 to line 370, col 109 of module two_party: 126
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 360, col 22 to line 362, col 105 of module two_party: 144
+  line 371, col 22 to line 373, col 105 of module two_party: 126
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 363, col 22 to line 363, col 69 of module two_party: 144
+  line 374, col 22 to line 374, col 69 of module two_party: 126
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 364, col 22 to line 364, col 47 of module two_party: 144
+  line 375, col 22 to line 375, col 47 of module two_party: 126
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 365, col 25 to line 365, col 62 of module two_party: 416
+  line 376, col 25 to line 376, col 62 of module two_party: 418
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 366, col 30 to line 366, col 105 of module two_party: 192
+  line 377, col 30 to line 377, col 105 of module two_party: 194
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 367, col 33 to line 367, col 36 of module two_party: 224
+  line 378, col 33 to line 378, col 36 of module two_party: 224
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 368, col 33 to line 368, col 58 of module two_party: 224
+  line 379, col 33 to line 379, col 58 of module two_party: 224
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 369, col 22 to line 369, col 63 of module two_party: 416
+  line 380, col 22 to line 380, col 63 of module two_party: 418
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 370, col 14 to line 370, col 79 of module two_party: 560
+  line 381, col 14 to line 381, col 79 of module two_party: 544
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 370, col 14 to line 370, col 35 of module two_party: 560
+  |line 381, col 14 to line 381, col 35 of module two_party: 544
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 370, col 40 to line 370, col 79 of module two_party: 110
+  |line 381, col 40 to line 381, col 79 of module two_party: 110
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 371, col 19 to line 371, col 69 of module two_party: 38
+  line 382, col 19 to line 382, col 69 of module two_party: 38
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 372, col 25 to line 372, col 82 of module two_party: 522
+  line 383, col 25 to line 383, col 82 of module two_party: 506
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 372, col 25 to line 372, col 62 of module two_party: 522
+  |line 383, col 25 to line 383, col 62 of module two_party: 506
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  ||line 372, col 25 to line 372, col 41 of module two_party: 522
+  ||line 383, col 25 to line 383, col 41 of module two_party: 506
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  ||line 372, col 46 to line 372, col 62 of module two_party: 326
+  ||line 383, col 46 to line 383, col 62 of module two_party: 310
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 372, col 65 to line 372, col 82 of module two_party: 204
+  |line 383, col 65 to line 383, col 82 of module two_party: 188
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 373, col 30 to line 373, col 80 of module two_party: 112
+  line 384, col 30 to line 384, col 80 of module two_party: 114
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 374, col 36 to line 374, col 74 of module two_party: 410
+  line 385, col 36 to line 385, col 74 of module two_party: 392
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 374, col 36 to line 374, col 53 of module two_party: 410
+  |line 385, col 36 to line 385, col 53 of module two_party: 392
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 374, col 58 to line 374, col 74 of module two_party: 196
+  |line 385, col 58 to line 385, col 74 of module two_party: 196
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 375, col 41 to line 375, col 91 of module two_party: 28
+  line 386, col 41 to line 386, col 91 of module two_party: 28
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 376, col 44 to line 376, col 47 of module two_party: 382
+  line 387, col 44 to line 387, col 47 of module two_party: 364
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 377, col 44 to line 377, col 63 of module two_party: 382
+  line 388, col 44 to line 388, col 63 of module two_party: 364
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 378, col 11 to line 378, col 68 of module two_party: 560
+  line 389, col 11 to line 389, col 68 of module two_party: 544
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 379, col 11 to line 379, col 47 of module two_party: 560
+  line 390, col 11 to line 390, col 47 of module two_party: 544
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 380, col 11 to line 380, col 48 of module two_party: 560
+  line 391, col 11 to line 391, col 48 of module two_party: 544
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2772:0 @!@!@
-<AS3 line 382, col 1 to line 382, col 3 of module two_party>: 242:1470
+<AS3 line 393, col 1 to line 393, col 3 of module two_party>: 265:1610
 @!@!@ENDMSG 2772 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 382, col 11 to line 382, col 30 of module two_party: 5979
+  line 393, col 11 to line 393, col 30 of module two_party: 6281
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 382, col 11 to line 382, col 22 of module two_party: 4509
+  |line 393, col 11 to line 393, col 22 of module two_party: 4671
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 383, col 14 to line 383, col 105 of module two_party: 1470
+  line 394, col 14 to line 394, col 105 of module two_party: 1610
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 383, col 14 to line 383, col 67 of module two_party: 1470
+  |line 394, col 14 to line 394, col 67 of module two_party: 1610
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  ||line 383, col 14 to line 383, col 29 of module two_party: 1470
+  ||line 394, col 14 to line 394, col 29 of module two_party: 1610
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  ||line 383, col 32 to line 383, col 67 of module two_party: 1070
+  ||line 394, col 32 to line 394, col 67 of module two_party: 1210
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 383, col 70 to line 383, col 105 of module two_party: 600
+  |line 394, col 70 to line 394, col 105 of module two_party: 684
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 384, col 19 to line 388, col 69 of module two_party: 600
+  line 395, col 22 to line 395, col 88 of module two_party: 684
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 389, col 25 to line 389, col 79 of module two_party: 870
+  line 396, col 25 to line 396, col 62 of module two_party: 684
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 389, col 25 to line 389, col 40 of module two_party: 870
+  line 397, col 30 to line 397, col 105 of module two_party: 684
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 389, col 44 to line 389, col 79 of module two_party: 470
+  line 399, col 33 to line 399, col 58 of module two_party: 0
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 390, col 30 to line 393, col 137 of module two_party: 470
+  line 400, col 22 to line 401, col 124 of module two_party: 684
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 394, col 33 to line 394, col 36 of module two_party: 400
+  line 402, col 22 to line 402, col 69 of module two_party: 684
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 395, col 33 to line 396, col 54 of module two_party: 400
+  line 403, col 25 to line 403, col 79 of module two_party: 926
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 397, col 22 to line 397, col 41 of module two_party: 870
+  |line 403, col 25 to line 403, col 40 of module two_party: 926
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 398, col 14 to line 398, col 75 of module two_party: 1470
+  |line 403, col 44 to line 403, col 79 of module two_party: 526
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 399, col 22 to line 399, col 71 of module two_party: 0
+  line 404, col 33 to line 404, col 99 of module two_party: 526
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 400, col 25 to line 400, col 61 of module two_party: 1470
+  line 405, col 36 to line 405, col 73 of module two_party: 526
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 400, col 25 to line 400, col 41 of module two_party: 1470
+  line 406, col 41 to line 408, col 148 of module two_party: 526
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 400, col 44 to line 400, col 61 of module two_party: 1070
+  line 410, col 44 to line 411, col 65 of module two_party: 0
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 401, col 30 to line 401, col 82 of module two_party: 470
+  line 412, col 33 to line 412, col 36 of module two_party: 400
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 402, col 36 to line 402, col 72 of module two_party: 1000
+  line 413, col 33 to line 414, col 54 of module two_party: 400
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 402, col 36 to line 402, col 53 of module two_party: 1000
+  line 415, col 22 to line 415, col 41 of module two_party: 926
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 402, col 56 to line 402, col 72 of module two_party: 400
+  line 416, col 14 to line 416, col 75 of module two_party: 1610
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 403, col 44 to line 403, col 93 of module two_party: 0
+  line 417, col 22 to line 417, col 71 of module two_party: 0
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 404, col 44 to line 404, col 47 of module two_party: 1000
+  line 418, col 25 to line 418, col 61 of module two_party: 1610
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 405, col 44 to line 405, col 63 of module two_party: 1000
+  |line 418, col 25 to line 418, col 41 of module two_party: 1610
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 406, col 11 to line 406, col 68 of module two_party: 1470
+  |line 418, col 44 to line 418, col 61 of module two_party: 1210
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 407, col 11 to line 407, col 48 of module two_party: 1470
+  line 419, col 30 to line 419, col 82 of module two_party: 526
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 408, col 11 to line 408, col 40 of module two_party: 1470
+  line 420, col 36 to line 420, col 72 of module two_party: 1084
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 420, col 36 to line 420, col 53 of module two_party: 1084
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 420, col 56 to line 420, col 72 of module two_party: 400
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 421, col 44 to line 421, col 93 of module two_party: 0
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 422, col 44 to line 422, col 47 of module two_party: 1084
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 423, col 44 to line 423, col 63 of module two_party: 1084
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 424, col 11 to line 424, col 68 of module two_party: 1610
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 425, col 11 to line 425, col 48 of module two_party: 1610
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 426, col 11 to line 426, col 40 of module two_party: 1610
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2772:0 @!@!@
-<tik line 412, col 1 to line 412, col 3 of module two_party>: 2169:2255
+<tik line 430, col 1 to line 430, col 3 of module two_party>: 2229:2336
 @!@!@ENDMSG 2772 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 412, col 11 to line 412, col 27 of module two_party: 6764
+  line 430, col 11 to line 430, col 27 of module two_party: 7007
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 412, col 11 to line 412, col 19 of module two_party: 4509
+  |line 430, col 11 to line 430, col 19 of module two_party: 4671
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 413, col 15 to line 413, col 26 of module two_party: 2255
+  line 431, col 15 to line 431, col 26 of module two_party: 2336
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 414, col 19 to line 414, col 55 of module two_party: 1630
+  line 432, col 19 to line 432, col 55 of module two_party: 1689
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 415, col 19 to line 415, col 56 of module two_party: 625
+  line 433, col 19 to line 433, col 56 of module two_party: 647
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 416, col 11 to line 417, col 72 of module two_party: 2255
+  line 434, col 11 to line 435, col 72 of module two_party: 2336
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2772:0 @!@!@
-<tok line 419, col 1 to line 419, col 3 of module two_party>: 1589:1629
+<tok line 437, col 1 to line 437, col 3 of module two_party>: 1648:1688
 @!@!@ENDMSG 2772 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 419, col 11 to line 419, col 27 of module two_party: 6138
+  line 437, col 11 to line 437, col 27 of module two_party: 6359
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 419, col 11 to line 419, col 19 of module two_party: 4509
+  |line 437, col 11 to line 437, col 19 of module two_party: 4671
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 420, col 11 to line 420, col 28 of module two_party: 1629
+  line 438, col 11 to line 438, col 28 of module two_party: 1688
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 421, col 11 to line 421, col 44 of module two_party: 1629
+  line 439, col 11 to line 439, col 44 of module two_party: 1688
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 422, col 11 to line 423, col 65 of module two_party: 1629
+  line 440, col 11 to line 441, col 65 of module two_party: 1688
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2772:0 @!@!@
-<Terminating line 428, col 1 to line 428, col 11 of module two_party>: 0:197
+<Terminating line 446, col 1 to line 446, col 11 of module two_party>: 0:203
 @!@!@ENDMSG 2772 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 428, col 40 to line 428, col 56 of module two_party: 7615
+  line 446, col 40 to line 446, col 56 of module two_party: 7979
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 428, col 40 to line 428, col 47 of module two_party: 7024
+  |line 446, col 40 to line 446, col 47 of module two_party: 7370
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 428, col 31 to line 428, col 37 of module two_party: 4509
+  line 446, col 31 to line 446, col 37 of module two_party: 4671
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 429, col 19 to line 429, col 32 of module two_party: 197
+  line 447, col 19 to line 447, col 32 of module two_party: 203
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2202:0 @!@!@
 End of statistics.
 @!@!@ENDMSG 2202 @!@!@
 @!@!@STARTMSG 2200:0 @!@!@
-Progress(20) at 2021-05-09 23:35:01: 8,685 states generated (171,470 s/min), 4,508 distinct states found (89,002 ds/min), 0 states left on queue.
+Progress(20) at 2021-05-10 10:36:27: 8,955 states generated (205,547 s/min), 4,670 distinct states found (107,192 ds/min), 0 states left on queue.
 @!@!@ENDMSG 2200 @!@!@
 @!@!@STARTMSG 2199:0 @!@!@
-8685 states generated, 4508 distinct states found, 0 states left on queue.
+8955 states generated, 4670 distinct states found, 0 states left on queue.
 @!@!@ENDMSG 2199 @!@!@
 @!@!@STARTMSG 2194:0 @!@!@
 The depth of the complete state graph search is 20.
@@ -652,5 +706,5 @@ The depth of the complete state graph search is 20.
 The average outdegree of the complete state graph is 1 (minimum is 0, the maximum 3 and the 95th percentile is 2).
 @!@!@ENDMSG 2268 @!@!@
 @!@!@STARTMSG 2186:0 @!@!@
-Finished in 3051ms at (2021-05-09 23:35:01)
+Finished in 2622ms at (2021-05-10 10:36:27)
 @!@!@ENDMSG 2186 @!@!@

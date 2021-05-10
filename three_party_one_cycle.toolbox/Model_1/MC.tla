@@ -1,6 +1,6 @@
 ---- MODULE MC ----
-EXTENDS two_party, TLC
+EXTENDS three_party_one_cycle, TLC
 
 =============================================================================
 \* Modification History
-\* Created Mon May 10 10:36:25 EDT 2021 by yingjie
+\* Created Mon May 10 10:39:29 EDT 2021 by yingjie

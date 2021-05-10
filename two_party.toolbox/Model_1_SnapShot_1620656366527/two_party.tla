@@ -125,15 +125,13 @@ fair process bitcoin = BITCOIN begin
        
     elsif step_taken[SAS1]/\ asset_contract["ALICE"].state= ESCROW then \* Bob is too late
          asset_contract["ALICE"].state := REFUNDED;
-         if  premium_contract["BOB"].state=ESCROW then
          premium_contract["BOB"].state:=LOST;
          wallet["BOB"].balance := wallet["BOB"].balance-premium_contract["BOB"].balance
          ||wallet["ALICE"].balance := wallet["ALICE"].balance+premium_contract["BOB"].balance;
-         end if;
     end if;
     
     \* this part determines the whether they are conforming 
-    if  ~step_taken[SAS3]/\step_taken[SAS2]/\ step_taken[SAS4] then
+    if  ~step_taken[SAS3]/\ step_taken[SAS4] then
           conforming[ALICE]:= FALSE; 
     elsif ~step_considered[SAS3] /\ clock<=hashkey["B2A"].deadline then
           conforming[BOB]:= FALSE; 
@@ -190,20 +188,16 @@ fair process litecoin=LITECOIN begin
     
     if step_taken[SAS2]/\clock<=asset_contract["BOB"].timeout/\asset_contract["BOB"].state = ESCROW then
                 asset_contract["BOB"].state := REDEEMED;
-               if  premium_contract["ALICE"].state=ESCROW then
                premium_contract["ALICE"].state:=REFUNDED;
-               end if;
                wallet["BOB"].balance := wallet["BOB"].balance-asset_contract["BOB"].balance \*Bob loses $100
                ||wallet["ALICE"].balance := wallet["ALICE"].balance + asset_contract["BOB"].balance;\*alice gets $100
                step_taken[SAS3]:=TRUE;
      
     elsif step_taken[SAS2] /\asset_contract["BOB"].state = ESCROW then \* Alice is too late
            asset_contract["BOB"].state := REFUNDED;
-            if  premium_contract["ALICE"].state=ESCROW then
            premium_contract["ALICE"].state:=LOST;
            wallet["BOB"].balance := wallet["BOB"].balance+premium_contract["ALICE"].balance
            ||wallet["ALICE"].balance := wallet["ALICE"].balance-premium_contract["ALICE"].balance
-           end if;
     end if;
   
     \* this part determines if a party is conforming and the protocol goes well
@@ -224,7 +218,7 @@ fair process Clock = CLOCK begin tik:
  end process
 
 end algorithm; *)
-\* BEGIN TRANSLATION - the hash of the PCal code: PCal-473e7ebcfc6a5f70208154912c4629c1
+\* BEGIN TRANSLATION - the hash of the PCal code: PCal-4a7a3ceca6d8c1d474a1bd659496d866
 VARIABLES asset_contract, premium_contract, hashkey, wallet, clock, 
           step_taken, step_considered, conforming, pc
 
@@ -325,18 +319,14 @@ AS4 == /\ pc[BITCOIN] = "AS4"
                   /\ step_taken' = [step_taken EXCEPT ![SAS4] = TRUE]
              ELSE /\ IF step_taken[SAS1]/\ asset_contract["ALICE"].state= ESCROW
                         THEN /\ asset_contract' = [asset_contract EXCEPT !["ALICE"].state = REFUNDED]
-                             /\ IF premium_contract["BOB"].state=ESCROW
-                                   THEN /\ premium_contract' = [premium_contract EXCEPT !["BOB"].state = LOST]
-                                        /\ wallet' = [wallet EXCEPT !["BOB"].balance = wallet["BOB"].balance-premium_contract'["BOB"].balance,
-                                                                    !["ALICE"].balance = wallet["ALICE"].balance+premium_contract'["BOB"].balance]
-                                   ELSE /\ TRUE
-                                        /\ UNCHANGED << premium_contract, 
-                                                        wallet >>
+                             /\ premium_contract' = [premium_contract EXCEPT !["BOB"].state = LOST]
+                             /\ wallet' = [wallet EXCEPT !["BOB"].balance = wallet["BOB"].balance-premium_contract'["BOB"].balance,
+                                                         !["ALICE"].balance = wallet["ALICE"].balance+premium_contract'["BOB"].balance]
                         ELSE /\ TRUE
                              /\ UNCHANGED << asset_contract, premium_contract, 
                                              wallet >>
                   /\ UNCHANGED step_taken
-       /\ IF ~step_taken'[SAS3]/\step_taken'[SAS2]/\ step_taken'[SAS4]
+       /\ IF ~step_taken'[SAS3]/\ step_taken'[SAS4]
              THEN /\ conforming' = [conforming EXCEPT ![ALICE] = FALSE]
              ELSE /\ IF ~step_considered[SAS3] /\ clock<=hashkey["B2A"].deadline
                         THEN /\ conforming' = [conforming EXCEPT ![BOB] = FALSE]
@@ -393,22 +383,15 @@ AS2 == /\ pc[LITECOIN] = "AS2"
 AS3 == /\ pc[LITECOIN] = "AS3"
        /\ IF step_taken[SAS2]/\clock<=asset_contract["BOB"].timeout/\asset_contract["BOB"].state = ESCROW
              THEN /\ asset_contract' = [asset_contract EXCEPT !["BOB"].state = REDEEMED]
-                  /\ IF premium_contract["ALICE"].state=ESCROW
-                        THEN /\ premium_contract' = [premium_contract EXCEPT !["ALICE"].state = REFUNDED]
-                        ELSE /\ TRUE
-                             /\ UNCHANGED premium_contract
+                  /\ premium_contract' = [premium_contract EXCEPT !["ALICE"].state = REFUNDED]
                   /\ wallet' = [wallet EXCEPT !["BOB"].balance = wallet["BOB"].balance-asset_contract'["BOB"].balance,
                                               !["ALICE"].balance = wallet["ALICE"].balance + asset_contract'["BOB"].balance]
                   /\ step_taken' = [step_taken EXCEPT ![SAS3] = TRUE]
              ELSE /\ IF step_taken[SAS2] /\asset_contract["BOB"].state = ESCROW
                         THEN /\ asset_contract' = [asset_contract EXCEPT !["BOB"].state = REFUNDED]
-                             /\ IF premium_contract["ALICE"].state=ESCROW
-                                   THEN /\ premium_contract' = [premium_contract EXCEPT !["ALICE"].state = LOST]
-                                        /\ wallet' = [wallet EXCEPT !["BOB"].balance = wallet["BOB"].balance+premium_contract'["ALICE"].balance,
-                                                                    !["ALICE"].balance = wallet["ALICE"].balance-premium_contract'["ALICE"].balance]
-                                   ELSE /\ TRUE
-                                        /\ UNCHANGED << premium_contract, 
-                                                        wallet >>
+                             /\ premium_contract' = [premium_contract EXCEPT !["ALICE"].state = LOST]
+                             /\ wallet' = [wallet EXCEPT !["BOB"].balance = wallet["BOB"].balance+premium_contract'["ALICE"].balance,
+                                                         !["ALICE"].balance = wallet["ALICE"].balance-premium_contract'["ALICE"].balance]
                         ELSE /\ TRUE
                              /\ UNCHANGED << asset_contract, premium_contract, 
                                              wallet >>
@@ -456,6 +439,6 @@ Spec == /\ Init /\ [][Next]_vars
 
 Termination == <>(\A self \in ProcSet: pc[self] = "Done")
 
-\* END TRANSLATION - the hash of the generated TLA code (remove to silence divergence warnings): TLA-700c49ba814da733f5c329b2606f6ef9
+\* END TRANSLATION - the hash of the generated TLA code (remove to silence divergence warnings): TLA-56f856f399b5190a3747f4b4f3da0ee4
 
 ====
