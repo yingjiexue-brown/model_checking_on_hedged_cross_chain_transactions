@@ -29,24 +29,24 @@ variables
     
     \* all name field A2B,B2C, etc denotes the acr for asset transfer in the graph 
     
-    asset_contract = [A2B |->[balance |->200, timeout |-> -1, state |-> INIT,deadline |-> 6],
-                     B2C |->[balance |->100, timeout |-> -1, state |-> INIT,deadline |-> 7],
-                     B2A |->[balance |->100, timeout |-> -1, state |-> INIT,deadline |-> 7],
-                     C2A |->[balance |->100, timeout |-> -1, state |-> INIT,deadline |-> 8]
+    asset_contract = [A2B |->[balance |->100, timeout |-> -1, state |-> INIT,deadline |-> 6],
+                     B2C |->[balance |->50, timeout |-> -1, state |-> INIT,deadline |-> 7],
+                     B2A |->[balance |->50, timeout |-> -1, state |-> INIT,deadline |-> 7],
+                     C2A |->[balance |->50, timeout |-> -1, state |-> INIT,deadline |-> 8]
                      ],
                 
-    premium_escrow_contract = [A2B |->[balance |->14, timeout |-> -1, state |-> INIT,deadline |-> 0],
-                                B2C |->[balance |->7, timeout |-> -1, state |-> INIT,deadline |-> 1],
-                                B2A |->[balance |->7, timeout |-> -1, state |-> INIT,deadline |-> 1],
-                                C2A |->[balance |->7, timeout |-> -1, state |-> INIT,deadline |-> 2]
+    premium_escrow_contract = [A2B |->[balance |->7, timeout |-> -1, state |-> INIT,deadline |-> 0],
+                                B2C |->[balance |->3.5, timeout |-> -1, state |-> INIT,deadline |-> 1],
+                                B2A |->[balance |->3.5, timeout |-> -1, state |-> INIT,deadline |-> 1],
+                                C2A |->[balance |->3.5, timeout |-> -1, state |-> INIT,deadline |-> 2]
                                 ],
      \* premium_redeem is related to a hahskey, not an escrow. Even if an asset is not escrowed,
      \* as long as the hashkey is presented, the premium_redeem is refunded                
-    premium_redeem_contract_sa = [A_ON_CA|->[balance |->4, timeout |-> -1, state |-> INIT,deadline |-> 3],
-                                  A_ON_BA |->[balance |->3, timeout |-> -1, state |-> INIT,deadline |-> 3],
-                                  CA_ON_BC |->[balance |->3, timeout |-> -1, state |-> INIT,deadline |-> 4],
-                                  BA_ON_AB |->[balance |->2, timeout |-> -1, state |-> INIT,deadline |-> 4],
-                                  BCA_ON_AB |->[balance |->2, timeout |-> -1, state |-> INIT,deadline |-> 5]  
+    premium_redeem_contract_sa = [A_ON_CA|->[balance |->2, timeout |-> -1, state |-> INIT,deadline |-> 3],
+                                  A_ON_BA |->[balance |->1.5, timeout |-> -1, state |-> INIT,deadline |-> 3],
+                                  CA_ON_BC |->[balance |->1.5, timeout |-> -1, state |-> INIT,deadline |-> 4],
+                                  BA_ON_AB |->[balance |->1, timeout |-> -1, state |-> INIT,deadline |-> 4],
+                                  BCA_ON_AB |->[balance |->1, timeout |-> -1, state |-> INIT,deadline |-> 5]  
                                   ],
                
    
@@ -57,8 +57,7 @@ variables
                         BCA_ON_AB |->[timeout |-> 11, state |-> INIT]
                         ],                                 
     
-    wallet = [ALICE |-> [balance|-> 200+14+7,input|->221], BOB|-> [balance|-> 200+14+4,input|->218],CAROL |->[balance|->100+7+5,input|->112]],
-    compensation =[A2B |->2,B2C |->1,B2A |->1,C2A |->1],
+    wallet = [ALICE |-> [balance|-> 100+7+3.5,input|->110.5], BOB|-> [balance|-> 100+7+2,input|->109],CAROL |->[balance|->50+3.5+2.5,input|->56]],
     \* global clock
     clock = 0,
     \* indicating whether a step is considered in the model
@@ -100,15 +99,12 @@ walletliveness == /\(conformingliveness) => (\A x \in PARTIES:wallet[x].balance=
 nounderwater == /\ \A x \in PARTIES: ended/\conforming[x]=>wallet[x].balance>=wallet[x].input
 \* hedged
 \* compensated_partial checks A2B,B2C and C2A, compensate_BA checks B2A
-compensated_partial == \A x\in PARTIES:  ended/\asset_contract[party_contract_map[x]].state=REFUNDED/\conforming[x]=>wallet[x].balance>=wallet[x].input+ compensation[party_contract_map[x]]
-compensated_BA == ended /\ conforming["BOB"]/\asset_contract["B2A"].state = REFUNDED =>wallet["BOB"].balance>=wallet["BOB"].input+ compensation["B2A"]
-compensated_both == ended /\ conforming["BOB"]/\asset_contract["B2C"].state = REFUNDED/\ asset_contract["B2A"].state = REFUNDED=>wallet["BOB"].balance>=wallet["BOB"].input+ compensation["B2C"]+compensation["B2A"]
-
+compensated_partial == \A x\in PARTIES:  ended/\asset_contract[party_contract_map[x]].state=REFUNDED/\conforming[x]=>wallet[x].balance>=wallet[x].input+0.01*asset_contract[party_contract_map[x]].balance
+compensated_BA == ended /\ conforming["BOB"]/\asset_contract["B2A"].state = REFUNDED =>wallet["BOB"].balance>=wallet["BOB"].input+0.01*asset_contract["B2A"].balance
 \*redundant check, just to make sure we update balances correctly
 constant == wallet["ALICE"].balance+wallet["BOB"].balance+wallet["CAROL"].balance
 constant_expect == wallet["ALICE"].input+wallet["BOB"].input+wallet["CAROL"].input
 constant_hold == (constant =constant_expect)
-all_steps_taken == \A  x \in STEPS: step_taken[x]
 end define;
 
 \* A2B process =======================================================================================================
@@ -231,12 +227,11 @@ SA_BA_ON_AB: \* clock =10, BOB releases (sa,Ba) on AB
     conforming["ALICE"]:=FALSE;
  elsif ~step_considered[SSA_A_ON_BA]/\clock<=path_signature_sa["A_ON_BA"].timeout then
     conforming["BOB"]:=FALSE;
- elsif  step_taken[SP_R_SA_BA_ON_AB]/\step_taken[SSA_A_ON_BA] /\ ~step_taken[SSA_BA_ON_AB] then
+ elsif  step_taken[SP_R_SA_BCA_ON_AB]/\step_taken[SSA_A_ON_BA] /\ ~step_taken[SSA_BA_ON_AB] then
      conforming["BOB"]:=FALSE;
  end if;
  step_considered[SSA_BA_ON_AB]:= TRUE;
  \* then go to SA_BCA_ON_AB on process a2b
- 
  \* step 11
  
 SA_BCA_ON_AB: \* clock =11, bob publishes premium_redeem(sa,bca) on AB
@@ -343,7 +338,7 @@ P_R_SA_CA_ON_BC: \* clock =4, carol deposits premium_redeem(sa,ca) on bc
         conforming["BOB"]:=FALSE;
    elsif step_taken[SAB]/\premium_escrow_contract["B2C"].state>=ACTIVATED /\~step_taken[SBC] then 
        conforming["BOB"]:=FALSE;
-   elsif ~step_taken[SAB]/\step_taken[SBC] then
+   elsif ~step_taken[SAB]\/step_taken[SBC] then
        conforming["BOB"]:=FALSE;
    end if;
    step_considered[SBC]:= TRUE;
@@ -483,12 +478,10 @@ SA_A_ON_CA: \* clock =9, Alice releases (sa,a) on CA
         end if;
     end if;
  
- if ~(step_considered[SCA]/\step_considered[SBA])/\clock<=asset_contract["C2A"].deadline then
+ if ~(step_considered[SCA]\/step_considered[SBA])/\clock<=asset_contract["C2A"].deadline then
      conforming["ALICE"]:=FALSE;
  elsif  step_taken[SP_R_SA_A_ON_CA]/\(step_taken[SCA]/\step_taken[SBA])/\~step_taken[SSA_A_ON_CA] then \* should release the pathsig if all incoming assets are escrowed                                                                       \* or it does not escrow any outgoing assets
      conforming["ALICE"]:=FALSE; 
- elsif ~step_considered[SAB] then
-     conforming["ALICE"]:=FALSE;
  elsif step_taken[SP_R_SA_A_ON_CA] /\ ~step_taken[SAB] /\~step_taken[SSA_A_ON_CA] then
      conforming["ALICE"]:=FALSE;
  elsif ~step_taken[SP_R_SA_A_ON_CA]/\ step_taken[SSA_A_ON_CA] then 
@@ -602,13 +595,11 @@ P_R_SA_A_ON_BA: \* clock =3, Alice deposits premium_redeem(sa,a) on BA
     conforming["ALICE"]:=FALSE;
   elsif  step_taken[SP_R_SA_A_ON_BA]/\(step_taken[SCA]/\step_taken[SBA])/\~step_taken[SSA_A_ON_BA] then \* should release the pathsig if all incoming assets are escrowed                                                                       \* or it does not escrow any outgoing assets
      conforming["ALICE"]:=FALSE; 
- elsif ~step_considered[SAB] then
-     conforming["ALICE"]:=FALSE;
  elsif step_taken[SP_R_SA_A_ON_BA] /\ ~step_taken[SAB] /\~step_taken[SSA_A_ON_CA] then
      conforming["ALICE"]:=FALSE;
  elsif ~step_taken[SP_R_SA_A_ON_BA]/\ step_taken[SSA_A_ON_BA] then 
        conforming["ALICE"]:=FALSE;
- elsif ~(step_taken[SCA]/\step_taken[SBA])/\ step_taken[SAB]/\step_taken[SSA_A_ON_BA] then 
+ elsif ~(step_taken[SCA]/\step_taken[SBA])/\ step_taken[SAB]/\step_taken[SSA_A_ON_CA] then 
      conforming["ALICE"]:=FALSE;
  end if;
  step_considered[SSA_A_ON_BA]:= TRUE;
@@ -625,10 +616,10 @@ fair process Clock = CLOCK begin tick:
 
 
 end algorithm; *)
-\* BEGIN TRANSLATION - the hash of the PCal code: PCal-afc4c25df2689fd80a1549294db45fdb
+\* BEGIN TRANSLATION - the hash of the PCal code: PCal-b16038510275bc9450d05786048b8ef1
 VARIABLES asset_contract, premium_escrow_contract, premium_redeem_contract_sa, 
-          path_signature_sa, wallet, compensation, clock, step_considered, 
-          conforming, step_taken, ending, party_contract_map, pc
+          path_signature_sa, wallet, clock, step_considered, conforming, 
+          step_taken, ending, party_contract_map, pc
 
 (* define statement *)
  INIT == 0 ESCROW == 1 REDEEMED == 2 REFUNDED == 3  ACTIVATED == 4 REFUNDED2 == 5 LOST == 6 EXPIRED == 7 RELEASED == 8
@@ -662,40 +653,37 @@ walletliveness == /\(conformingliveness) => (\A x \in PARTIES:wallet[x].balance=
 nounderwater == /\ \A x \in PARTIES: ended/\conforming[x]=>wallet[x].balance>=wallet[x].input
 
 
-compensated_partial == \A x\in PARTIES:  ended/\asset_contract[party_contract_map[x]].state=REFUNDED/\conforming[x]=>wallet[x].balance>=wallet[x].input+ compensation[party_contract_map[x]]
-compensated_BA == ended /\ conforming["BOB"]/\asset_contract["B2A"].state = REFUNDED =>wallet["BOB"].balance>=wallet["BOB"].input+ compensation["B2A"]
-compensated_both == ended /\ conforming["BOB"]/\asset_contract["B2C"].state = REFUNDED/\ asset_contract["B2A"].state = REFUNDED=>wallet["BOB"].balance>=wallet["BOB"].input+ compensation["B2C"]+compensation["B2A"]
-
+compensated_partial == \A x\in PARTIES:  ended/\asset_contract[party_contract_map[x]].state=REFUNDED/\conforming[x]=>wallet[x].balance>=wallet[x].input+0.01*asset_contract[party_contract_map[x]].balance
+compensated_BA == ended /\ conforming["BOB"]/\asset_contract["B2A"].state = REFUNDED =>wallet["BOB"].balance>=wallet["BOB"].input+0.01*asset_contract["B2A"].balance
 
 constant == wallet["ALICE"].balance+wallet["BOB"].balance+wallet["CAROL"].balance
 constant_expect == wallet["ALICE"].input+wallet["BOB"].input+wallet["CAROL"].input
 constant_hold == (constant =constant_expect)
-all_steps_taken == \A  x \in STEPS: step_taken[x]
 
 
 vars == << asset_contract, premium_escrow_contract, 
-           premium_redeem_contract_sa, path_signature_sa, wallet, 
-           compensation, clock, step_considered, conforming, step_taken, 
-           ending, party_contract_map, pc >>
+           premium_redeem_contract_sa, path_signature_sa, wallet, clock, 
+           step_considered, conforming, step_taken, ending, 
+           party_contract_map, pc >>
 
 ProcSet == {A2B} \cup {B2C} \cup {C2A} \cup {B2A} \cup {CLOCK}
 
 Init == (* Global variables *)
-        /\ asset_contract = [A2B |->[balance |->200, timeout |-> -1, state |-> INIT,deadline |-> 6],
-                            B2C |->[balance |->100, timeout |-> -1, state |-> INIT,deadline |-> 7],
-                            B2A |->[balance |->100, timeout |-> -1, state |-> INIT,deadline |-> 7],
-                            C2A |->[balance |->100, timeout |-> -1, state |-> INIT,deadline |-> 8]
+        /\ asset_contract = [A2B |->[balance |->100, timeout |-> -1, state |-> INIT,deadline |-> 6],
+                            B2C |->[balance |->50, timeout |-> -1, state |-> INIT,deadline |-> 7],
+                            B2A |->[balance |->50, timeout |-> -1, state |-> INIT,deadline |-> 7],
+                            C2A |->[balance |->50, timeout |-> -1, state |-> INIT,deadline |-> 8]
                             ]
-        /\ premium_escrow_contract = [A2B |->[balance |->14, timeout |-> -1, state |-> INIT,deadline |-> 0],
-                                       B2C |->[balance |->7, timeout |-> -1, state |-> INIT,deadline |-> 1],
-                                       B2A |->[balance |->7, timeout |-> -1, state |-> INIT,deadline |-> 1],
-                                       C2A |->[balance |->7, timeout |-> -1, state |-> INIT,deadline |-> 2]
+        /\ premium_escrow_contract = [A2B |->[balance |->7, timeout |-> -1, state |-> INIT,deadline |-> 0],
+                                       B2C |->[balance |->3.5, timeout |-> -1, state |-> INIT,deadline |-> 1],
+                                       B2A |->[balance |->3.5, timeout |-> -1, state |-> INIT,deadline |-> 1],
+                                       C2A |->[balance |->3.5, timeout |-> -1, state |-> INIT,deadline |-> 2]
                                        ]
-        /\ premium_redeem_contract_sa = [A_ON_CA|->[balance |->4, timeout |-> -1, state |-> INIT,deadline |-> 3],
-                                         A_ON_BA |->[balance |->3, timeout |-> -1, state |-> INIT,deadline |-> 3],
-                                         CA_ON_BC |->[balance |->3, timeout |-> -1, state |-> INIT,deadline |-> 4],
-                                         BA_ON_AB |->[balance |->2, timeout |-> -1, state |-> INIT,deadline |-> 4],
-                                         BCA_ON_AB |->[balance |->2, timeout |-> -1, state |-> INIT,deadline |-> 5]
+        /\ premium_redeem_contract_sa = [A_ON_CA|->[balance |->2, timeout |-> -1, state |-> INIT,deadline |-> 3],
+                                         A_ON_BA |->[balance |->1.5, timeout |-> -1, state |-> INIT,deadline |-> 3],
+                                         CA_ON_BC |->[balance |->1.5, timeout |-> -1, state |-> INIT,deadline |-> 4],
+                                         BA_ON_AB |->[balance |->1, timeout |-> -1, state |-> INIT,deadline |-> 4],
+                                         BCA_ON_AB |->[balance |->1, timeout |-> -1, state |-> INIT,deadline |-> 5]
                                          ]
         /\ path_signature_sa = [A_ON_CA|->[timeout |-> 9, state |-> INIT],
                                A_ON_BA|->[timeout |-> 9, state |-> INIT],
@@ -703,8 +691,7 @@ Init == (* Global variables *)
                                BA_ON_AB |->[timeout |-> 10, state |-> INIT],
                                BCA_ON_AB |->[timeout |-> 11, state |-> INIT]
                                ]
-        /\ wallet = [ALICE |-> [balance|-> 200+14+7,input|->221], BOB|-> [balance|-> 200+14+4,input|->218],CAROL |->[balance|->100+7+5,input|->112]]
-        /\ compensation = [A2B |->2,B2C |->1,B2A |->1,C2A |->1]
+        /\ wallet = [ALICE |-> [balance|-> 100+7+3.5,input|->110.5], BOB|-> [balance|-> 100+7+2,input|->109],CAROL |->[balance|->50+3.5+2.5,input|->56]]
         /\ clock = 0
         /\ step_considered = [s \in STEPS |->FALSE]
         /\ conforming = [p \in  PARTIES |->TRUE]
@@ -731,8 +718,8 @@ P_E_AB == /\ pc[A2B] = "P_E_AB"
           /\ step_considered' = [step_considered EXCEPT ![SP_E_AB] = TRUE]
           /\ pc' = [pc EXCEPT ![A2B] = "P_R_SA_BA_ON_AB"]
           /\ UNCHANGED << asset_contract, premium_redeem_contract_sa, 
-                          path_signature_sa, wallet, compensation, clock, 
-                          ending, party_contract_map >>
+                          path_signature_sa, wallet, clock, ending, 
+                          party_contract_map >>
 
 P_R_SA_BA_ON_AB == /\ pc[A2B] = "P_R_SA_BA_ON_AB"
                    /\ IF step_taken[SP_E_AB]/\clock<= premium_redeem_contract_sa["BA_ON_AB"].deadline /\ premium_redeem_contract_sa["BA_ON_AB"].state=INIT
@@ -760,8 +747,7 @@ P_R_SA_BA_ON_AB == /\ pc[A2B] = "P_R_SA_BA_ON_AB"
                    /\ step_considered' = [step_considered EXCEPT ![SP_R_SA_BA_ON_AB] = TRUE]
                    /\ pc' = [pc EXCEPT ![A2B] = "P_R_SA_BCA_ON_AB"]
                    /\ UNCHANGED << asset_contract, path_signature_sa, wallet, 
-                                   compensation, clock, ending, 
-                                   party_contract_map >>
+                                   clock, ending, party_contract_map >>
 
 P_R_SA_BCA_ON_AB == /\ pc[A2B] = "P_R_SA_BCA_ON_AB"
                     /\ IF step_taken[SP_E_AB]/\clock<= premium_redeem_contract_sa["BCA_ON_AB"].deadline /\ premium_redeem_contract_sa["BCA_ON_AB"].state=INIT
@@ -795,8 +781,7 @@ P_R_SA_BCA_ON_AB == /\ pc[A2B] = "P_R_SA_BCA_ON_AB"
                     /\ step_considered' = [step_considered EXCEPT ![SP_R_SA_BCA_ON_AB] = TRUE]
                     /\ pc' = [pc EXCEPT ![A2B] = "AB"]
                     /\ UNCHANGED << asset_contract, path_signature_sa, wallet, 
-                                    compensation, clock, ending, 
-                                    party_contract_map >>
+                                    clock, ending, party_contract_map >>
 
 AB == /\ pc[A2B] = "AB"
       /\ IF premium_escrow_contract["A2B"].state=ACTIVATED/\clock<= asset_contract["A2B"].deadline /\  asset_contract["A2B"].state=INIT
@@ -818,8 +803,8 @@ AB == /\ pc[A2B] = "AB"
                  /\ UNCHANGED conforming
       /\ step_considered' = [step_considered EXCEPT ![SAB] = TRUE]
       /\ pc' = [pc EXCEPT ![A2B] = "SA_BA_ON_AB"]
-      /\ UNCHANGED << premium_redeem_contract_sa, path_signature_sa, 
-                      compensation, clock, ending, party_contract_map >>
+      /\ UNCHANGED << premium_redeem_contract_sa, path_signature_sa, clock, 
+                      ending, party_contract_map >>
 
 SA_BA_ON_AB == /\ pc[A2B] = "SA_BA_ON_AB"
                /\ IF clock<= path_signature_sa["BA_ON_AB"].timeout /\ path_signature_sa["BA_ON_AB"].state=INIT
@@ -848,14 +833,14 @@ SA_BA_ON_AB == /\ pc[A2B] = "SA_BA_ON_AB"
                      THEN /\ conforming' = [conforming EXCEPT !["ALICE"] = FALSE]
                      ELSE /\ IF ~step_considered[SSA_A_ON_BA]/\clock<=path_signature_sa'["A_ON_BA"].timeout
                                 THEN /\ conforming' = [conforming EXCEPT !["BOB"] = FALSE]
-                                ELSE /\ IF step_taken'[SP_R_SA_BA_ON_AB]/\step_taken'[SSA_A_ON_BA] /\ ~step_taken'[SSA_BA_ON_AB]
+                                ELSE /\ IF step_taken'[SP_R_SA_BCA_ON_AB]/\step_taken'[SSA_A_ON_BA] /\ ~step_taken'[SSA_BA_ON_AB]
                                            THEN /\ conforming' = [conforming EXCEPT !["BOB"] = FALSE]
                                            ELSE /\ TRUE
                                                 /\ UNCHANGED conforming
                /\ step_considered' = [step_considered EXCEPT ![SSA_BA_ON_AB] = TRUE]
                /\ pc' = [pc EXCEPT ![A2B] = "SA_BCA_ON_AB"]
-               /\ UNCHANGED << premium_escrow_contract, compensation, clock, 
-                               ending, party_contract_map >>
+               /\ UNCHANGED << premium_escrow_contract, clock, ending, 
+                               party_contract_map >>
 
 SA_BCA_ON_AB == /\ pc[A2B] = "SA_BCA_ON_AB"
                 /\ IF clock<= path_signature_sa["BCA_ON_AB"].timeout /\ path_signature_sa["BCA_ON_AB"].state=INIT
@@ -897,7 +882,7 @@ SA_BCA_ON_AB == /\ pc[A2B] = "SA_BCA_ON_AB"
                 /\ step_considered' = [step_considered EXCEPT ![SSA_BCA_ON_AB] = TRUE]
                 /\ ending' = [ending EXCEPT ![A2B] = TRUE]
                 /\ pc' = [pc EXCEPT ![A2B] = "Done"]
-                /\ UNCHANGED << premium_escrow_contract, compensation, clock, 
+                /\ UNCHANGED << premium_escrow_contract, clock, 
                                 party_contract_map >>
 
 a2b == P_E_AB \/ P_R_SA_BA_ON_AB \/ P_R_SA_BCA_ON_AB \/ AB \/ SA_BA_ON_AB
@@ -921,8 +906,8 @@ P_E_BC == /\ pc[B2C] = "P_E_BC"
           /\ step_considered' = [step_considered EXCEPT ![SP_E_BC] = TRUE]
           /\ pc' = [pc EXCEPT ![B2C] = "P_R_SA_CA_ON_BC"]
           /\ UNCHANGED << asset_contract, premium_redeem_contract_sa, 
-                          path_signature_sa, wallet, compensation, clock, 
-                          ending, party_contract_map >>
+                          path_signature_sa, wallet, clock, ending, 
+                          party_contract_map >>
 
 P_R_SA_CA_ON_BC == /\ pc[B2C] = "P_R_SA_CA_ON_BC"
                    /\ IF step_taken[SP_E_BC]/\clock<= premium_redeem_contract_sa["CA_ON_BC"].deadline /\ premium_redeem_contract_sa["CA_ON_BC"].state=INIT
@@ -952,8 +937,7 @@ P_R_SA_CA_ON_BC == /\ pc[B2C] = "P_R_SA_CA_ON_BC"
                    /\ step_considered' = [step_considered EXCEPT ![SP_R_SA_CA_ON_BC] = TRUE]
                    /\ pc' = [pc EXCEPT ![B2C] = "BC"]
                    /\ UNCHANGED << asset_contract, path_signature_sa, wallet, 
-                                   compensation, clock, ending, 
-                                   party_contract_map >>
+                                   clock, ending, party_contract_map >>
 
 BC == /\ pc[B2C] = "BC"
       /\ IF premium_escrow_contract["B2C"].state=ACTIVATED/\clock<= asset_contract["B2C"].deadline /\ asset_contract["B2C"].state=INIT
@@ -973,14 +957,14 @@ BC == /\ pc[B2C] = "BC"
             THEN /\ conforming' = [conforming EXCEPT !["BOB"] = FALSE]
             ELSE /\ IF step_taken'[SAB]/\premium_escrow_contract'["B2C"].state>=ACTIVATED /\~step_taken'[SBC]
                        THEN /\ conforming' = [conforming EXCEPT !["BOB"] = FALSE]
-                       ELSE /\ IF ~step_taken'[SAB]/\step_taken'[SBC]
+                       ELSE /\ IF ~step_taken'[SAB]\/step_taken'[SBC]
                                   THEN /\ conforming' = [conforming EXCEPT !["BOB"] = FALSE]
                                   ELSE /\ TRUE
                                        /\ UNCHANGED conforming
       /\ step_considered' = [step_considered EXCEPT ![SBC] = TRUE]
       /\ pc' = [pc EXCEPT ![B2C] = "SA_CA_ON_BC"]
-      /\ UNCHANGED << premium_redeem_contract_sa, path_signature_sa, 
-                      compensation, clock, ending, party_contract_map >>
+      /\ UNCHANGED << premium_redeem_contract_sa, path_signature_sa, clock, 
+                      ending, party_contract_map >>
 
 SA_CA_ON_BC == /\ pc[B2C] = "SA_CA_ON_BC"
                /\ IF clock<= path_signature_sa["CA_ON_BC"].timeout /\ path_signature_sa["CA_ON_BC"].state=INIT
@@ -1019,7 +1003,7 @@ SA_CA_ON_BC == /\ pc[B2C] = "SA_CA_ON_BC"
                /\ step_considered' = [step_considered EXCEPT ![SSA_CA_ON_BC] = TRUE]
                /\ ending' = [ending EXCEPT ![B2C] = TRUE]
                /\ pc' = [pc EXCEPT ![B2C] = "Done"]
-               /\ UNCHANGED << premium_escrow_contract, compensation, clock, 
+               /\ UNCHANGED << premium_escrow_contract, clock, 
                                party_contract_map >>
 
 b2c == P_E_BC \/ P_R_SA_CA_ON_BC \/ BC \/ SA_CA_ON_BC
@@ -1042,8 +1026,8 @@ P_E_CA == /\ pc[C2A] = "P_E_CA"
           /\ step_considered' = [step_considered EXCEPT ![SP_E_CA] = TRUE]
           /\ pc' = [pc EXCEPT ![C2A] = "P_R_SA_A_ON_CA"]
           /\ UNCHANGED << asset_contract, premium_redeem_contract_sa, 
-                          path_signature_sa, wallet, compensation, clock, 
-                          ending, party_contract_map >>
+                          path_signature_sa, wallet, clock, ending, 
+                          party_contract_map >>
 
 P_R_SA_A_ON_CA == /\ pc[C2A] = "P_R_SA_A_ON_CA"
                   /\ IF step_taken[SP_E_CA]/\clock<= premium_redeem_contract_sa["A_ON_CA"].deadline /\ premium_redeem_contract_sa["A_ON_CA"].state=INIT
@@ -1072,8 +1056,7 @@ P_R_SA_A_ON_CA == /\ pc[C2A] = "P_R_SA_A_ON_CA"
                   /\ step_considered' = [step_considered EXCEPT ![SP_R_SA_A_ON_CA] = TRUE]
                   /\ pc' = [pc EXCEPT ![C2A] = "CA"]
                   /\ UNCHANGED << asset_contract, path_signature_sa, wallet, 
-                                  compensation, clock, ending, 
-                                  party_contract_map >>
+                                  clock, ending, party_contract_map >>
 
 CA == /\ pc[C2A] = "CA"
       /\ IF premium_escrow_contract["C2A"].state=ACTIVATED/\clock<= asset_contract["C2A"].deadline /\ asset_contract["C2A"].state=INIT
@@ -1099,8 +1082,8 @@ CA == /\ pc[C2A] = "CA"
                                   ELSE /\ TRUE
                                        /\ UNCHANGED conforming
       /\ pc' = [pc EXCEPT ![C2A] = "SA_A_ON_CA"]
-      /\ UNCHANGED << premium_redeem_contract_sa, path_signature_sa, 
-                      compensation, clock, ending, party_contract_map >>
+      /\ UNCHANGED << premium_redeem_contract_sa, path_signature_sa, clock, 
+                      ending, party_contract_map >>
 
 SA_A_ON_CA == /\ pc[C2A] = "SA_A_ON_CA"
               /\ IF clock<= path_signature_sa["A_ON_CA"].timeout /\ path_signature_sa["A_ON_CA"].state=INIT
@@ -1128,24 +1111,22 @@ SA_A_ON_CA == /\ pc[C2A] = "SA_A_ON_CA"
                                     /\ UNCHANGED << premium_redeem_contract_sa, 
                                                     wallet >>
                          /\ UNCHANGED << path_signature_sa, step_taken >>
-              /\ IF ~(step_considered[SCA]/\step_considered[SBA])/\clock<=asset_contract'["C2A"].deadline
+              /\ IF ~(step_considered[SCA]\/step_considered[SBA])/\clock<=asset_contract'["C2A"].deadline
                     THEN /\ conforming' = [conforming EXCEPT !["ALICE"] = FALSE]
                     ELSE /\ IF step_taken'[SP_R_SA_A_ON_CA]/\(step_taken'[SCA]/\step_taken'[SBA])/\~step_taken'[SSA_A_ON_CA]
                                THEN /\ conforming' = [conforming EXCEPT !["ALICE"] = FALSE]
-                               ELSE /\ IF ~step_considered[SAB]
+                               ELSE /\ IF step_taken'[SP_R_SA_A_ON_CA] /\ ~step_taken'[SAB] /\~step_taken'[SSA_A_ON_CA]
                                           THEN /\ conforming' = [conforming EXCEPT !["ALICE"] = FALSE]
-                                          ELSE /\ IF step_taken'[SP_R_SA_A_ON_CA] /\ ~step_taken'[SAB] /\~step_taken'[SSA_A_ON_CA]
+                                          ELSE /\ IF ~step_taken'[SP_R_SA_A_ON_CA]/\ step_taken'[SSA_A_ON_CA]
                                                      THEN /\ conforming' = [conforming EXCEPT !["ALICE"] = FALSE]
-                                                     ELSE /\ IF ~step_taken'[SP_R_SA_A_ON_CA]/\ step_taken'[SSA_A_ON_CA]
+                                                     ELSE /\ IF ~(step_taken'[SCA]/\step_taken'[SBA])/\ step_taken'[SAB]/\step_taken'[SSA_A_ON_CA]
                                                                 THEN /\ conforming' = [conforming EXCEPT !["ALICE"] = FALSE]
-                                                                ELSE /\ IF ~(step_taken'[SCA]/\step_taken'[SBA])/\ step_taken'[SAB]/\step_taken'[SSA_A_ON_CA]
-                                                                           THEN /\ conforming' = [conforming EXCEPT !["ALICE"] = FALSE]
-                                                                           ELSE /\ TRUE
-                                                                                /\ UNCHANGED conforming
+                                                                ELSE /\ TRUE
+                                                                     /\ UNCHANGED conforming
               /\ step_considered' = [step_considered EXCEPT ![SSA_A_ON_CA] = TRUE]
               /\ ending' = [ending EXCEPT ![C2A] = TRUE]
               /\ pc' = [pc EXCEPT ![C2A] = "Done"]
-              /\ UNCHANGED << premium_escrow_contract, compensation, clock, 
+              /\ UNCHANGED << premium_escrow_contract, clock, 
                               party_contract_map >>
 
 c2a == P_E_CA \/ P_R_SA_A_ON_CA \/ CA \/ SA_A_ON_CA
@@ -1168,8 +1149,8 @@ P_E_BA == /\ pc[B2A] = "P_E_BA"
           /\ step_considered' = [step_considered EXCEPT ![SP_E_BA] = TRUE]
           /\ pc' = [pc EXCEPT ![B2A] = "P_R_SA_A_ON_BA"]
           /\ UNCHANGED << asset_contract, premium_redeem_contract_sa, 
-                          path_signature_sa, wallet, compensation, clock, 
-                          ending, party_contract_map >>
+                          path_signature_sa, wallet, clock, ending, 
+                          party_contract_map >>
 
 P_R_SA_A_ON_BA == /\ pc[B2A] = "P_R_SA_A_ON_BA"
                   /\ IF step_taken[SP_E_BA]/\clock<= premium_redeem_contract_sa["A_ON_BA"].deadline /\ premium_redeem_contract_sa["A_ON_BA"].state=INIT
@@ -1198,8 +1179,7 @@ P_R_SA_A_ON_BA == /\ pc[B2A] = "P_R_SA_A_ON_BA"
                   /\ step_considered' = [step_considered EXCEPT ![SP_R_SA_A_ON_BA] = TRUE]
                   /\ pc' = [pc EXCEPT ![B2A] = "BA"]
                   /\ UNCHANGED << asset_contract, path_signature_sa, wallet, 
-                                  compensation, clock, ending, 
-                                  party_contract_map >>
+                                  clock, ending, party_contract_map >>
 
 BA == /\ pc[B2A] = "BA"
       /\ IF premium_escrow_contract["B2A"].state=ACTIVATED/\clock<= asset_contract["B2A"].deadline /\ asset_contract["B2A"].state=INIT
@@ -1225,8 +1205,8 @@ BA == /\ pc[B2A] = "BA"
                                        /\ UNCHANGED conforming
       /\ step_considered' = [step_considered EXCEPT ![SBA] = TRUE]
       /\ pc' = [pc EXCEPT ![B2A] = "SA_A_ON_BA"]
-      /\ UNCHANGED << premium_redeem_contract_sa, path_signature_sa, 
-                      compensation, clock, ending, party_contract_map >>
+      /\ UNCHANGED << premium_redeem_contract_sa, path_signature_sa, clock, 
+                      ending, party_contract_map >>
 
 SA_A_ON_BA == /\ pc[B2A] = "SA_A_ON_BA"
               /\ IF clock<= path_signature_sa["A_ON_BA"].timeout /\ path_signature_sa["A_ON_BA"].state=INIT
@@ -1258,20 +1238,18 @@ SA_A_ON_BA == /\ pc[B2A] = "SA_A_ON_BA"
                     THEN /\ conforming' = [conforming EXCEPT !["ALICE"] = FALSE]
                     ELSE /\ IF step_taken'[SP_R_SA_A_ON_BA]/\(step_taken'[SCA]/\step_taken'[SBA])/\~step_taken'[SSA_A_ON_BA]
                                THEN /\ conforming' = [conforming EXCEPT !["ALICE"] = FALSE]
-                               ELSE /\ IF ~step_considered[SAB]
+                               ELSE /\ IF step_taken'[SP_R_SA_A_ON_BA] /\ ~step_taken'[SAB] /\~step_taken'[SSA_A_ON_CA]
                                           THEN /\ conforming' = [conforming EXCEPT !["ALICE"] = FALSE]
-                                          ELSE /\ IF step_taken'[SP_R_SA_A_ON_BA] /\ ~step_taken'[SAB] /\~step_taken'[SSA_A_ON_CA]
+                                          ELSE /\ IF ~step_taken'[SP_R_SA_A_ON_BA]/\ step_taken'[SSA_A_ON_BA]
                                                      THEN /\ conforming' = [conforming EXCEPT !["ALICE"] = FALSE]
-                                                     ELSE /\ IF ~step_taken'[SP_R_SA_A_ON_BA]/\ step_taken'[SSA_A_ON_BA]
+                                                     ELSE /\ IF ~(step_taken'[SCA]/\step_taken'[SBA])/\ step_taken'[SAB]/\step_taken'[SSA_A_ON_CA]
                                                                 THEN /\ conforming' = [conforming EXCEPT !["ALICE"] = FALSE]
-                                                                ELSE /\ IF ~(step_taken'[SCA]/\step_taken'[SBA])/\ step_taken'[SAB]/\step_taken'[SSA_A_ON_BA]
-                                                                           THEN /\ conforming' = [conforming EXCEPT !["ALICE"] = FALSE]
-                                                                           ELSE /\ TRUE
-                                                                                /\ UNCHANGED conforming
+                                                                ELSE /\ TRUE
+                                                                     /\ UNCHANGED conforming
               /\ step_considered' = [step_considered EXCEPT ![SSA_A_ON_BA] = TRUE]
               /\ ending' = [ending EXCEPT ![B2A] = TRUE]
               /\ pc' = [pc EXCEPT ![B2A] = "Done"]
-              /\ UNCHANGED << premium_escrow_contract, compensation, clock, 
+              /\ UNCHANGED << premium_escrow_contract, clock, 
                               party_contract_map >>
 
 b2a == P_E_BA \/ P_R_SA_A_ON_BA \/ BA \/ SA_A_ON_BA
@@ -1282,16 +1260,16 @@ tick == /\ pc[CLOCK] = "tick"
               ELSE /\ pc' = [pc EXCEPT ![CLOCK] = "Done"]
         /\ UNCHANGED << asset_contract, premium_escrow_contract, 
                         premium_redeem_contract_sa, path_signature_sa, wallet, 
-                        compensation, clock, step_considered, conforming, 
-                        step_taken, ending, party_contract_map >>
+                        clock, step_considered, conforming, step_taken, ending, 
+                        party_contract_map >>
 
 tok == /\ pc[CLOCK] = "tok"
        /\ clock' = clock + 1
        /\ pc' = [pc EXCEPT ![CLOCK] = "tick"]
        /\ UNCHANGED << asset_contract, premium_escrow_contract, 
                        premium_redeem_contract_sa, path_signature_sa, wallet, 
-                       compensation, step_considered, conforming, step_taken, 
-                       ending, party_contract_map >>
+                       step_considered, conforming, step_taken, ending, 
+                       party_contract_map >>
 
 Clock == tick \/ tok
 
@@ -1311,5 +1289,5 @@ Spec == /\ Init /\ [][Next]_vars
 
 Termination == <>(\A self \in ProcSet: pc[self] = "Done")
 
-\* END TRANSLATION - the hash of the generated TLA code (remove to silence divergence warnings): TLA-8d9ac510f3d1d2f07f8eee0112a8a9b3
+\* END TRANSLATION - the hash of the generated TLA code (remove to silence divergence warnings): TLA-066dd36b35ab5fd423be97917300e876
 ====

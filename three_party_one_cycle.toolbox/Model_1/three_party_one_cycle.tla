@@ -60,7 +60,8 @@ define
  STEPS == {A_D_P, B_D_P,C_D_P,A_E,B_E,C_E, A_R,B_R,C_R} 
  \* properties that we want to check
  ending == /\ step_considered[A_R]/\step_considered[B_R]/\step_considered[C_R]
- liveness == (/\ending/\conforming[ALICE]/\conforming[BOB]/\conforming[CAROL])=>(/\premium_contract["ALICE"].state=REFUNDED /\premium_contract["BOB"].state=REFUNDED/\premium_contract["CAROL"].state=REFUNDED/\asset_contract["ALICE"].state=REDEEMED /\asset_contract["BOB"].state=REDEEMED/\asset_contract["CAROL"].state=REDEEMED)
+ liveness_pre ==/\ending/\conforming[ALICE]/\conforming[BOB]/\conforming[CAROL]\* helper
+ liveness == (liveness_pre) =>(/\premium_contract["ALICE"].state=REFUNDED /\premium_contract["BOB"].state=REFUNDED/\premium_contract["CAROL"].state=REFUNDED/\asset_contract["ALICE"].state=REDEEMED /\asset_contract["BOB"].state=REDEEMED/\asset_contract["CAROL"].state=REDEEMED)
  compensated_alice == (/\ending/\conforming[ALICE]/\asset_contract["ALICE"].state=REFUNDED) => wallet["ALICE"].balance>=wallet["ALICE"].init+1
  compensated_bob == (/\ending/\conforming[BOB]/\asset_contract["BOB"].state=REFUNDED) => wallet["BOB"].balance>=wallet["BOB"].init+1
  compensated_carol == (/\ending/\conforming[CAROL]/\asset_contract["CAROL"].state=REFUNDED) => wallet["CAROL"].balance>=wallet["CAROL"].init+1
@@ -304,7 +305,7 @@ fair process Clock = CLOCK begin tick:
  
 
 end algorithm; *)
-\* BEGIN TRANSLATION - the hash of the PCal code: PCal-65ec476cecbbaff9e76e695926566b71
+\* BEGIN TRANSLATION - the hash of the PCal code: PCal-ba1a9f19d367552c41f193257eea968b
 VARIABLES asset_contract, premium_contract, wallet, hashkey, clock, 
           step_considered, conforming, step_taken, pc
 
@@ -320,7 +321,8 @@ A_R==6 C_R==7 B_R==8
 STEPS == {A_D_P, B_D_P,C_D_P,A_E,B_E,C_E, A_R,B_R,C_R}
 
 ending == /\ step_considered[A_R]/\step_considered[B_R]/\step_considered[C_R]
-liveness == (/\ending/\conforming[ALICE]/\conforming[BOB]/\conforming[CAROL])=>(/\premium_contract["ALICE"].state=REFUNDED /\premium_contract["BOB"].state=REFUNDED/\premium_contract["CAROL"].state=REFUNDED/\asset_contract["ALICE"].state=REDEEMED /\asset_contract["BOB"].state=REDEEMED/\asset_contract["CAROL"].state=REDEEMED)
+liveness_pre ==/\ending/\conforming[ALICE]/\conforming[BOB]/\conforming[CAROL]
+liveness == (liveness_pre) =>(/\premium_contract["ALICE"].state=REFUNDED /\premium_contract["BOB"].state=REFUNDED/\premium_contract["CAROL"].state=REFUNDED/\asset_contract["ALICE"].state=REDEEMED /\asset_contract["BOB"].state=REDEEMED/\asset_contract["CAROL"].state=REDEEMED)
 compensated_alice == (/\ending/\conforming[ALICE]/\asset_contract["ALICE"].state=REFUNDED) => wallet["ALICE"].balance>=wallet["ALICE"].init+1
 compensated_bob == (/\ending/\conforming[BOB]/\asset_contract["BOB"].state=REFUNDED) => wallet["BOB"].balance>=wallet["BOB"].init+1
 compensated_carol == (/\ending/\conforming[CAROL]/\asset_contract["CAROL"].state=REFUNDED) => wallet["CAROL"].balance>=wallet["CAROL"].init+1
@@ -623,5 +625,5 @@ Spec == /\ Init /\ [][Next]_vars
 
 Termination == <>(\A self \in ProcSet: pc[self] = "Done")
 
-\* END TRANSLATION - the hash of the generated TLA code (remove to silence divergence warnings): TLA-e31a9420d0ba253d4d18d7e9bb10327b
+\* END TRANSLATION - the hash of the generated TLA code (remove to silence divergence warnings): TLA-ecb724fa97049034828931bcaeb2fece
 ====

@@ -100,10 +100,8 @@ walletliveness == /\(conformingliveness) => (\A x \in PARTIES:wallet[x].balance=
 nounderwater == /\ \A x \in PARTIES: ended/\conforming[x]=>wallet[x].balance>=wallet[x].input
 \* hedged
 \* compensated_partial checks A2B,B2C and C2A, compensate_BA checks B2A
-compensated_partial == \A x\in PARTIES:  ended/\asset_contract[party_contract_map[x]].state=REFUNDED/\conforming[x]=>wallet[x].balance>=wallet[x].input+ compensation[party_contract_map[x]]
+compensated_partial == \A x\in PARTIES:  ended/\asset_contract[party_contract_map[x]].state=REFUNDED/\conforming[x]=>wallet[x].balance>=wallet[x].input+ compensation[x]
 compensated_BA == ended /\ conforming["BOB"]/\asset_contract["B2A"].state = REFUNDED =>wallet["BOB"].balance>=wallet["BOB"].input+ compensation["B2A"]
-compensated_both == ended /\ conforming["BOB"]/\asset_contract["B2C"].state = REFUNDED/\ asset_contract["B2A"].state = REFUNDED=>wallet["BOB"].balance>=wallet["BOB"].input+ compensation["B2C"]+compensation["B2A"]
-
 \*redundant check, just to make sure we update balances correctly
 constant == wallet["ALICE"].balance+wallet["BOB"].balance+wallet["CAROL"].balance
 constant_expect == wallet["ALICE"].input+wallet["BOB"].input+wallet["CAROL"].input
@@ -231,7 +229,7 @@ SA_BA_ON_AB: \* clock =10, BOB releases (sa,Ba) on AB
     conforming["ALICE"]:=FALSE;
  elsif ~step_considered[SSA_A_ON_BA]/\clock<=path_signature_sa["A_ON_BA"].timeout then
     conforming["BOB"]:=FALSE;
- elsif  step_taken[SP_R_SA_BA_ON_AB]/\step_taken[SSA_A_ON_BA] /\ ~step_taken[SSA_BA_ON_AB] then
+ elsif  step_taken[SP_R_SA_BCA_ON_AB]/\step_taken[SSA_A_ON_BA] /\ ~step_taken[SSA_BA_ON_AB] then
      conforming["BOB"]:=FALSE;
  end if;
  step_considered[SSA_BA_ON_AB]:= TRUE;
@@ -625,7 +623,7 @@ fair process Clock = CLOCK begin tick:
 
 
 end algorithm; *)
-\* BEGIN TRANSLATION - the hash of the PCal code: PCal-afc4c25df2689fd80a1549294db45fdb
+\* BEGIN TRANSLATION - the hash of the PCal code: PCal-0188b2e5d51aca44edfe90ceb4186931
 VARIABLES asset_contract, premium_escrow_contract, premium_redeem_contract_sa, 
           path_signature_sa, wallet, compensation, clock, step_considered, 
           conforming, step_taken, ending, party_contract_map, pc
@@ -662,10 +660,8 @@ walletliveness == /\(conformingliveness) => (\A x \in PARTIES:wallet[x].balance=
 nounderwater == /\ \A x \in PARTIES: ended/\conforming[x]=>wallet[x].balance>=wallet[x].input
 
 
-compensated_partial == \A x\in PARTIES:  ended/\asset_contract[party_contract_map[x]].state=REFUNDED/\conforming[x]=>wallet[x].balance>=wallet[x].input+ compensation[party_contract_map[x]]
+compensated_partial == \A x\in PARTIES:  ended/\asset_contract[party_contract_map[x]].state=REFUNDED/\conforming[x]=>wallet[x].balance>=wallet[x].input+ compensation[x]
 compensated_BA == ended /\ conforming["BOB"]/\asset_contract["B2A"].state = REFUNDED =>wallet["BOB"].balance>=wallet["BOB"].input+ compensation["B2A"]
-compensated_both == ended /\ conforming["BOB"]/\asset_contract["B2C"].state = REFUNDED/\ asset_contract["B2A"].state = REFUNDED=>wallet["BOB"].balance>=wallet["BOB"].input+ compensation["B2C"]+compensation["B2A"]
-
 
 constant == wallet["ALICE"].balance+wallet["BOB"].balance+wallet["CAROL"].balance
 constant_expect == wallet["ALICE"].input+wallet["BOB"].input+wallet["CAROL"].input
@@ -848,7 +844,7 @@ SA_BA_ON_AB == /\ pc[A2B] = "SA_BA_ON_AB"
                      THEN /\ conforming' = [conforming EXCEPT !["ALICE"] = FALSE]
                      ELSE /\ IF ~step_considered[SSA_A_ON_BA]/\clock<=path_signature_sa'["A_ON_BA"].timeout
                                 THEN /\ conforming' = [conforming EXCEPT !["BOB"] = FALSE]
-                                ELSE /\ IF step_taken'[SP_R_SA_BA_ON_AB]/\step_taken'[SSA_A_ON_BA] /\ ~step_taken'[SSA_BA_ON_AB]
+                                ELSE /\ IF step_taken'[SP_R_SA_BCA_ON_AB]/\step_taken'[SSA_A_ON_BA] /\ ~step_taken'[SSA_BA_ON_AB]
                                            THEN /\ conforming' = [conforming EXCEPT !["BOB"] = FALSE]
                                            ELSE /\ TRUE
                                                 /\ UNCHANGED conforming
@@ -1311,5 +1307,5 @@ Spec == /\ Init /\ [][Next]_vars
 
 Termination == <>(\A self \in ProcSet: pc[self] = "Done")
 
-\* END TRANSLATION - the hash of the generated TLA code (remove to silence divergence warnings): TLA-8d9ac510f3d1d2f07f8eee0112a8a9b3
+\* END TRANSLATION - the hash of the generated TLA code (remove to silence divergence warnings): TLA-d58d5e35b95889826cbbd05d871ada89
 ====

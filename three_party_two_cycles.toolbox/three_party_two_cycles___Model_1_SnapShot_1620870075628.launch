@@ -1,28 +1,26 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <launchConfiguration type="org.lamport.tla.toolbox.tool.tlc.modelCheck">
-    <stringAttribute key="configurationName" value="Model_1"/>
+    <stringAttribute key="configurationName" value="Model_1_SnapShot_1620870075628"/>
     <intAttribute key="distributedFPSetCount" value="0"/>
     <stringAttribute key="distributedNetworkInterface" value="192.168.1.153"/>
     <intAttribute key="distributedNodesCount" value="1"/>
     <stringAttribute key="distributedTLC" value="off"/>
-    <intAttribute key="fpIndex" value="85"/>
+    <intAttribute key="fpIndex" value="112"/>
     <intAttribute key="maxHeapSize" value="25"/>
     <stringAttribute key="modelBehaviorInit" value=""/>
     <stringAttribute key="modelBehaviorNext" value=""/>
     <stringAttribute key="modelBehaviorSpec" value="Spec"/>
     <intAttribute key="modelBehaviorSpecType" value="1"/>
-    <stringAttribute key="modelBehaviorVars" value="step_taken, step_considered, hashkey, clock, pc, asset_contract, premium_contract, wallet, conforming"/>
+    <stringAttribute key="modelBehaviorVars" value="party_contract_map, step_taken, step_considered, path_signature_sa, compensation, clock, pc, asset_contract, premium_escrow_contract, premium_redeem_contract_sa, wallet, conforming, ending"/>
     <stringAttribute key="modelComments" value=""/>
     <booleanAttribute key="modelCorrectnessCheckDeadlock" value="true"/>
     <listAttribute key="modelCorrectnessInvariants">
-        <listEntry value="1liveness"/>
-        <listEntry value="1safe_alice"/>
-        <listEntry value="1safe_bob"/>
-        <listEntry value="1safe_carol"/>
-        <listEntry value="1compensated_alice"/>
-        <listEntry value="1compensated_bob"/>
-        <listEntry value="1compensated_carol"/>
-        <listEntry value="1~liveness_pre"/>
+        <listEntry value="1~conformingliveness"/>
+        <listEntry value="0~(ended/\conforming[&quot;ALICE&quot;]/\conforming[&quot;BOB&quot;])"/>
+        <listEntry value="0~(all_steps_taken /\ conforming[&quot;ALICE&quot;]/\ conforming[&quot;BOB&quot;]/\conforming[&quot;CAROL&quot;])"/>
+        <listEntry value="0contractliveness"/>
+        <listEntry value="0walletliveness"/>
+        <listEntry value="0nounderwater"/>
     </listAttribute>
     <listAttribute key="modelCorrectnessProperties">
         <listEntry value="0Termination"/>
@@ -33,6 +31,6 @@
     <intAttribute key="modelVersion" value="20191005"/>
     <intAttribute key="numberOfWorkers" value="4"/>
     <stringAttribute key="result.mail.address" value=""/>
-    <stringAttribute key="specName" value="three_party_one_cycle"/>
+    <stringAttribute key="specName" value="three_party_two_cycles"/>
     <stringAttribute key="tlcResourcesProfile" value="local custom"/>
 </launchConfiguration>

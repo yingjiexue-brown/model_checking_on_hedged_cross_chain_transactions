@@ -102,8 +102,6 @@ nounderwater == /\ \A x \in PARTIES: ended/\conforming[x]=>wallet[x].balance>=wa
 \* compensated_partial checks A2B,B2C and C2A, compensate_BA checks B2A
 compensated_partial == \A x\in PARTIES:  ended/\asset_contract[party_contract_map[x]].state=REFUNDED/\conforming[x]=>wallet[x].balance>=wallet[x].input+ compensation[party_contract_map[x]]
 compensated_BA == ended /\ conforming["BOB"]/\asset_contract["B2A"].state = REFUNDED =>wallet["BOB"].balance>=wallet["BOB"].input+ compensation["B2A"]
-compensated_both == ended /\ conforming["BOB"]/\asset_contract["B2C"].state = REFUNDED/\ asset_contract["B2A"].state = REFUNDED=>wallet["BOB"].balance>=wallet["BOB"].input+ compensation["B2C"]+compensation["B2A"]
-
 \*redundant check, just to make sure we update balances correctly
 constant == wallet["ALICE"].balance+wallet["BOB"].balance+wallet["CAROL"].balance
 constant_expect == wallet["ALICE"].input+wallet["BOB"].input+wallet["CAROL"].input
@@ -625,7 +623,7 @@ fair process Clock = CLOCK begin tick:
 
 
 end algorithm; *)
-\* BEGIN TRANSLATION - the hash of the PCal code: PCal-afc4c25df2689fd80a1549294db45fdb
+\* BEGIN TRANSLATION - the hash of the PCal code: PCal-114689376a70d6e535074bd2bedd8583
 VARIABLES asset_contract, premium_escrow_contract, premium_redeem_contract_sa, 
           path_signature_sa, wallet, compensation, clock, step_considered, 
           conforming, step_taken, ending, party_contract_map, pc
@@ -664,8 +662,6 @@ nounderwater == /\ \A x \in PARTIES: ended/\conforming[x]=>wallet[x].balance>=wa
 
 compensated_partial == \A x\in PARTIES:  ended/\asset_contract[party_contract_map[x]].state=REFUNDED/\conforming[x]=>wallet[x].balance>=wallet[x].input+ compensation[party_contract_map[x]]
 compensated_BA == ended /\ conforming["BOB"]/\asset_contract["B2A"].state = REFUNDED =>wallet["BOB"].balance>=wallet["BOB"].input+ compensation["B2A"]
-compensated_both == ended /\ conforming["BOB"]/\asset_contract["B2C"].state = REFUNDED/\ asset_contract["B2A"].state = REFUNDED=>wallet["BOB"].balance>=wallet["BOB"].input+ compensation["B2C"]+compensation["B2A"]
-
 
 constant == wallet["ALICE"].balance+wallet["BOB"].balance+wallet["CAROL"].balance
 constant_expect == wallet["ALICE"].input+wallet["BOB"].input+wallet["CAROL"].input
@@ -1311,5 +1307,5 @@ Spec == /\ Init /\ [][Next]_vars
 
 Termination == <>(\A self \in ProcSet: pc[self] = "Done")
 
-\* END TRANSLATION - the hash of the generated TLA code (remove to silence divergence warnings): TLA-8d9ac510f3d1d2f07f8eee0112a8a9b3
+\* END TRANSLATION - the hash of the generated TLA code (remove to silence divergence warnings): TLA-11a8cf26191a2c349099d5c4f4b0bd11
 ====

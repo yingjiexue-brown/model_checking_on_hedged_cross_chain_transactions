@@ -100,10 +100,8 @@ walletliveness == /\(conformingliveness) => (\A x \in PARTIES:wallet[x].balance=
 nounderwater == /\ \A x \in PARTIES: ended/\conforming[x]=>wallet[x].balance>=wallet[x].input
 \* hedged
 \* compensated_partial checks A2B,B2C and C2A, compensate_BA checks B2A
-compensated_partial == \A x\in PARTIES:  ended/\asset_contract[party_contract_map[x]].state=REFUNDED/\conforming[x]=>wallet[x].balance>=wallet[x].input+ compensation[party_contract_map[x]]
+compensated_partial == \A x\in PARTIES:  ended/\asset_contract[party_contract_map[x]].state=REFUNDED/\conforming[x]=>wallet[x].balance>=wallet[x].input+ compensation[x]
 compensated_BA == ended /\ conforming["BOB"]/\asset_contract["B2A"].state = REFUNDED =>wallet["BOB"].balance>=wallet["BOB"].input+ compensation["B2A"]
-compensated_both == ended /\ conforming["BOB"]/\asset_contract["B2C"].state = REFUNDED/\ asset_contract["B2A"].state = REFUNDED=>wallet["BOB"].balance>=wallet["BOB"].input+ compensation["B2C"]+compensation["B2A"]
-
 \*redundant check, just to make sure we update balances correctly
 constant == wallet["ALICE"].balance+wallet["BOB"].balance+wallet["CAROL"].balance
 constant_expect == wallet["ALICE"].input+wallet["BOB"].input+wallet["CAROL"].input
@@ -231,7 +229,7 @@ SA_BA_ON_AB: \* clock =10, BOB releases (sa,Ba) on AB
     conforming["ALICE"]:=FALSE;
  elsif ~step_considered[SSA_A_ON_BA]/\clock<=path_signature_sa["A_ON_BA"].timeout then
     conforming["BOB"]:=FALSE;
- elsif  step_taken[SP_R_SA_BA_ON_AB]/\step_taken[SSA_A_ON_BA] /\ ~step_taken[SSA_BA_ON_AB] then
+ elsif  step_taken[SP_R_SA_BCA_ON_AB]/\step_taken[SSA_A_ON_BA] /\ ~step_taken[SSA_BA_ON_AB] then
      conforming["BOB"]:=FALSE;
  end if;
  step_considered[SSA_BA_ON_AB]:= TRUE;
@@ -483,12 +481,10 @@ SA_A_ON_CA: \* clock =9, Alice releases (sa,a) on CA
         end if;
     end if;
  
- if ~(step_considered[SCA]/\step_considered[SBA])/\clock<=asset_contract["C2A"].deadline then
+ if ~(step_considered[SCA]\/step_considered[SBA])/\clock<=asset_contract["C2A"].deadline then
      conforming["ALICE"]:=FALSE;
  elsif  step_taken[SP_R_SA_A_ON_CA]/\(step_taken[SCA]/\step_taken[SBA])/\~step_taken[SSA_A_ON_CA] then \* should release the pathsig if all incoming assets are escrowed                                                                       \* or it does not escrow any outgoing assets
      conforming["ALICE"]:=FALSE; 
- elsif ~step_considered[SAB] then
-     conforming["ALICE"]:=FALSE;
  elsif step_taken[SP_R_SA_A_ON_CA] /\ ~step_taken[SAB] /\~step_taken[SSA_A_ON_CA] then
      conforming["ALICE"]:=FALSE;
  elsif ~step_taken[SP_R_SA_A_ON_CA]/\ step_taken[SSA_A_ON_CA] then 
@@ -602,8 +598,6 @@ P_R_SA_A_ON_BA: \* clock =3, Alice deposits premium_redeem(sa,a) on BA
     conforming["ALICE"]:=FALSE;
   elsif  step_taken[SP_R_SA_A_ON_BA]/\(step_taken[SCA]/\step_taken[SBA])/\~step_taken[SSA_A_ON_BA] then \* should release the pathsig if all incoming assets are escrowed                                                                       \* or it does not escrow any outgoing assets
      conforming["ALICE"]:=FALSE; 
- elsif ~step_considered[SAB] then
-     conforming["ALICE"]:=FALSE;
  elsif step_taken[SP_R_SA_A_ON_BA] /\ ~step_taken[SAB] /\~step_taken[SSA_A_ON_CA] then
      conforming["ALICE"]:=FALSE;
  elsif ~step_taken[SP_R_SA_A_ON_BA]/\ step_taken[SSA_A_ON_BA] then 
@@ -625,7 +619,7 @@ fair process Clock = CLOCK begin tick:
 
 
 end algorithm; *)
-\* BEGIN TRANSLATION - the hash of the PCal code: PCal-afc4c25df2689fd80a1549294db45fdb
+\* BEGIN TRANSLATION - the hash of the PCal code: PCal-88654234fa714b3e23c0a59435a16e2e
 VARIABLES asset_contract, premium_escrow_contract, premium_redeem_contract_sa, 
           path_signature_sa, wallet, compensation, clock, step_considered, 
           conforming, step_taken, ending, party_contract_map, pc
@@ -662,10 +656,8 @@ walletliveness == /\(conformingliveness) => (\A x \in PARTIES:wallet[x].balance=
 nounderwater == /\ \A x \in PARTIES: ended/\conforming[x]=>wallet[x].balance>=wallet[x].input
 
 
-compensated_partial == \A x\in PARTIES:  ended/\asset_contract[party_contract_map[x]].state=REFUNDED/\conforming[x]=>wallet[x].balance>=wallet[x].input+ compensation[party_contract_map[x]]
+compensated_partial == \A x\in PARTIES:  ended/\asset_contract[party_contract_map[x]].state=REFUNDED/\conforming[x]=>wallet[x].balance>=wallet[x].input+ compensation[x]
 compensated_BA == ended /\ conforming["BOB"]/\asset_contract["B2A"].state = REFUNDED =>wallet["BOB"].balance>=wallet["BOB"].input+ compensation["B2A"]
-compensated_both == ended /\ conforming["BOB"]/\asset_contract["B2C"].state = REFUNDED/\ asset_contract["B2A"].state = REFUNDED=>wallet["BOB"].balance>=wallet["BOB"].input+ compensation["B2C"]+compensation["B2A"]
-
 
 constant == wallet["ALICE"].balance+wallet["BOB"].balance+wallet["CAROL"].balance
 constant_expect == wallet["ALICE"].input+wallet["BOB"].input+wallet["CAROL"].input
@@ -848,7 +840,7 @@ SA_BA_ON_AB == /\ pc[A2B] = "SA_BA_ON_AB"
                      THEN /\ conforming' = [conforming EXCEPT !["ALICE"] = FALSE]
                      ELSE /\ IF ~step_considered[SSA_A_ON_BA]/\clock<=path_signature_sa'["A_ON_BA"].timeout
                                 THEN /\ conforming' = [conforming EXCEPT !["BOB"] = FALSE]
-                                ELSE /\ IF step_taken'[SP_R_SA_BA_ON_AB]/\step_taken'[SSA_A_ON_BA] /\ ~step_taken'[SSA_BA_ON_AB]
+                                ELSE /\ IF step_taken'[SP_R_SA_BCA_ON_AB]/\step_taken'[SSA_A_ON_BA] /\ ~step_taken'[SSA_BA_ON_AB]
                                            THEN /\ conforming' = [conforming EXCEPT !["BOB"] = FALSE]
                                            ELSE /\ TRUE
                                                 /\ UNCHANGED conforming
@@ -1128,20 +1120,18 @@ SA_A_ON_CA == /\ pc[C2A] = "SA_A_ON_CA"
                                     /\ UNCHANGED << premium_redeem_contract_sa, 
                                                     wallet >>
                          /\ UNCHANGED << path_signature_sa, step_taken >>
-              /\ IF ~(step_considered[SCA]/\step_considered[SBA])/\clock<=asset_contract'["C2A"].deadline
+              /\ IF ~(step_considered[SCA]\/step_considered[SBA])/\clock<=asset_contract'["C2A"].deadline
                     THEN /\ conforming' = [conforming EXCEPT !["ALICE"] = FALSE]
                     ELSE /\ IF step_taken'[SP_R_SA_A_ON_CA]/\(step_taken'[SCA]/\step_taken'[SBA])/\~step_taken'[SSA_A_ON_CA]
                                THEN /\ conforming' = [conforming EXCEPT !["ALICE"] = FALSE]
-                               ELSE /\ IF ~step_considered[SAB]
+                               ELSE /\ IF step_taken'[SP_R_SA_A_ON_CA] /\ ~step_taken'[SAB] /\~step_taken'[SSA_A_ON_CA]
                                           THEN /\ conforming' = [conforming EXCEPT !["ALICE"] = FALSE]
-                                          ELSE /\ IF step_taken'[SP_R_SA_A_ON_CA] /\ ~step_taken'[SAB] /\~step_taken'[SSA_A_ON_CA]
+                                          ELSE /\ IF ~step_taken'[SP_R_SA_A_ON_CA]/\ step_taken'[SSA_A_ON_CA]
                                                      THEN /\ conforming' = [conforming EXCEPT !["ALICE"] = FALSE]
-                                                     ELSE /\ IF ~step_taken'[SP_R_SA_A_ON_CA]/\ step_taken'[SSA_A_ON_CA]
+                                                     ELSE /\ IF ~(step_taken'[SCA]/\step_taken'[SBA])/\ step_taken'[SAB]/\step_taken'[SSA_A_ON_CA]
                                                                 THEN /\ conforming' = [conforming EXCEPT !["ALICE"] = FALSE]
-                                                                ELSE /\ IF ~(step_taken'[SCA]/\step_taken'[SBA])/\ step_taken'[SAB]/\step_taken'[SSA_A_ON_CA]
-                                                                           THEN /\ conforming' = [conforming EXCEPT !["ALICE"] = FALSE]
-                                                                           ELSE /\ TRUE
-                                                                                /\ UNCHANGED conforming
+                                                                ELSE /\ TRUE
+                                                                     /\ UNCHANGED conforming
               /\ step_considered' = [step_considered EXCEPT ![SSA_A_ON_CA] = TRUE]
               /\ ending' = [ending EXCEPT ![C2A] = TRUE]
               /\ pc' = [pc EXCEPT ![C2A] = "Done"]
@@ -1258,16 +1248,14 @@ SA_A_ON_BA == /\ pc[B2A] = "SA_A_ON_BA"
                     THEN /\ conforming' = [conforming EXCEPT !["ALICE"] = FALSE]
                     ELSE /\ IF step_taken'[SP_R_SA_A_ON_BA]/\(step_taken'[SCA]/\step_taken'[SBA])/\~step_taken'[SSA_A_ON_BA]
                                THEN /\ conforming' = [conforming EXCEPT !["ALICE"] = FALSE]
-                               ELSE /\ IF ~step_considered[SAB]
+                               ELSE /\ IF step_taken'[SP_R_SA_A_ON_BA] /\ ~step_taken'[SAB] /\~step_taken'[SSA_A_ON_CA]
                                           THEN /\ conforming' = [conforming EXCEPT !["ALICE"] = FALSE]
-                                          ELSE /\ IF step_taken'[SP_R_SA_A_ON_BA] /\ ~step_taken'[SAB] /\~step_taken'[SSA_A_ON_CA]
+                                          ELSE /\ IF ~step_taken'[SP_R_SA_A_ON_BA]/\ step_taken'[SSA_A_ON_BA]
                                                      THEN /\ conforming' = [conforming EXCEPT !["ALICE"] = FALSE]
-                                                     ELSE /\ IF ~step_taken'[SP_R_SA_A_ON_BA]/\ step_taken'[SSA_A_ON_BA]
+                                                     ELSE /\ IF ~(step_taken'[SCA]/\step_taken'[SBA])/\ step_taken'[SAB]/\step_taken'[SSA_A_ON_BA]
                                                                 THEN /\ conforming' = [conforming EXCEPT !["ALICE"] = FALSE]
-                                                                ELSE /\ IF ~(step_taken'[SCA]/\step_taken'[SBA])/\ step_taken'[SAB]/\step_taken'[SSA_A_ON_BA]
-                                                                           THEN /\ conforming' = [conforming EXCEPT !["ALICE"] = FALSE]
-                                                                           ELSE /\ TRUE
-                                                                                /\ UNCHANGED conforming
+                                                                ELSE /\ TRUE
+                                                                     /\ UNCHANGED conforming
               /\ step_considered' = [step_considered EXCEPT ![SSA_A_ON_BA] = TRUE]
               /\ ending' = [ending EXCEPT ![B2A] = TRUE]
               /\ pc' = [pc EXCEPT ![B2A] = "Done"]
@@ -1311,5 +1299,5 @@ Spec == /\ Init /\ [][Next]_vars
 
 Termination == <>(\A self \in ProcSet: pc[self] = "Done")
 
-\* END TRANSLATION - the hash of the generated TLA code (remove to silence divergence warnings): TLA-8d9ac510f3d1d2f07f8eee0112a8a9b3
+\* END TRANSLATION - the hash of the generated TLA code (remove to silence divergence warnings): TLA-6041091d3b1f4f623e4da870de795554
 ====

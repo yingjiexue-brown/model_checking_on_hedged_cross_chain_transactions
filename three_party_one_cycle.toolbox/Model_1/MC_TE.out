@@ -2,7 +2,7 @@
 TLC2 Version 2.15 of Day Month 20?? (rev: eb3ff99)
 @!@!@ENDMSG 2262 @!@!@
 @!@!@STARTMSG 2187:0 @!@!@
-Running breadth-first search Model-Checking with fp 86 and seed -3141483321353853572 with 4 workers on 8 cores with 1214MB heap and 2730MB offheap memory [pid: 85203] (Mac OS X 10.16 x86_64, AdoptOpenJDK 14.0.1 x86_64, OffHeapDiskFPSet, DiskStateQueue).
+Running breadth-first search Model-Checking with fp 85 and seed 9017456130112327873 with 4 workers on 8 cores with 1214MB heap and 2730MB offheap memory [pid: 86907] (Mac OS X 10.16 x86_64, AdoptOpenJDK 14.0.1 x86_64, OffHeapDiskFPSet, DiskStateQueue).
 @!@!@ENDMSG 2187 @!@!@
 @!@!@STARTMSG 2220:0 @!@!@
 Starting SANY...
@@ -25,1305 +25,1953 @@ Semantic processing of module MC
 SANY finished.
 @!@!@ENDMSG 2219 @!@!@
 @!@!@STARTMSG 2185:0 @!@!@
-Starting... (2021-05-10 13:44:54)
+Starting... (2021-05-10 20:13:49)
 @!@!@ENDMSG 2185 @!@!@
 @!@!@STARTMSG 2189:0 @!@!@
 Computing initial states...
 @!@!@ENDMSG 2189 @!@!@
 @!@!@STARTMSG 2190:0 @!@!@
-Finished computing initial states: 1 distinct state generated at 2021-05-10 13:44:54.
+Finished computing initial states: 1 distinct state generated at 2021-05-10 20:13:50.
 @!@!@ENDMSG 2190 @!@!@
-@!@!@STARTMSG 2200:0 @!@!@
-Progress(22) at 2021-05-10 13:44:57: 357,527 states generated (357,527 s/min), 155,299 distinct states found (155,299 ds/min), 27,208 states left on queue.
-@!@!@ENDMSG 2200 @!@!@
-@!@!@STARTMSG 2193:0 @!@!@
-Model checking completed. No error has been found.
-  Estimates of the probability that TLC did not check all reachable states
-  because two distinct states had the same fingerprint:
-  calculated (optimistic):  val = 1.6E-8
-  based on the actual fingerprints:  val = 8.8E-9
-@!@!@ENDMSG 2193 @!@!@
+@!@!@STARTMSG 2110:1 @!@!@
+Invariant inv_1620692028587237000 is violated.
+@!@!@ENDMSG 2110 @!@!@
+@!@!@STARTMSG 2121:1 @!@!@
+The behavior up to this point is:
+@!@!@ENDMSG 2121 @!@!@
+@!@!@STARTMSG 2217:4 @!@!@
+1: <Initial predicate>
+/\ step_taken = ( 0 :> FALSE @@
+  1 :> FALSE @@
+  2 :> FALSE @@
+  3 :> FALSE @@
+  4 :> FALSE @@
+  5 :> FALSE @@
+  6 :> FALSE @@
+  7 :> FALSE @@
+  8 :> FALSE )
+/\ step_considered = ( 0 :> FALSE @@
+  1 :> FALSE @@
+  2 :> FALSE @@
+  3 :> FALSE @@
+  4 :> FALSE @@
+  5 :> FALSE @@
+  6 :> FALSE @@
+  7 :> FALSE @@
+  8 :> FALSE )
+/\ hashkey = [ C2A |-> [state |-> 0, deadline |-> 6],
+  B2C |-> [state |-> 0, deadline |-> 7],
+  A2B |-> [state |-> 0, deadline |-> 8] ]
+/\ clock = 0
+/\ pc = (0 :> "S_B_D_P" @@ 1 :> "S_C_D_P" @@ 2 :> "S_A_D_P" @@ 3 :> "tick")
+/\ asset_contract = [ ALICE |->
+      [ state |-> 0,
+        balance |-> 100,
+        timeout |-> -1,
+        deadline |-> 3,
+        timestamp |-> 9 ],
+  BOB |->
+      [ state |-> 0,
+        balance |-> 100,
+        timeout |-> -1,
+        deadline |-> 4,
+        timestamp |-> 9 ],
+  CAROL |->
+      [ state |-> 0,
+        balance |-> 100,
+        timeout |-> -1,
+        deadline |-> 5,
+        timestamp |-> 9 ] ]
+/\ premium_contract = [ ALICE |->
+      [ state |-> 0,
+        balance |-> 3,
+        timeout |-> -1,
+        deadline |-> 0,
+        timestamp |-> 9 ],
+  BOB |->
+      [ state |-> 0,
+        balance |-> 1,
+        timeout |-> -1,
+        deadline |-> 2,
+        timestamp |-> 9 ],
+  CAROL |->
+      [ state |-> 0,
+        balance |-> 2,
+        timeout |-> -1,
+        deadline |-> 1,
+        timestamp |-> 9 ] ]
+/\ wallet = [ ALICE |-> [balance |-> 103, init |-> 103],
+  BOB |-> [balance |-> 101, init |-> 101],
+  CAROL |-> [balance |-> 102, init |-> 102] ]
+/\ conforming = (0 :> TRUE @@ 1 :> TRUE @@ 2 :> TRUE)
+
+@!@!@ENDMSG 2217 @!@!@
+@!@!@STARTMSG 2217:4 @!@!@
+2: <S_A_D_P line 521, col 12 to line 535, col 68 of module three_party_one_cycle>
+/\ step_taken = ( 0 :> TRUE @@
+  1 :> FALSE @@
+  2 :> FALSE @@
+  3 :> FALSE @@
+  4 :> FALSE @@
+  5 :> FALSE @@
+  6 :> FALSE @@
+  7 :> FALSE @@
+  8 :> FALSE )
+/\ step_considered = ( 0 :> TRUE @@
+  1 :> FALSE @@
+  2 :> FALSE @@
+  3 :> FALSE @@
+  4 :> FALSE @@
+  5 :> FALSE @@
+  6 :> FALSE @@
+  7 :> FALSE @@
+  8 :> FALSE )
+/\ hashkey = [ C2A |-> [state |-> 0, deadline |-> 6],
+  B2C |-> [state |-> 0, deadline |-> 7],
+  A2B |-> [state |-> 0, deadline |-> 8] ]
+/\ clock = 0
+/\ pc = (0 :> "S_B_D_P" @@ 1 :> "S_C_D_P" @@ 2 :> "S_C_E" @@ 3 :> "tick")
+/\ asset_contract = [ ALICE |->
+      [ state |-> 0,
+        balance |-> 100,
+        timeout |-> -1,
+        deadline |-> 3,
+        timestamp |-> 9 ],
+  BOB |->
+      [ state |-> 0,
+        balance |-> 100,
+        timeout |-> -1,
+        deadline |-> 4,
+        timestamp |-> 9 ],
+  CAROL |->
+      [ state |-> 0,
+        balance |-> 100,
+        timeout |-> -1,
+        deadline |-> 5,
+        timestamp |-> 9 ] ]
+/\ premium_contract = [ ALICE |->
+      [ state |-> 1,
+        balance |-> 3,
+        timeout |-> 5,
+        deadline |-> 0,
+        timestamp |-> 0 ],
+  BOB |->
+      [ state |-> 0,
+        balance |-> 1,
+        timeout |-> -1,
+        deadline |-> 2,
+        timestamp |-> 9 ],
+  CAROL |->
+      [ state |-> 0,
+        balance |-> 2,
+        timeout |-> -1,
+        deadline |-> 1,
+        timestamp |-> 9 ] ]
+/\ wallet = [ ALICE |-> [balance |-> 103, init |-> 103],
+  BOB |-> [balance |-> 101, init |-> 101],
+  CAROL |-> [balance |-> 102, init |-> 102] ]
+/\ conforming = (0 :> TRUE @@ 1 :> TRUE @@ 2 :> TRUE)
+
+@!@!@ENDMSG 2217 @!@!@
+@!@!@STARTMSG 2217:4 @!@!@
+3: <S_C_D_P line 440, col 12 to line 458, col 68 of module three_party_one_cycle>
+/\ step_taken = ( 0 :> TRUE @@
+  1 :> TRUE @@
+  2 :> FALSE @@
+  3 :> FALSE @@
+  4 :> FALSE @@
+  5 :> FALSE @@
+  6 :> FALSE @@
+  7 :> FALSE @@
+  8 :> FALSE )
+/\ step_considered = ( 0 :> TRUE @@
+  1 :> TRUE @@
+  2 :> FALSE @@
+  3 :> FALSE @@
+  4 :> FALSE @@
+  5 :> FALSE @@
+  6 :> FALSE @@
+  7 :> FALSE @@
+  8 :> FALSE )
+/\ hashkey = [ C2A |-> [state |-> 0, deadline |-> 6],
+  B2C |-> [state |-> 0, deadline |-> 7],
+  A2B |-> [state |-> 0, deadline |-> 8] ]
+/\ clock = 0
+/\ pc = (0 :> "S_B_D_P" @@ 1 :> "S_B_E" @@ 2 :> "S_C_E" @@ 3 :> "tick")
+/\ asset_contract = [ ALICE |->
+      [ state |-> 0,
+        balance |-> 100,
+        timeout |-> -1,
+        deadline |-> 3,
+        timestamp |-> 9 ],
+  BOB |->
+      [ state |-> 0,
+        balance |-> 100,
+        timeout |-> -1,
+        deadline |-> 4,
+        timestamp |-> 9 ],
+  CAROL |->
+      [ state |-> 0,
+        balance |-> 100,
+        timeout |-> -1,
+        deadline |-> 5,
+        timestamp |-> 9 ] ]
+/\ premium_contract = [ ALICE |->
+      [ state |-> 1,
+        balance |-> 3,
+        timeout |-> 5,
+        deadline |-> 0,
+        timestamp |-> 0 ],
+  BOB |->
+      [ state |-> 0,
+        balance |-> 1,
+        timeout |-> -1,
+        deadline |-> 2,
+        timestamp |-> 9 ],
+  CAROL |->
+      [ state |-> 1,
+        balance |-> 2,
+        timeout |-> 4,
+        deadline |-> 1,
+        timestamp |-> 0 ] ]
+/\ wallet = [ ALICE |-> [balance |-> 103, init |-> 103],
+  BOB |-> [balance |-> 101, init |-> 101],
+  CAROL |-> [balance |-> 102, init |-> 102] ]
+/\ conforming = (0 :> TRUE @@ 1 :> TRUE @@ 2 :> TRUE)
+
+@!@!@ENDMSG 2217 @!@!@
+@!@!@STARTMSG 2217:4 @!@!@
+4: <S_B_D_P line 357, col 12 to line 375, col 68 of module three_party_one_cycle>
+/\ step_taken = ( 0 :> TRUE @@
+  1 :> TRUE @@
+  2 :> TRUE @@
+  3 :> FALSE @@
+  4 :> FALSE @@
+  5 :> FALSE @@
+  6 :> FALSE @@
+  7 :> FALSE @@
+  8 :> FALSE )
+/\ step_considered = ( 0 :> TRUE @@
+  1 :> TRUE @@
+  2 :> TRUE @@
+  3 :> FALSE @@
+  4 :> FALSE @@
+  5 :> FALSE @@
+  6 :> FALSE @@
+  7 :> FALSE @@
+  8 :> FALSE )
+/\ hashkey = [ C2A |-> [state |-> 0, deadline |-> 6],
+  B2C |-> [state |-> 0, deadline |-> 7],
+  A2B |-> [state |-> 0, deadline |-> 8] ]
+/\ clock = 0
+/\ pc = (0 :> "S_A_E" @@ 1 :> "S_B_E" @@ 2 :> "S_C_E" @@ 3 :> "tick")
+/\ asset_contract = [ ALICE |->
+      [ state |-> 0,
+        balance |-> 100,
+        timeout |-> -1,
+        deadline |-> 3,
+        timestamp |-> 9 ],
+  BOB |->
+      [ state |-> 0,
+        balance |-> 100,
+        timeout |-> -1,
+        deadline |-> 4,
+        timestamp |-> 9 ],
+  CAROL |->
+      [ state |-> 0,
+        balance |-> 100,
+        timeout |-> -1,
+        deadline |-> 5,
+        timestamp |-> 9 ] ]
+/\ premium_contract = [ ALICE |->
+      [ state |-> 1,
+        balance |-> 3,
+        timeout |-> 5,
+        deadline |-> 0,
+        timestamp |-> 0 ],
+  BOB |->
+      [ state |-> 1,
+        balance |-> 1,
+        timeout |-> 3,
+        deadline |-> 2,
+        timestamp |-> 0 ],
+  CAROL |->
+      [ state |-> 1,
+        balance |-> 2,
+        timeout |-> 4,
+        deadline |-> 1,
+        timestamp |-> 0 ] ]
+/\ wallet = [ ALICE |-> [balance |-> 103, init |-> 103],
+  BOB |-> [balance |-> 101, init |-> 101],
+  CAROL |-> [balance |-> 102, init |-> 102] ]
+/\ conforming = (0 :> TRUE @@ 1 :> TRUE @@ 2 :> TRUE)
+
+@!@!@ENDMSG 2217 @!@!@
+@!@!@STARTMSG 2217:4 @!@!@
+5: <S_A_E line 377, col 10 to line 399, col 50 of module three_party_one_cycle>
+/\ step_taken = ( 0 :> TRUE @@
+  1 :> TRUE @@
+  2 :> TRUE @@
+  3 :> TRUE @@
+  4 :> FALSE @@
+  5 :> FALSE @@
+  6 :> FALSE @@
+  7 :> FALSE @@
+  8 :> FALSE )
+/\ step_considered = ( 0 :> TRUE @@
+  1 :> TRUE @@
+  2 :> TRUE @@
+  3 :> TRUE @@
+  4 :> FALSE @@
+  5 :> FALSE @@
+  6 :> FALSE @@
+  7 :> FALSE @@
+  8 :> FALSE )
+/\ hashkey = [ C2A |-> [state |-> 0, deadline |-> 6],
+  B2C |-> [state |-> 0, deadline |-> 7],
+  A2B |-> [state |-> 0, deadline |-> 8] ]
+/\ clock = 0
+/\ pc = (0 :> "S_B_R" @@ 1 :> "S_B_E" @@ 2 :> "S_C_E" @@ 3 :> "tick")
+/\ asset_contract = [ ALICE |->
+      [ state |-> 1,
+        balance |-> 100,
+        timeout |-> 8,
+        deadline |-> 3,
+        timestamp |-> 0 ],
+  BOB |->
+      [ state |-> 0,
+        balance |-> 100,
+        timeout |-> -1,
+        deadline |-> 4,
+        timestamp |-> 9 ],
+  CAROL |->
+      [ state |-> 0,
+        balance |-> 100,
+        timeout |-> -1,
+        deadline |-> 5,
+        timestamp |-> 9 ] ]
+/\ premium_contract = [ ALICE |->
+      [ state |-> 1,
+        balance |-> 3,
+        timeout |-> 5,
+        deadline |-> 0,
+        timestamp |-> 0 ],
+  BOB |->
+      [ state |-> 1,
+        balance |-> 1,
+        timeout |-> 3,
+        deadline |-> 2,
+        timestamp |-> 0 ],
+  CAROL |->
+      [ state |-> 1,
+        balance |-> 2,
+        timeout |-> 4,
+        deadline |-> 1,
+        timestamp |-> 0 ] ]
+/\ wallet = [ ALICE |-> [balance |-> 103, init |-> 103],
+  BOB |-> [balance |-> 101, init |-> 101],
+  CAROL |-> [balance |-> 102, init |-> 102] ]
+/\ conforming = (0 :> TRUE @@ 1 :> TRUE @@ 2 :> TRUE)
+
+@!@!@ENDMSG 2217 @!@!@
+@!@!@STARTMSG 2217:4 @!@!@
+6: <S_B_E line 460, col 10 to line 482, col 50 of module three_party_one_cycle>
+/\ step_taken = ( 0 :> TRUE @@
+  1 :> TRUE @@
+  2 :> TRUE @@
+  3 :> TRUE @@
+  4 :> TRUE @@
+  5 :> FALSE @@
+  6 :> FALSE @@
+  7 :> FALSE @@
+  8 :> FALSE )
+/\ step_considered = ( 0 :> TRUE @@
+  1 :> TRUE @@
+  2 :> TRUE @@
+  3 :> TRUE @@
+  4 :> TRUE @@
+  5 :> FALSE @@
+  6 :> FALSE @@
+  7 :> FALSE @@
+  8 :> FALSE )
+/\ hashkey = [ C2A |-> [state |-> 0, deadline |-> 6],
+  B2C |-> [state |-> 0, deadline |-> 7],
+  A2B |-> [state |-> 0, deadline |-> 8] ]
+/\ clock = 0
+/\ pc = (0 :> "S_B_R" @@ 1 :> "S_C_R" @@ 2 :> "S_C_E" @@ 3 :> "tick")
+/\ asset_contract = [ ALICE |->
+      [ state |-> 1,
+        balance |-> 100,
+        timeout |-> 8,
+        deadline |-> 3,
+        timestamp |-> 0 ],
+  BOB |->
+      [ state |-> 1,
+        balance |-> 100,
+        timeout |-> 7,
+        deadline |-> 4,
+        timestamp |-> 0 ],
+  CAROL |->
+      [ state |-> 0,
+        balance |-> 100,
+        timeout |-> -1,
+        deadline |-> 5,
+        timestamp |-> 9 ] ]
+/\ premium_contract = [ ALICE |->
+      [ state |-> 1,
+        balance |-> 3,
+        timeout |-> 5,
+        deadline |-> 0,
+        timestamp |-> 0 ],
+  BOB |->
+      [ state |-> 1,
+        balance |-> 1,
+        timeout |-> 3,
+        deadline |-> 2,
+        timestamp |-> 0 ],
+  CAROL |->
+      [ state |-> 1,
+        balance |-> 2,
+        timeout |-> 4,
+        deadline |-> 1,
+        timestamp |-> 0 ] ]
+/\ wallet = [ ALICE |-> [balance |-> 103, init |-> 103],
+  BOB |-> [balance |-> 101, init |-> 101],
+  CAROL |-> [balance |-> 102, init |-> 102] ]
+/\ conforming = (0 :> TRUE @@ 1 :> TRUE @@ 2 :> TRUE)
+
+@!@!@ENDMSG 2217 @!@!@
+@!@!@STARTMSG 2217:4 @!@!@
+7: <S_C_E line 537, col 10 to line 559, col 50 of module three_party_one_cycle>
+/\ step_taken = ( 0 :> TRUE @@
+  1 :> TRUE @@
+  2 :> TRUE @@
+  3 :> TRUE @@
+  4 :> TRUE @@
+  5 :> TRUE @@
+  6 :> FALSE @@
+  7 :> FALSE @@
+  8 :> FALSE )
+/\ step_considered = ( 0 :> TRUE @@
+  1 :> TRUE @@
+  2 :> TRUE @@
+  3 :> TRUE @@
+  4 :> TRUE @@
+  5 :> TRUE @@
+  6 :> FALSE @@
+  7 :> FALSE @@
+  8 :> FALSE )
+/\ hashkey = [ C2A |-> [state |-> 0, deadline |-> 6],
+  B2C |-> [state |-> 0, deadline |-> 7],
+  A2B |-> [state |-> 0, deadline |-> 8] ]
+/\ clock = 0
+/\ pc = (0 :> "S_B_R" @@ 1 :> "S_C_R" @@ 2 :> "S_A_R" @@ 3 :> "tick")
+/\ asset_contract = [ ALICE |->
+      [ state |-> 1,
+        balance |-> 100,
+        timeout |-> 8,
+        deadline |-> 3,
+        timestamp |-> 0 ],
+  BOB |->
+      [ state |-> 1,
+        balance |-> 100,
+        timeout |-> 7,
+        deadline |-> 4,
+        timestamp |-> 0 ],
+  CAROL |->
+      [ state |-> 1,
+        balance |-> 100,
+        timeout |-> 6,
+        deadline |-> 5,
+        timestamp |-> 0 ] ]
+/\ premium_contract = [ ALICE |->
+      [ state |-> 1,
+        balance |-> 3,
+        timeout |-> 5,
+        deadline |-> 0,
+        timestamp |-> 0 ],
+  BOB |->
+      [ state |-> 1,
+        balance |-> 1,
+        timeout |-> 3,
+        deadline |-> 2,
+        timestamp |-> 0 ],
+  CAROL |->
+      [ state |-> 1,
+        balance |-> 2,
+        timeout |-> 4,
+        deadline |-> 1,
+        timestamp |-> 0 ] ]
+/\ wallet = [ ALICE |-> [balance |-> 103, init |-> 103],
+  BOB |-> [balance |-> 101, init |-> 101],
+  CAROL |-> [balance |-> 102, init |-> 102] ]
+/\ conforming = (0 :> TRUE @@ 1 :> TRUE @@ 2 :> TRUE)
+
+@!@!@ENDMSG 2217 @!@!@
+@!@!@STARTMSG 2217:4 @!@!@
+8: <S_A_R line 561, col 10 to line 594, col 42 of module three_party_one_cycle>
+/\ step_taken = ( 0 :> TRUE @@
+  1 :> TRUE @@
+  2 :> TRUE @@
+  3 :> TRUE @@
+  4 :> TRUE @@
+  5 :> TRUE @@
+  6 :> TRUE @@
+  7 :> FALSE @@
+  8 :> FALSE )
+/\ step_considered = ( 0 :> TRUE @@
+  1 :> TRUE @@
+  2 :> TRUE @@
+  3 :> TRUE @@
+  4 :> TRUE @@
+  5 :> TRUE @@
+  6 :> TRUE @@
+  7 :> FALSE @@
+  8 :> FALSE )
+/\ hashkey = [ C2A |-> [state |-> 0, deadline |-> 6],
+  B2C |-> [state |-> 0, deadline |-> 7],
+  A2B |-> [state |-> 0, deadline |-> 8] ]
+/\ clock = 0
+/\ pc = (0 :> "S_B_R" @@ 1 :> "S_C_R" @@ 2 :> "Done" @@ 3 :> "tick")
+/\ asset_contract = [ ALICE |->
+      [ state |-> 1,
+        balance |-> 100,
+        timeout |-> 8,
+        deadline |-> 3,
+        timestamp |-> 0 ],
+  BOB |->
+      [ state |-> 1,
+        balance |-> 100,
+        timeout |-> 7,
+        deadline |-> 4,
+        timestamp |-> 0 ],
+  CAROL |->
+      [ state |-> 2,
+        balance |-> 100,
+        timeout |-> 6,
+        deadline |-> 5,
+        timestamp |-> 0 ] ]
+/\ premium_contract = [ ALICE |->
+      [ state |-> 3,
+        balance |-> 3,
+        timeout |-> 5,
+        deadline |-> 0,
+        timestamp |-> 0 ],
+  BOB |->
+      [ state |-> 1,
+        balance |-> 1,
+        timeout |-> 3,
+        deadline |-> 2,
+        timestamp |-> 0 ],
+  CAROL |->
+      [ state |-> 1,
+        balance |-> 2,
+        timeout |-> 4,
+        deadline |-> 1,
+        timestamp |-> 0 ] ]
+/\ wallet = [ ALICE |-> [balance |-> 203, init |-> 103],
+  BOB |-> [balance |-> 101, init |-> 101],
+  CAROL |-> [balance |-> 2, init |-> 102] ]
+/\ conforming = (0 :> TRUE @@ 1 :> TRUE @@ 2 :> TRUE)
+
+@!@!@ENDMSG 2217 @!@!@
+@!@!@STARTMSG 2217:4 @!@!@
+9: <S_C_R line 484, col 10 to line 517, col 42 of module three_party_one_cycle>
+/\ step_taken = ( 0 :> TRUE @@
+  1 :> TRUE @@
+  2 :> TRUE @@
+  3 :> TRUE @@
+  4 :> TRUE @@
+  5 :> TRUE @@
+  6 :> TRUE @@
+  7 :> TRUE @@
+  8 :> FALSE )
+/\ step_considered = ( 0 :> TRUE @@
+  1 :> TRUE @@
+  2 :> TRUE @@
+  3 :> TRUE @@
+  4 :> TRUE @@
+  5 :> TRUE @@
+  6 :> TRUE @@
+  7 :> TRUE @@
+  8 :> FALSE )
+/\ hashkey = [ C2A |-> [state |-> 0, deadline |-> 6],
+  B2C |-> [state |-> 0, deadline |-> 7],
+  A2B |-> [state |-> 0, deadline |-> 8] ]
+/\ clock = 0
+/\ pc = (0 :> "S_B_R" @@ 1 :> "Done" @@ 2 :> "Done" @@ 3 :> "tick")
+/\ asset_contract = [ ALICE |->
+      [ state |-> 1,
+        balance |-> 100,
+        timeout |-> 8,
+        deadline |-> 3,
+        timestamp |-> 0 ],
+  BOB |->
+      [ state |-> 2,
+        balance |-> 100,
+        timeout |-> 7,
+        deadline |-> 4,
+        timestamp |-> 0 ],
+  CAROL |->
+      [ state |-> 2,
+        balance |-> 100,
+        timeout |-> 6,
+        deadline |-> 5,
+        timestamp |-> 0 ] ]
+/\ premium_contract = [ ALICE |->
+      [ state |-> 3,
+        balance |-> 3,
+        timeout |-> 5,
+        deadline |-> 0,
+        timestamp |-> 0 ],
+  BOB |->
+      [ state |-> 1,
+        balance |-> 1,
+        timeout |-> 3,
+        deadline |-> 2,
+        timestamp |-> 0 ],
+  CAROL |->
+      [ state |-> 3,
+        balance |-> 2,
+        timeout |-> 4,
+        deadline |-> 1,
+        timestamp |-> 0 ] ]
+/\ wallet = [ ALICE |-> [balance |-> 203, init |-> 103],
+  BOB |-> [balance |-> 1, init |-> 101],
+  CAROL |-> [balance |-> 102, init |-> 102] ]
+/\ conforming = (0 :> TRUE @@ 1 :> TRUE @@ 2 :> TRUE)
+
+@!@!@ENDMSG 2217 @!@!@
+@!@!@STARTMSG 2217:4 @!@!@
+10: <S_B_R line 401, col 10 to line 436, col 42 of module three_party_one_cycle>
+/\ step_taken = ( 0 :> TRUE @@
+  1 :> TRUE @@
+  2 :> TRUE @@
+  3 :> TRUE @@
+  4 :> TRUE @@
+  5 :> TRUE @@
+  6 :> TRUE @@
+  7 :> TRUE @@
+  8 :> TRUE )
+/\ step_considered = ( 0 :> TRUE @@
+  1 :> TRUE @@
+  2 :> TRUE @@
+  3 :> TRUE @@
+  4 :> TRUE @@
+  5 :> TRUE @@
+  6 :> TRUE @@
+  7 :> TRUE @@
+  8 :> TRUE )
+/\ hashkey = [ C2A |-> [state |-> 0, deadline |-> 6],
+  B2C |-> [state |-> 0, deadline |-> 7],
+  A2B |-> [state |-> 0, deadline |-> 8] ]
+/\ clock = 0
+/\ pc = (0 :> "Done" @@ 1 :> "Done" @@ 2 :> "Done" @@ 3 :> "tick")
+/\ asset_contract = [ ALICE |->
+      [ state |-> 2,
+        balance |-> 100,
+        timeout |-> 8,
+        deadline |-> 3,
+        timestamp |-> 0 ],
+  BOB |->
+      [ state |-> 2,
+        balance |-> 100,
+        timeout |-> 7,
+        deadline |-> 4,
+        timestamp |-> 0 ],
+  CAROL |->
+      [ state |-> 2,
+        balance |-> 100,
+        timeout |-> 6,
+        deadline |-> 5,
+        timestamp |-> 0 ] ]
+/\ premium_contract = [ ALICE |->
+      [ state |-> 3,
+        balance |-> 3,
+        timeout |-> 5,
+        deadline |-> 0,
+        timestamp |-> 0 ],
+  BOB |->
+      [ state |-> 3,
+        balance |-> 1,
+        timeout |-> 3,
+        deadline |-> 2,
+        timestamp |-> 0 ],
+  CAROL |->
+      [ state |-> 3,
+        balance |-> 2,
+        timeout |-> 4,
+        deadline |-> 1,
+        timestamp |-> 0 ] ]
+/\ wallet = [ ALICE |-> [balance |-> 103, init |-> 103],
+  BOB |-> [balance |-> 101, init |-> 101],
+  CAROL |-> [balance |-> 102, init |-> 102] ]
+/\ conforming = (0 :> TRUE @@ 1 :> TRUE @@ 2 :> TRUE)
+
+@!@!@ENDMSG 2217 @!@!@
 @!@!@STARTMSG 2201:0 @!@!@
-The coverage statistics at 2021-05-10 13:45:05
+The coverage statistics at 2021-05-10 20:13:50
 @!@!@ENDMSG 2201 @!@!@
 @!@!@STARTMSG 2773:0 @!@!@
-<Init line 337, col 1 to line 337, col 4 of module three_party_one_cycle>: 1:1
+<Init line 339, col 1 to line 339, col 4 of module three_party_one_cycle>: 2:2
 @!@!@ENDMSG 2773 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 338, col 9 to line 353, col 66 of module three_party_one_cycle: 1
+  line 340, col 9 to line 355, col 66 of module three_party_one_cycle: 2
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2772:0 @!@!@
-<S_B_D_P line 355, col 1 to line 355, col 7 of module three_party_one_cycle>: 580:12708
+<S_B_D_P line 357, col 1 to line 357, col 7 of module three_party_one_cycle>: 99:382
 @!@!@ENDMSG 2772 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 355, col 15 to line 355, col 37 of module three_party_one_cycle: 484278
+  line 357, col 15 to line 357, col 37 of module three_party_one_cycle: 2503
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 355, col 15 to line 355, col 25 of module three_party_one_cycle: 471570
+  |line 357, col 15 to line 357, col 25 of module three_party_one_cycle: 2121
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 356, col 18 to line 356, col 95 of module three_party_one_cycle: 12708
+  line 358, col 18 to line 358, col 95 of module three_party_one_cycle: 382
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 356, col 18 to line 356, col 57 of module three_party_one_cycle: 12708
+  |line 358, col 18 to line 358, col 57 of module three_party_one_cycle: 382
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 356, col 62 to line 356, col 95 of module three_party_one_cycle: 756
+  |line 358, col 62 to line 358, col 95 of module three_party_one_cycle: 368
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 357, col 23 to line 360, col 74 of module three_party_one_cycle: 756
+  line 359, col 23 to line 362, col 74 of module three_party_one_cycle: 368
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 361, col 26 to line 361, col 29 of module three_party_one_cycle: 11952
+  line 363, col 26 to line 363, col 29 of module three_party_one_cycle: 14
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 362, col 26 to line 362, col 69 of module three_party_one_cycle: 11952
+  line 364, col 26 to line 364, col 69 of module three_party_one_cycle: 14
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 363, col 18 to line 363, col 86 of module three_party_one_cycle: 12708
+  line 365, col 18 to line 365, col 86 of module three_party_one_cycle: 382
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 363, col 18 to line 363, col 40 of module three_party_one_cycle: 12708
+  |line 365, col 18 to line 365, col 40 of module three_party_one_cycle: 382
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 363, col 45 to line 363, col 86 of module three_party_one_cycle: 346
+  |line 365, col 45 to line 365, col 86 of module three_party_one_cycle: 50
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 364, col 23 to line 364, col 73 of module three_party_one_cycle: 26
+  line 366, col 23 to line 366, col 73 of module three_party_one_cycle: 28
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 365, col 29 to line 365, col 67 of module three_party_one_cycle: 12682
+  line 367, col 29 to line 367, col 67 of module three_party_one_cycle: 354
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 365, col 29 to line 365, col 47 of module three_party_one_cycle: 12682
+  |line 367, col 29 to line 367, col 47 of module three_party_one_cycle: 354
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 365, col 50 to line 365, col 67 of module three_party_one_cycle: 1864
+  |line 367, col 50 to line 367, col 67 of module three_party_one_cycle: 38
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 366, col 34 to line 366, col 84 of module three_party_one_cycle: 94
+  line 368, col 34 to line 368, col 84 of module three_party_one_cycle: 33
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 367, col 40 to line 367, col 78 of module three_party_one_cycle: 12588
+  line 369, col 40 to line 369, col 78 of module three_party_one_cycle: 321
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 367, col 40 to line 367, col 57 of module three_party_one_cycle: 12588
+  |line 369, col 40 to line 369, col 57 of module three_party_one_cycle: 321
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 367, col 60 to line 367, col 78 of module three_party_one_cycle: 10818
+  |line 369, col 60 to line 369, col 78 of module three_party_one_cycle: 316
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 368, col 45 to line 368, col 95 of module three_party_one_cycle: 10182
+  line 370, col 45 to line 370, col 95 of module three_party_one_cycle: 9
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 369, col 48 to line 369, col 51 of module three_party_one_cycle: 2406
+  line 371, col 48 to line 371, col 51 of module three_party_one_cycle: 312
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 370, col 48 to line 370, col 67 of module three_party_one_cycle: 2406
+  line 372, col 48 to line 372, col 67 of module three_party_one_cycle: 312
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 371, col 15 to line 371, col 73 of module three_party_one_cycle: 12708
+  line 373, col 15 to line 373, col 73 of module three_party_one_cycle: 382
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 372, col 15 to line 372, col 52 of module three_party_one_cycle: 12708
+  line 374, col 15 to line 374, col 52 of module three_party_one_cycle: 382
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 373, col 15 to line 373, col 68 of module three_party_one_cycle: 12708
+  line 375, col 15 to line 375, col 68 of module three_party_one_cycle: 382
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2772:0 @!@!@
-<S_A_E line 375, col 1 to line 375, col 5 of module three_party_one_cycle>: 4048:49712
+<S_A_E line 377, col 1 to line 377, col 5 of module three_party_one_cycle>: 191:603
 @!@!@ENDMSG 2772 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 375, col 13 to line 375, col 33 of module three_party_one_cycle: 521282
+  line 377, col 13 to line 377, col 33 of module three_party_one_cycle: 2723
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 375, col 13 to line 375, col 23 of module three_party_one_cycle: 471570
+  |line 377, col 13 to line 377, col 23 of module three_party_one_cycle: 2120
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 376, col 16 to line 376, col 118 of module three_party_one_cycle: 49712
+  line 378, col 16 to line 378, col 118 of module three_party_one_cycle: 603
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 376, col 16 to line 376, col 77 of module three_party_one_cycle: 49712
+  |line 378, col 16 to line 378, col 77 of module three_party_one_cycle: 603
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  ||line 376, col 16 to line 376, col 32 of module three_party_one_cycle: 49712
+  ||line 378, col 16 to line 378, col 32 of module three_party_one_cycle: 603
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  ||line 376, col 37 to line 376, col 77 of module three_party_one_cycle: 37760
+  ||line 378, col 37 to line 378, col 77 of module three_party_one_cycle: 601
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 376, col 83 to line 376, col 118 of module three_party_one_cycle: 4282
+  |line 378, col 83 to line 378, col 118 of module three_party_one_cycle: 601
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 377, col 24 to line 379, col 109 of module three_party_one_cycle: 4282
+  line 379, col 24 to line 381, col 109 of module three_party_one_cycle: 601
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 380, col 24 to line 380, col 70 of module three_party_one_cycle: 4282
+  line 382, col 24 to line 382, col 70 of module three_party_one_cycle: 601
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 381, col 24 to line 381, col 49 of module three_party_one_cycle: 4282
+  line 383, col 24 to line 383, col 49 of module three_party_one_cycle: 601
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 382, col 27 to line 382, col 62 of module three_party_one_cycle: 45430
+  line 384, col 27 to line 384, col 62 of module three_party_one_cycle: 2
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 383, col 32 to line 383, col 105 of module three_party_one_cycle: 33478
+  line 385, col 35 to line 385, col 105 of module three_party_one_cycle: 0
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 384, col 35 to line 384, col 38 of module three_party_one_cycle: 11952
+  line 386, col 35 to line 386, col 38 of module three_party_one_cycle: 2
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 385, col 35 to line 385, col 60 of module three_party_one_cycle: 11952
+  line 387, col 35 to line 387, col 60 of module three_party_one_cycle: 2
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 386, col 24 to line 386, col 65 of module three_party_one_cycle: 45430
+  line 388, col 24 to line 388, col 65 of module three_party_one_cycle: 2
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 387, col 16 to line 387, col 82 of module three_party_one_cycle: 49712
+  line 389, col 16 to line 389, col 82 of module three_party_one_cycle: 603
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 388, col 24 to line 388, col 73 of module three_party_one_cycle: 0
+  line 390, col 24 to line 390, col 73 of module three_party_one_cycle: 0
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 389, col 27 to line 389, col 63 of module three_party_one_cycle: 49712
+  line 391, col 27 to line 391, col 63 of module three_party_one_cycle: 603
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 389, col 27 to line 389, col 45 of module three_party_one_cycle: 49712
+  |line 391, col 27 to line 391, col 45 of module three_party_one_cycle: 603
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 389, col 48 to line 389, col 63 of module three_party_one_cycle: 11952
+  |line 391, col 48 to line 391, col 63 of module three_party_one_cycle: 2
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 390, col 35 to line 390, col 84 of module three_party_one_cycle: 0
+  line 392, col 35 to line 392, col 84 of module three_party_one_cycle: 0
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 391, col 38 to line 391, col 74 of module three_party_one_cycle: 49712
+  line 393, col 38 to line 393, col 74 of module three_party_one_cycle: 603
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 391, col 38 to line 391, col 55 of module three_party_one_cycle: 49712
+  |line 393, col 38 to line 393, col 55 of module three_party_one_cycle: 603
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 391, col 58 to line 391, col 74 of module three_party_one_cycle: 37760
+  |line 393, col 58 to line 393, col 74 of module three_party_one_cycle: 601
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 392, col 43 to line 392, col 95 of module three_party_one_cycle: 33478
+  line 394, col 46 to line 394, col 95 of module three_party_one_cycle: 0
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 393, col 46 to line 393, col 49 of module three_party_one_cycle: 16234
+  line 395, col 46 to line 395, col 49 of module three_party_one_cycle: 603
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 394, col 46 to line 394, col 65 of module three_party_one_cycle: 16234
+  line 396, col 46 to line 396, col 65 of module three_party_one_cycle: 603
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 395, col 13 to line 395, col 69 of module three_party_one_cycle: 49712
+  line 397, col 13 to line 397, col 69 of module three_party_one_cycle: 603
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 396, col 13 to line 396, col 50 of module three_party_one_cycle: 49712
+  line 398, col 13 to line 398, col 50 of module three_party_one_cycle: 603
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 397, col 13 to line 397, col 50 of module three_party_one_cycle: 49712
+  line 399, col 13 to line 399, col 50 of module three_party_one_cycle: 603
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2772:0 @!@!@
-<S_B_R line 399, col 1 to line 399, col 5 of module three_party_one_cycle>: 17570:180960
+<S_B_R line 401, col 1 to line 401, col 5 of module three_party_one_cycle>: 117:740
 @!@!@ENDMSG 2772 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 399, col 13 to line 399, col 33 of module three_party_one_cycle: 652530
+  line 401, col 13 to line 401, col 33 of module three_party_one_cycle: 2858
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 399, col 13 to line 399, col 23 of module three_party_one_cycle: 471570
+  |line 401, col 13 to line 401, col 23 of module three_party_one_cycle: 2119
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 400, col 16 to line 400, col 110 of module three_party_one_cycle: 180960
+  line 402, col 16 to line 402, col 110 of module three_party_one_cycle: 740
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 400, col 16 to line 400, col 70 of module three_party_one_cycle: 180960
+  line 403, col 24 to line 403, col 92 of module three_party_one_cycle: 739
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  ||line 400, col 16 to line 400, col 30 of module three_party_one_cycle: 180960
+  |line 403, col 42 to line 403, col 92 of module three_party_one_cycle: 740
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  ||line 400, col 33 to line 400, col 70 of module three_party_one_cycle: 138196
+  line 404, col 27 to line 404, col 64 of module three_party_one_cycle: 740
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 400, col 74 to line 400, col 110 of module three_party_one_cycle: 109268
+  line 405, col 35 to line 405, col 105 of module three_party_one_cycle: 739
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 401, col 24 to line 401, col 92 of module three_party_one_cycle: 109268
+  |line 405, col 55 to line 405, col 105 of module three_party_one_cycle: 740
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 402, col 27 to line 402, col 64 of module three_party_one_cycle: 109268
+  line 407, col 35 to line 407, col 60 of module three_party_one_cycle: 0
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 403, col 32 to line 403, col 105 of module three_party_one_cycle: 109268
+  line 408, col 24 to line 409, col 126 of module three_party_one_cycle: 739
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 405, col 35 to line 405, col 60 of module three_party_one_cycle: 0
+  |line 408, col 34 to line 409, col 126 of module three_party_one_cycle: 740
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 406, col 24 to line 407, col 126 of module three_party_one_cycle: 109268
+  line 410, col 24 to line 410, col 70 of module three_party_one_cycle: 739
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 408, col 24 to line 408, col 70 of module three_party_one_cycle: 109268
+  |line 410, col 38 to line 410, col 70 of module three_party_one_cycle: 740
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 409, col 27 to line 409, col 81 of module three_party_one_cycle: 71692
+  line 412, col 35 to line 412, col 103 of module three_party_one_cycle: 0
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 409, col 27 to line 409, col 41 of module three_party_one_cycle: 71692
+  line 414, col 46 to line 414, col 112 of module three_party_one_cycle: 0
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 409, col 45 to line 409, col 81 of module three_party_one_cycle: 28928
+  line 415, col 46 to line 416, col 148 of module three_party_one_cycle: 0
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 410, col 35 to line 410, col 103 of module three_party_one_cycle: 28928
+  line 418, col 46 to line 419, col 67 of module three_party_one_cycle: 0
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 411, col 38 to line 411, col 75 of module three_party_one_cycle: 28928
+  line 421, col 35 to line 422, col 74 of module three_party_one_cycle: 0
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 412, col 43 to line 414, col 148 of module three_party_one_cycle: 28928
+  line 423, col 24 to line 423, col 43 of module three_party_one_cycle: 0
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 416, col 46 to line 417, col 67 of module three_party_one_cycle: 0
+  line 424, col 16 to line 424, col 118 of module three_party_one_cycle: 740
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 418, col 35 to line 418, col 38 of module three_party_one_cycle: 42764
+  |line 424, col 16 to line 424, col 100 of module three_party_one_cycle: 740
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 419, col 35 to line 420, col 74 of module three_party_one_cycle: 42764
+  ||line 424, col 16 to line 424, col 56 of module three_party_one_cycle: 740
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 421, col 24 to line 421, col 43 of module three_party_one_cycle: 71692
+  ||line 424, col 60 to line 424, col 99 of module three_party_one_cycle: 622
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 422, col 16 to line 422, col 118 of module three_party_one_cycle: 180960
+  |line 424, col 103 to line 424, col 118 of module three_party_one_cycle: 56
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 422, col 16 to line 422, col 100 of module three_party_one_cycle: 180960
+  line 425, col 21 to line 425, col 73 of module three_party_one_cycle: 56
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  ||line 422, col 16 to line 422, col 56 of module three_party_one_cycle: 180960
+  line 426, col 27 to line 426, col 87 of module three_party_one_cycle: 684
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  ||line 422, col 60 to line 422, col 99 of module three_party_one_cycle: 113066
+  |line 426, col 27 to line 426, col 69 of module three_party_one_cycle: 684
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 422, col 103 to line 422, col 118 of module three_party_one_cycle: 30340
+  |line 426, col 72 to line 426, col 87 of module three_party_one_cycle: 671
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 423, col 21 to line 423, col 73 of module three_party_one_cycle: 18122
+  line 427, col 32 to line 427, col 84 of module three_party_one_cycle: 671
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 424, col 27 to line 424, col 87 of module three_party_one_cycle: 162838
+  line 428, col 38 to line 428, col 91 of module three_party_one_cycle: 13
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 424, col 27 to line 424, col 69 of module three_party_one_cycle: 162838
+  line 429, col 46 to line 429, col 93 of module three_party_one_cycle: 0
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 424, col 72 to line 424, col 87 of module three_party_one_cycle: 120604
+  line 430, col 49 to line 430, col 101 of module three_party_one_cycle: 13
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 425, col 32 to line 425, col 84 of module three_party_one_cycle: 69674
+  line 431, col 57 to line 431, col 104 of module three_party_one_cycle: 0
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 426, col 38 to line 426, col 91 of module three_party_one_cycle: 93164
+  line 432, col 57 to line 432, col 60 of module three_party_one_cycle: 12
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 426, col 38 to line 426, col 58 of module three_party_one_cycle: 93164
+  line 433, col 57 to line 433, col 76 of module three_party_one_cycle: 12
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 426, col 61 to line 426, col 91 of module three_party_one_cycle: 32268
+  line 434, col 13 to line 434, col 69 of module three_party_one_cycle: 739
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 427, col 43 to line 427, col 93 of module three_party_one_cycle: 12730
+  |line 434, col 32 to line 434, col 69 of module three_party_one_cycle: 740
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 428, col 49 to line 428, col 101 of module three_party_one_cycle: 80434
+  line 435, col 13 to line 435, col 49 of module three_party_one_cycle: 739
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 428, col 49 to line 428, col 82 of module three_party_one_cycle: 80434
+  |line 435, col 19 to line 435, col 49 of module three_party_one_cycle: 740
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  ||line 428, col 49 to line 428, col 64 of module three_party_one_cycle: 80434
-@!@!@ENDMSG 2221 @!@!@
-@!@!@STARTMSG 2221:0 @!@!@
-  ||line 428, col 67 to line 428, col 82 of module three_party_one_cycle: 44178
-@!@!@ENDMSG 2221 @!@!@
-@!@!@STARTMSG 2221:0 @!@!@
-  |line 428, col 85 to line 428, col 101 of module three_party_one_cycle: 30834
-@!@!@ENDMSG 2221 @!@!@
-@!@!@STARTMSG 2221:0 @!@!@
-  line 429, col 54 to line 429, col 104 of module three_party_one_cycle: 9362
-@!@!@ENDMSG 2221 @!@!@
-@!@!@STARTMSG 2221:0 @!@!@
-  line 430, col 57 to line 430, col 60 of module three_party_one_cycle: 71072
-@!@!@ENDMSG 2221 @!@!@
-@!@!@STARTMSG 2221:0 @!@!@
-  line 431, col 57 to line 431, col 76 of module three_party_one_cycle: 71072
-@!@!@ENDMSG 2221 @!@!@
-@!@!@STARTMSG 2221:0 @!@!@
-  line 432, col 13 to line 432, col 69 of module three_party_one_cycle: 180960
-@!@!@ENDMSG 2221 @!@!@
-@!@!@STARTMSG 2221:0 @!@!@
-  line 433, col 13 to line 433, col 49 of module three_party_one_cycle: 180960
-@!@!@ENDMSG 2221 @!@!@
-@!@!@STARTMSG 2221:0 @!@!@
-  line 434, col 13 to line 434, col 42 of module three_party_one_cycle: 180960
+  line 436, col 13 to line 436, col 42 of module three_party_one_cycle: 739
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2772:0 @!@!@
-<S_C_D_P line 438, col 1 to line 438, col 7 of module three_party_one_cycle>: 322:10974
+<S_C_D_P line 440, col 1 to line 440, col 7 of module three_party_one_cycle>: 117:331
 @!@!@ENDMSG 2772 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 438, col 15 to line 438, col 38 of module three_party_one_cycle: 482544
+  line 440, col 15 to line 440, col 38 of module three_party_one_cycle: 2448
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 438, col 15 to line 438, col 26 of module three_party_one_cycle: 471570
+  |line 440, col 15 to line 440, col 26 of module three_party_one_cycle: 2117
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 439, col 18 to line 439, col 98 of module three_party_one_cycle: 10974
+  line 441, col 18 to line 441, col 98 of module three_party_one_cycle: 331
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 439, col 18 to line 439, col 58 of module three_party_one_cycle: 10974
+  |line 441, col 18 to line 441, col 58 of module three_party_one_cycle: 331
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 439, col 63 to line 439, col 98 of module three_party_one_cycle: 208
+  |line 441, col 63 to line 441, col 98 of module three_party_one_cycle: 189
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 440, col 23 to line 443, col 74 of module three_party_one_cycle: 208
+  line 442, col 23 to line 445, col 74 of module three_party_one_cycle: 189
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 444, col 26 to line 444, col 29 of module three_party_one_cycle: 10766
+  line 446, col 26 to line 446, col 29 of module three_party_one_cycle: 142
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 445, col 26 to line 445, col 69 of module three_party_one_cycle: 10766
+  line 447, col 26 to line 447, col 69 of module three_party_one_cycle: 142
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 446, col 18 to line 446, col 86 of module three_party_one_cycle: 10974
+  line 448, col 18 to line 448, col 86 of module three_party_one_cycle: 331
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 446, col 18 to line 446, col 40 of module three_party_one_cycle: 10974
+  |line 448, col 18 to line 448, col 40 of module three_party_one_cycle: 331
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 446, col 45 to line 446, col 86 of module three_party_one_cycle: 502
+  |line 448, col 45 to line 448, col 86 of module three_party_one_cycle: 68
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 447, col 23 to line 447, col 75 of module three_party_one_cycle: 8
+  line 449, col 23 to line 449, col 75 of module three_party_one_cycle: 9
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 448, col 29 to line 448, col 67 of module three_party_one_cycle: 10966
+  line 450, col 29 to line 450, col 67 of module three_party_one_cycle: 322
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 448, col 29 to line 448, col 47 of module three_party_one_cycle: 10966
+  |line 450, col 29 to line 450, col 47 of module three_party_one_cycle: 322
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 448, col 50 to line 448, col 67 of module three_party_one_cycle: 2640
+  |line 450, col 50 to line 450, col 67 of module three_party_one_cycle: 143
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 449, col 34 to line 449, col 86 of module three_party_one_cycle: 72
+  line 451, col 34 to line 451, col 86 of module three_party_one_cycle: 67
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 450, col 40 to line 450, col 78 of module three_party_one_cycle: 10894
+  line 452, col 40 to line 452, col 78 of module three_party_one_cycle: 255
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 450, col 40 to line 450, col 57 of module three_party_one_cycle: 10894
+  |line 452, col 40 to line 452, col 57 of module three_party_one_cycle: 255
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 450, col 60 to line 450, col 78 of module three_party_one_cycle: 8326
+  |line 452, col 60 to line 452, col 78 of module three_party_one_cycle: 179
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 451, col 45 to line 451, col 97 of module three_party_one_cycle: 8198
+  line 453, col 45 to line 453, col 97 of module three_party_one_cycle: 66
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 452, col 48 to line 452, col 51 of module three_party_one_cycle: 2696
+  line 454, col 48 to line 454, col 51 of module three_party_one_cycle: 189
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 453, col 48 to line 453, col 67 of module three_party_one_cycle: 2696
+  line 455, col 48 to line 455, col 67 of module three_party_one_cycle: 189
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 454, col 15 to line 454, col 73 of module three_party_one_cycle: 10974
+  line 456, col 15 to line 456, col 73 of module three_party_one_cycle: 331
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 455, col 15 to line 455, col 53 of module three_party_one_cycle: 10974
+  line 457, col 15 to line 457, col 53 of module three_party_one_cycle: 331
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 456, col 15 to line 456, col 68 of module three_party_one_cycle: 10974
+  line 458, col 15 to line 458, col 68 of module three_party_one_cycle: 331
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2772:0 @!@!@
-<S_B_E line 458, col 1 to line 458, col 5 of module three_party_one_cycle>: 5689:39394
+<S_B_E line 460, col 1 to line 460, col 5 of module three_party_one_cycle>: 306:715
 @!@!@ENDMSG 2772 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 458, col 13 to line 458, col 34 of module three_party_one_cycle: 510964
+  line 460, col 13 to line 460, col 34 of module three_party_one_cycle: 2831
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 458, col 13 to line 458, col 24 of module three_party_one_cycle: 471570
+  |line 460, col 13 to line 460, col 24 of module three_party_one_cycle: 2116
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 459, col 16 to line 459, col 111 of module three_party_one_cycle: 39394
+  line 461, col 16 to line 461, col 111 of module three_party_one_cycle: 715
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 459, col 16 to line 459, col 73 of module three_party_one_cycle: 39394
+  |line 461, col 16 to line 461, col 73 of module three_party_one_cycle: 715
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  ||line 459, col 16 to line 459, col 32 of module three_party_one_cycle: 39394
+  ||line 461, col 16 to line 461, col 32 of module three_party_one_cycle: 715
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  ||line 459, col 37 to line 459, col 73 of module three_party_one_cycle: 28628
+  ||line 461, col 37 to line 461, col 73 of module three_party_one_cycle: 660
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 459, col 78 to line 459, col 111 of module three_party_one_cycle: 6438
+  |line 461, col 78 to line 461, col 111 of module three_party_one_cycle: 660
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 460, col 24 to line 462, col 107 of module three_party_one_cycle: 6438
+  line 462, col 24 to line 464, col 107 of module three_party_one_cycle: 660
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 463, col 24 to line 463, col 70 of module three_party_one_cycle: 6438
+  line 465, col 24 to line 465, col 70 of module three_party_one_cycle: 660
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 464, col 24 to line 464, col 49 of module three_party_one_cycle: 6438
+  line 466, col 24 to line 466, col 49 of module three_party_one_cycle: 660
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 465, col 27 to line 465, col 64 of module three_party_one_cycle: 32956
+  line 467, col 27 to line 467, col 64 of module three_party_one_cycle: 55
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 466, col 32 to line 466, col 107 of module three_party_one_cycle: 22190
+  line 468, col 35 to line 468, col 107 of module three_party_one_cycle: 0
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 467, col 35 to line 467, col 38 of module three_party_one_cycle: 10766
+  line 469, col 35 to line 469, col 38 of module three_party_one_cycle: 55
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 468, col 35 to line 468, col 60 of module three_party_one_cycle: 10766
+  line 470, col 35 to line 470, col 60 of module three_party_one_cycle: 55
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 469, col 24 to line 469, col 65 of module three_party_one_cycle: 32956
+  line 471, col 24 to line 471, col 65 of module three_party_one_cycle: 55
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 470, col 16 to line 470, col 80 of module three_party_one_cycle: 39394
+  line 472, col 16 to line 472, col 80 of module three_party_one_cycle: 715
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 470, col 16 to line 470, col 36 of module three_party_one_cycle: 39394
+  |line 472, col 16 to line 472, col 36 of module three_party_one_cycle: 715
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 470, col 41 to line 470, col 80 of module three_party_one_cycle: 5506
+  |line 472, col 41 to line 472, col 80 of module three_party_one_cycle: 317
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 471, col 21 to line 471, col 71 of module three_party_one_cycle: 954
+  line 473, col 21 to line 473, col 71 of module three_party_one_cycle: 317
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 472, col 27 to line 472, col 81 of module three_party_one_cycle: 38440
+  line 474, col 27 to line 474, col 81 of module three_party_one_cycle: 398
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 472, col 27 to line 472, col 62 of module three_party_one_cycle: 38440
+  |line 474, col 27 to line 474, col 62 of module three_party_one_cycle: 398
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  ||line 472, col 27 to line 472, col 42 of module three_party_one_cycle: 38440
+  |line 474, col 65 to line 474, col 81 of module three_party_one_cycle: 373
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  ||line 472, col 45 to line 472, col 62 of module three_party_one_cycle: 26120
+  line 475, col 35 to line 475, col 82 of module three_party_one_cycle: 0
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 472, col 65 to line 472, col 81 of module three_party_one_cycle: 19268
+  line 476, col 38 to line 476, col 72 of module three_party_one_cycle: 398
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 473, col 32 to line 473, col 82 of module three_party_one_cycle: 14604
+  line 477, col 46 to line 477, col 93 of module three_party_one_cycle: 0
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 474, col 38 to line 474, col 72 of module three_party_one_cycle: 23836
+  line 478, col 46 to line 478, col 49 of module three_party_one_cycle: 398
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 474, col 38 to line 474, col 54 of module three_party_one_cycle: 23836
+  line 479, col 46 to line 479, col 65 of module three_party_one_cycle: 398
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 474, col 57 to line 474, col 72 of module three_party_one_cycle: 12320
+  line 480, col 13 to line 480, col 69 of module three_party_one_cycle: 715
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 475, col 43 to line 475, col 93 of module three_party_one_cycle: 1038
+  line 481, col 13 to line 481, col 51 of module three_party_one_cycle: 715
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 476, col 46 to line 476, col 49 of module three_party_one_cycle: 22798
-@!@!@ENDMSG 2221 @!@!@
-@!@!@STARTMSG 2221:0 @!@!@
-  line 477, col 46 to line 477, col 65 of module three_party_one_cycle: 22798
-@!@!@ENDMSG 2221 @!@!@
-@!@!@STARTMSG 2221:0 @!@!@
-  line 478, col 13 to line 478, col 69 of module three_party_one_cycle: 39394
-@!@!@ENDMSG 2221 @!@!@
-@!@!@STARTMSG 2221:0 @!@!@
-  line 479, col 13 to line 479, col 51 of module three_party_one_cycle: 39394
-@!@!@ENDMSG 2221 @!@!@
-@!@!@STARTMSG 2221:0 @!@!@
-  line 480, col 13 to line 480, col 50 of module three_party_one_cycle: 39394
+  line 482, col 13 to line 482, col 50 of module three_party_one_cycle: 715
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2772:0 @!@!@
-<S_C_R line 482, col 1 to line 482, col 5 of module three_party_one_cycle>: 17950:171898
+<S_C_R line 484, col 1 to line 484, col 5 of module three_party_one_cycle>: 212:709
 @!@!@ENDMSG 2772 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 482, col 13 to line 482, col 34 of module three_party_one_cycle: 643468
+  line 484, col 13 to line 484, col 34 of module three_party_one_cycle: 2824
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 482, col 13 to line 482, col 24 of module three_party_one_cycle: 471570
+  |line 484, col 13 to line 484, col 24 of module three_party_one_cycle: 2115
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 483, col 16 to line 483, col 108 of module three_party_one_cycle: 171898
+  line 485, col 16 to line 485, col 108 of module three_party_one_cycle: 709
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 483, col 16 to line 483, col 68 of module three_party_one_cycle: 171898
+  |line 485, col 16 to line 485, col 68 of module three_party_one_cycle: 709
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  ||line 483, col 16 to line 483, col 30 of module three_party_one_cycle: 171898
+  ||line 485, col 16 to line 485, col 30 of module three_party_one_cycle: 709
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  ||line 483, col 33 to line 483, col 68 of module three_party_one_cycle: 141906
+  ||line 485, col 33 to line 485, col 68 of module three_party_one_cycle: 694
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 483, col 73 to line 483, col 108 of module three_party_one_cycle: 86328
+  |line 485, col 73 to line 485, col 108 of module three_party_one_cycle: 694
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 484, col 24 to line 484, col 90 of module three_party_one_cycle: 86328
+  line 486, col 24 to line 486, col 90 of module three_party_one_cycle: 694
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 485, col 27 to line 485, col 64 of module three_party_one_cycle: 86328
+  line 487, col 27 to line 487, col 64 of module three_party_one_cycle: 694
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 486, col 32 to line 486, col 107 of module three_party_one_cycle: 86328
+  line 488, col 32 to line 488, col 107 of module three_party_one_cycle: 694
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 488, col 35 to line 488, col 60 of module three_party_one_cycle: 0
+  line 490, col 35 to line 490, col 60 of module three_party_one_cycle: 0
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 489, col 24 to line 490, col 124 of module three_party_one_cycle: 86328
+  line 491, col 24 to line 492, col 124 of module three_party_one_cycle: 694
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 491, col 24 to line 491, col 70 of module three_party_one_cycle: 86328
+  line 493, col 24 to line 493, col 70 of module three_party_one_cycle: 694
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 492, col 27 to line 492, col 81 of module three_party_one_cycle: 85570
+  line 494, col 27 to line 494, col 81 of module three_party_one_cycle: 15
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 492, col 27 to line 492, col 41 of module three_party_one_cycle: 85570
+  line 495, col 35 to line 495, col 101 of module three_party_one_cycle: 0
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 492, col 46 to line 492, col 81 of module three_party_one_cycle: 55578
+  line 497, col 46 to line 497, col 114 of module three_party_one_cycle: 0
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 493, col 35 to line 493, col 101 of module three_party_one_cycle: 55578
+  line 498, col 46 to line 499, col 150 of module three_party_one_cycle: 0
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 494, col 38 to line 494, col 75 of module three_party_one_cycle: 55578
+  line 501, col 46 to line 502, col 67 of module three_party_one_cycle: 0
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 495, col 43 to line 497, col 150 of module three_party_one_cycle: 55578
+  line 503, col 35 to line 503, col 38 of module three_party_one_cycle: 15
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 499, col 46 to line 500, col 67 of module three_party_one_cycle: 0
+  line 504, col 35 to line 505, col 74 of module three_party_one_cycle: 15
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 501, col 35 to line 501, col 38 of module three_party_one_cycle: 29992
+  line 506, col 24 to line 506, col 43 of module three_party_one_cycle: 15
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 502, col 35 to line 503, col 74 of module three_party_one_cycle: 29992
+  line 507, col 16 to line 507, col 76 of module three_party_one_cycle: 709
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 504, col 24 to line 504, col 43 of module three_party_one_cycle: 85570
+  |line 507, col 16 to line 507, col 58 of module three_party_one_cycle: 709
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 505, col 16 to line 505, col 76 of module three_party_one_cycle: 171898
+  |line 507, col 61 to line 507, col 76 of module three_party_one_cycle: 638
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 505, col 16 to line 505, col 58 of module three_party_one_cycle: 171898
+  line 508, col 21 to line 508, col 73 of module three_party_one_cycle: 623
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 505, col 61 to line 505, col 76 of module three_party_one_cycle: 114330
+  line 509, col 27 to line 509, col 82 of module three_party_one_cycle: 86
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 506, col 21 to line 506, col 73 of module three_party_one_cycle: 54010
+  |line 509, col 27 to line 509, col 47 of module three_party_one_cycle: 86
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 507, col 27 to line 507, col 82 of module three_party_one_cycle: 117888
+  |line 509, col 52 to line 509, col 82 of module three_party_one_cycle: 15
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 507, col 27 to line 507, col 47 of module three_party_one_cycle: 117888
+  line 510, col 32 to line 510, col 84 of module three_party_one_cycle: 15
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 507, col 52 to line 507, col 82 of module three_party_one_cycle: 36524
+  line 511, col 38 to line 511, col 90 of module three_party_one_cycle: 71
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 508, col 32 to line 508, col 84 of module three_party_one_cycle: 5938
+  line 512, col 46 to line 512, col 95 of module three_party_one_cycle: 0
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 509, col 38 to line 509, col 90 of module three_party_one_cycle: 111950
+  line 513, col 46 to line 513, col 49 of module three_party_one_cycle: 71
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 509, col 38 to line 509, col 71 of module three_party_one_cycle: 111950
+  line 514, col 46 to line 514, col 65 of module three_party_one_cycle: 71
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  ||line 509, col 38 to line 509, col 53 of module three_party_one_cycle: 111950
+  line 515, col 13 to line 515, col 69 of module three_party_one_cycle: 709
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  ||line 509, col 56 to line 509, col 71 of module three_party_one_cycle: 57568
+  line 516, col 13 to line 516, col 50 of module three_party_one_cycle: 709
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 509, col 74 to line 509, col 90 of module three_party_one_cycle: 48638
-@!@!@ENDMSG 2221 @!@!@
-@!@!@STARTMSG 2221:0 @!@!@
-  line 510, col 43 to line 510, col 95 of module three_party_one_cycle: 16320
-@!@!@ENDMSG 2221 @!@!@
-@!@!@STARTMSG 2221:0 @!@!@
-  line 511, col 46 to line 511, col 49 of module three_party_one_cycle: 95630
-@!@!@ENDMSG 2221 @!@!@
-@!@!@STARTMSG 2221:0 @!@!@
-  line 512, col 46 to line 512, col 65 of module three_party_one_cycle: 95630
-@!@!@ENDMSG 2221 @!@!@
-@!@!@STARTMSG 2221:0 @!@!@
-  line 513, col 13 to line 513, col 69 of module three_party_one_cycle: 171898
-@!@!@ENDMSG 2221 @!@!@
-@!@!@STARTMSG 2221:0 @!@!@
-  line 514, col 13 to line 514, col 50 of module three_party_one_cycle: 171898
-@!@!@ENDMSG 2221 @!@!@
-@!@!@STARTMSG 2221:0 @!@!@
-  line 515, col 13 to line 515, col 42 of module three_party_one_cycle: 171898
+  line 517, col 13 to line 517, col 42 of module three_party_one_cycle: 709
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2772:0 @!@!@
-<S_A_D_P line 519, col 1 to line 519, col 7 of module three_party_one_cycle>: 271:16600
+<S_A_D_P line 521, col 1 to line 521, col 7 of module three_party_one_cycle>: 171:501
 @!@!@ENDMSG 2772 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 519, col 15 to line 519, col 35 of module three_party_one_cycle: 488170
+  line 521, col 15 to line 521, col 35 of module three_party_one_cycle: 2615
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 519, col 15 to line 519, col 23 of module three_party_one_cycle: 471570
+  |line 521, col 15 to line 521, col 23 of module three_party_one_cycle: 2114
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 520, col 18 to line 520, col 98 of module three_party_one_cycle: 16600
+  line 522, col 18 to line 522, col 98 of module three_party_one_cycle: 501
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 520, col 18 to line 520, col 58 of module three_party_one_cycle: 16600
+  |line 522, col 18 to line 522, col 58 of module three_party_one_cycle: 501
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 520, col 63 to line 520, col 98 of module three_party_one_cycle: 46
+  |line 522, col 63 to line 522, col 98 of module three_party_one_cycle: 47
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 521, col 23 to line 524, col 74 of module three_party_one_cycle: 46
+  line 523, col 23 to line 526, col 74 of module three_party_one_cycle: 47
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 525, col 26 to line 525, col 29 of module three_party_one_cycle: 16554
+  line 527, col 26 to line 527, col 29 of module three_party_one_cycle: 454
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 526, col 26 to line 526, col 69 of module three_party_one_cycle: 16554
+  line 528, col 26 to line 528, col 69 of module three_party_one_cycle: 454
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 527, col 18 to line 527, col 36 of module three_party_one_cycle: 16600
+  line 529, col 18 to line 529, col 36 of module three_party_one_cycle: 501
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 528, col 23 to line 528, col 75 of module three_party_one_cycle: 16554
+  line 530, col 23 to line 530, col 75 of module three_party_one_cycle: 454
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 529, col 26 to line 529, col 29 of module three_party_one_cycle: 46
+  line 531, col 26 to line 531, col 29 of module three_party_one_cycle: 47
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 530, col 26 to line 530, col 45 of module three_party_one_cycle: 46
+  line 532, col 26 to line 532, col 45 of module three_party_one_cycle: 47
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 531, col 15 to line 531, col 73 of module three_party_one_cycle: 16600
+  line 533, col 15 to line 533, col 73 of module three_party_one_cycle: 501
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 532, col 15 to line 532, col 50 of module three_party_one_cycle: 16600
+  line 534, col 15 to line 534, col 50 of module three_party_one_cycle: 501
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 533, col 15 to line 533, col 68 of module three_party_one_cycle: 16600
+  line 535, col 15 to line 535, col 68 of module three_party_one_cycle: 501
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2772:0 @!@!@
-<S_C_E line 535, col 1 to line 535, col 5 of module three_party_one_cycle>: 7889:41096
+<S_C_E line 537, col 1 to line 537, col 5 of module three_party_one_cycle>: 431:745
 @!@!@ENDMSG 2772 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 535, col 13 to line 535, col 31 of module three_party_one_cycle: 512666
+  line 537, col 13 to line 537, col 31 of module three_party_one_cycle: 2858
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 535, col 13 to line 535, col 21 of module three_party_one_cycle: 471570
+  |line 537, col 13 to line 537, col 21 of module three_party_one_cycle: 2113
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 536, col 16 to line 536, col 113 of module three_party_one_cycle: 41096
+  line 538, col 16 to line 538, col 113 of module three_party_one_cycle: 745
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 536, col 16 to line 536, col 75 of module three_party_one_cycle: 41096
+  |line 538, col 16 to line 538, col 75 of module three_party_one_cycle: 745
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  ||line 536, col 16 to line 536, col 32 of module three_party_one_cycle: 41096
+  ||line 538, col 16 to line 538, col 32 of module three_party_one_cycle: 745
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  ||line 536, col 37 to line 536, col 75 of module three_party_one_cycle: 24542
+  ||line 538, col 37 to line 538, col 75 of module three_party_one_cycle: 490
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 536, col 79 to line 536, col 113 of module three_party_one_cycle: 8798
+  |line 538, col 79 to line 538, col 113 of module three_party_one_cycle: 490
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 537, col 24 to line 539, col 109 of module three_party_one_cycle: 8798
+  line 539, col 24 to line 541, col 109 of module three_party_one_cycle: 490
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 540, col 24 to line 540, col 70 of module three_party_one_cycle: 8798
+  line 542, col 24 to line 542, col 70 of module three_party_one_cycle: 490
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 541, col 24 to line 541, col 49 of module three_party_one_cycle: 8798
+  line 543, col 24 to line 543, col 49 of module three_party_one_cycle: 490
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 542, col 27 to line 542, col 64 of module three_party_one_cycle: 32298
+  line 544, col 27 to line 544, col 64 of module three_party_one_cycle: 255
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 543, col 32 to line 543, col 107 of module three_party_one_cycle: 15744
+  line 545, col 35 to line 545, col 107 of module three_party_one_cycle: 0
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 544, col 35 to line 544, col 38 of module three_party_one_cycle: 16554
+  line 546, col 35 to line 546, col 38 of module three_party_one_cycle: 255
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 545, col 35 to line 545, col 60 of module three_party_one_cycle: 16554
+  line 547, col 35 to line 547, col 60 of module three_party_one_cycle: 255
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 546, col 24 to line 546, col 65 of module three_party_one_cycle: 32298
+  line 548, col 24 to line 548, col 65 of module three_party_one_cycle: 255
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 547, col 16 to line 547, col 77 of module three_party_one_cycle: 41096
+  line 549, col 16 to line 549, col 77 of module three_party_one_cycle: 745
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 547, col 16 to line 547, col 36 of module three_party_one_cycle: 41096
+  |line 549, col 16 to line 549, col 36 of module three_party_one_cycle: 745
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 547, col 40 to line 547, col 77 of module three_party_one_cycle: 5252
+  |line 549, col 40 to line 549, col 77 of module three_party_one_cycle: 356
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 548, col 21 to line 548, col 73 of module three_party_one_cycle: 1736
+  line 550, col 21 to line 550, col 73 of module three_party_one_cycle: 356
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 549, col 27 to line 549, col 61 of module three_party_one_cycle: 39360
+  line 551, col 27 to line 551, col 61 of module three_party_one_cycle: 389
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 549, col 27 to line 549, col 43 of module three_party_one_cycle: 39360
+  |line 551, col 27 to line 551, col 43 of module three_party_one_cycle: 389
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 549, col 46 to line 549, col 61 of module three_party_one_cycle: 9566
+  |line 551, col 46 to line 551, col 61 of module three_party_one_cycle: 5
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 550, col 32 to line 550, col 84 of module three_party_one_cycle: 1152
+  line 552, col 32 to line 552, col 84 of module three_party_one_cycle: 3
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 551, col 38 to line 551, col 92 of module three_party_one_cycle: 38208
+  line 553, col 38 to line 553, col 92 of module three_party_one_cycle: 386
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 551, col 38 to line 551, col 73 of module three_party_one_cycle: 38208
+  |line 553, col 38 to line 553, col 73 of module three_party_one_cycle: 386
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  ||line 551, col 38 to line 551, col 53 of module three_party_one_cycle: 38208
+  ||line 553, col 38 to line 553, col 53 of module three_party_one_cycle: 386
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  ||line 551, col 56 to line 551, col 73 of module three_party_one_cycle: 29794
+  ||line 553, col 56 to line 553, col 73 of module three_party_one_cycle: 384
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 551, col 76 to line 551, col 92 of module three_party_one_cycle: 18240
+  |line 553, col 76 to line 553, col 92 of module three_party_one_cycle: 265
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 552, col 43 to line 552, col 95 of module three_party_one_cycle: 11592
+  line 554, col 46 to line 554, col 95 of module three_party_one_cycle: 0
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 553, col 46 to line 553, col 49 of module three_party_one_cycle: 26616
+  line 555, col 46 to line 555, col 49 of module three_party_one_cycle: 386
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 554, col 46 to line 554, col 65 of module three_party_one_cycle: 26616
+  line 556, col 46 to line 556, col 65 of module three_party_one_cycle: 386
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 555, col 13 to line 555, col 69 of module three_party_one_cycle: 41096
+  line 557, col 13 to line 557, col 69 of module three_party_one_cycle: 745
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 556, col 13 to line 556, col 48 of module three_party_one_cycle: 41096
+  line 558, col 13 to line 558, col 48 of module three_party_one_cycle: 745
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 557, col 13 to line 557, col 50 of module three_party_one_cycle: 41096
+  line 559, col 13 to line 559, col 50 of module three_party_one_cycle: 745
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2772:0 @!@!@
-<S_A_R line 559, col 1 to line 559, col 5 of module three_party_one_cycle>: 16370:148762
+<S_A_R line 561, col 1 to line 561, col 5 of module three_party_one_cycle>: 286:567
 @!@!@ENDMSG 2772 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 559, col 13 to line 559, col 31 of module three_party_one_cycle: 620332
+  line 561, col 13 to line 561, col 31 of module three_party_one_cycle: 2679
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 559, col 13 to line 559, col 21 of module three_party_one_cycle: 471570
+  |line 561, col 13 to line 561, col 21 of module three_party_one_cycle: 2112
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 560, col 16 to line 560, col 110 of module three_party_one_cycle: 148762
+  line 562, col 16 to line 562, col 110 of module three_party_one_cycle: 567
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 560, col 16 to line 560, col 70 of module three_party_one_cycle: 148762
+  |line 562, col 16 to line 562, col 70 of module three_party_one_cycle: 567
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  ||line 560, col 16 to line 560, col 30 of module three_party_one_cycle: 148762
+  ||line 562, col 16 to line 562, col 30 of module three_party_one_cycle: 567
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  ||line 560, col 33 to line 560, col 70 of module three_party_one_cycle: 119492
+  ||line 562, col 33 to line 562, col 70 of module three_party_one_cycle: 439
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 560, col 73 to line 560, col 110 of module three_party_one_cycle: 53300
+  |line 562, col 73 to line 562, col 110 of module three_party_one_cycle: 439
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 561, col 24 to line 561, col 92 of module three_party_one_cycle: 53300
+  line 563, col 24 to line 563, col 92 of module three_party_one_cycle: 439
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 562, col 27 to line 562, col 66 of module three_party_one_cycle: 53300
+  line 564, col 27 to line 564, col 66 of module three_party_one_cycle: 439
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 563, col 32 to line 563, col 107 of module three_party_one_cycle: 53300
+  line 565, col 32 to line 565, col 107 of module three_party_one_cycle: 439
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 565, col 35 to line 565, col 60 of module three_party_one_cycle: 0
+  line 567, col 35 to line 567, col 60 of module three_party_one_cycle: 0
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 566, col 24 to line 567, col 126 of module three_party_one_cycle: 53300
+  line 568, col 24 to line 569, col 126 of module three_party_one_cycle: 439
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 568, col 24 to line 568, col 70 of module three_party_one_cycle: 53300
+  line 570, col 24 to line 570, col 70 of module three_party_one_cycle: 439
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 569, col 27 to line 569, col 82 of module three_party_one_cycle: 95462
+  line 571, col 27 to line 571, col 82 of module three_party_one_cycle: 128
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 569, col 27 to line 569, col 41 of module three_party_one_cycle: 95462
+  line 572, col 35 to line 572, col 103 of module three_party_one_cycle: 0
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 569, col 45 to line 569, col 82 of module three_party_one_cycle: 66192
+  line 574, col 46 to line 574, col 114 of module three_party_one_cycle: 0
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 570, col 35 to line 570, col 103 of module three_party_one_cycle: 66192
+  line 575, col 46 to line 576, col 150 of module three_party_one_cycle: 0
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 571, col 38 to line 571, col 77 of module three_party_one_cycle: 66192
+  line 578, col 46 to line 579, col 67 of module three_party_one_cycle: 0
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 572, col 43 to line 574, col 150 of module three_party_one_cycle: 66192
+  line 580, col 35 to line 580, col 38 of module three_party_one_cycle: 128
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 576, col 46 to line 577, col 67 of module three_party_one_cycle: 0
+  line 581, col 35 to line 582, col 74 of module three_party_one_cycle: 128
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 578, col 35 to line 578, col 38 of module three_party_one_cycle: 29270
+  line 583, col 24 to line 583, col 43 of module three_party_one_cycle: 128
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 579, col 35 to line 580, col 74 of module three_party_one_cycle: 29270
+  line 584, col 16 to line 584, col 79 of module three_party_one_cycle: 567
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 581, col 24 to line 581, col 43 of module three_party_one_cycle: 95462
+  line 585, col 24 to line 585, col 73 of module three_party_one_cycle: 0
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 582, col 16 to line 582, col 79 of module three_party_one_cycle: 148762
+  line 586, col 27 to line 586, col 61 of module three_party_one_cycle: 567
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 583, col 24 to line 583, col 73 of module three_party_one_cycle: 0
+  |line 586, col 27 to line 586, col 42 of module three_party_one_cycle: 567
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 584, col 27 to line 584, col 61 of module three_party_one_cycle: 148762
+  |line 586, col 45 to line 586, col 61 of module three_party_one_cycle: 439
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 584, col 27 to line 584, col 42 of module three_party_one_cycle: 148762
+  line 587, col 35 to line 587, col 84 of module three_party_one_cycle: 0
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 584, col 45 to line 584, col 61 of module three_party_one_cycle: 119492
+  line 588, col 38 to line 588, col 72 of module three_party_one_cycle: 567
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 585, col 32 to line 585, col 84 of module three_party_one_cycle: 66192
+  |line 588, col 38 to line 588, col 54 of module three_party_one_cycle: 567
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 586, col 38 to line 586, col 72 of module three_party_one_cycle: 82570
+  |line 588, col 57 to line 588, col 72 of module three_party_one_cycle: 128
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 586, col 38 to line 586, col 54 of module three_party_one_cycle: 82570
+  line 589, col 46 to line 589, col 95 of module three_party_one_cycle: 0
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 586, col 57 to line 586, col 72 of module three_party_one_cycle: 29270
+  line 590, col 46 to line 590, col 49 of module three_party_one_cycle: 567
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 587, col 46 to line 587, col 95 of module three_party_one_cycle: 0
+  line 591, col 46 to line 591, col 65 of module three_party_one_cycle: 567
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 588, col 46 to line 588, col 49 of module three_party_one_cycle: 82570
+  line 592, col 13 to line 592, col 69 of module three_party_one_cycle: 567
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 589, col 46 to line 589, col 65 of module three_party_one_cycle: 82570
+  line 593, col 13 to line 593, col 47 of module three_party_one_cycle: 567
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 590, col 13 to line 590, col 69 of module three_party_one_cycle: 148762
-@!@!@ENDMSG 2221 @!@!@
-@!@!@STARTMSG 2221:0 @!@!@
-  line 591, col 13 to line 591, col 47 of module three_party_one_cycle: 148762
-@!@!@ENDMSG 2221 @!@!@
-@!@!@STARTMSG 2221:0 @!@!@
-  line 592, col 13 to line 592, col 42 of module three_party_one_cycle: 148762
+  line 594, col 13 to line 594, col 42 of module three_party_one_cycle: 567
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2772:0 @!@!@
-<tick line 596, col 1 to line 596, col 4 of module three_party_one_cycle>: 228253:235785
+<tick line 598, col 1 to line 598, col 4 of module three_party_one_cycle>: 1210:1378
 @!@!@ENDMSG 2772 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 596, col 12 to line 596, col 29 of module three_party_one_cycle: 707355
+  line 598, col 12 to line 598, col 29 of module three_party_one_cycle: 3489
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 596, col 12 to line 596, col 20 of module three_party_one_cycle: 471570
+  |line 598, col 12 to line 598, col 20 of module three_party_one_cycle: 2111
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 597, col 16 to line 597, col 27 of module three_party_one_cycle: 235785
+  line 599, col 16 to line 599, col 27 of module three_party_one_cycle: 1378
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 598, col 20 to line 598, col 56 of module three_party_one_cycle: 175068
+  line 600, col 20 to line 600, col 56 of module three_party_one_cycle: 1378
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 599, col 20 to line 599, col 57 of module three_party_one_cycle: 60717
+  line 601, col 23 to line 601, col 57 of module three_party_one_cycle: 0
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 600, col 12 to line 601, col 73 of module three_party_one_cycle: 235785
+  line 602, col 12 to line 603, col 73 of module three_party_one_cycle: 1378
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2772:0 @!@!@
-<tok line 603, col 1 to line 603, col 3 of module three_party_one_cycle>: 172627:175068
+<tok line 605, col 1 to line 605, col 3 of module three_party_one_cycle>: 719:733
 @!@!@ENDMSG 2772 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 603, col 11 to line 603, col 27 of module three_party_one_cycle: 646638
+  line 605, col 11 to line 605, col 27 of module three_party_one_cycle: 2844
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 603, col 11 to line 603, col 19 of module three_party_one_cycle: 471570
+  |line 605, col 11 to line 605, col 19 of module three_party_one_cycle: 2111
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 604, col 11 to line 604, col 28 of module three_party_one_cycle: 175068
+  line 606, col 11 to line 606, col 28 of module three_party_one_cycle: 733
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 605, col 11 to line 605, col 45 of module three_party_one_cycle: 175068
+  line 607, col 11 to line 607, col 45 of module three_party_one_cycle: 733
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 606, col 11 to line 607, col 65 of module three_party_one_cycle: 175068
+  line 608, col 11 to line 609, col 65 of module three_party_one_cycle: 733
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2772:0 @!@!@
-<Terminating line 612, col 1 to line 612, col 11 of module three_party_one_cycle>: 0:12462
+<Terminating line 614, col 1 to line 614, col 11 of module three_party_one_cycle>: 0:0
 @!@!@ENDMSG 2772 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 612, col 40 to line 612, col 56 of module three_party_one_cycle: 805704
+  line 614, col 40 to line 614, col 56 of module three_party_one_cycle: 2507
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 612, col 40 to line 612, col 47 of module three_party_one_cycle: 755856
+  line 614, col 31 to line 614, col 37 of module three_party_one_cycle: 2111
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 612, col 31 to line 612, col 37 of module three_party_one_cycle: 471570
-@!@!@ENDMSG 2221 @!@!@
-@!@!@STARTMSG 2221:0 @!@!@
-  line 613, col 19 to line 613, col 32 of module three_party_one_cycle: 12462
+  line 615, col 19 to line 615, col 32 of module three_party_one_cycle: 0
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2774:0 @!@!@
-<liveness line 323, col 1 to line 323, col 8 of module three_party_one_cycle>
+<liveness line 325, col 1 to line 325, col 8 of module three_party_one_cycle>
 @!@!@ENDMSG 2774 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 323, col 13 to line 323, col 325 of module three_party_one_cycle: 471570
+  line 325, col 13 to line 325, col 275 of module three_party_one_cycle: 3860
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 323, col 14 to line 323, col 76 of module three_party_one_cycle: 471570
+  |line 325, col 14 to line 325, col 25 of module three_party_one_cycle: 3860
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  ||line 323, col 16 to line 323, col 76 of module three_party_one_cycle: 471570
+  ||line 324, col 16 to line 324, col 78 of module three_party_one_cycle: 3860
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |||line 323, col 16 to line 323, col 57 of module three_party_one_cycle: 471570
+  |||line 324, col 18 to line 324, col 78 of module three_party_one_cycle: 3860
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  ||||line 323, col 16 to line 323, col 40 of module three_party_one_cycle: 471570
+  ||||line 324, col 18 to line 324, col 59 of module three_party_one_cycle: 3860
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |||||line 323, col 16 to line 323, col 21 of module three_party_one_cycle: 471570
+  |||||line 324, col 18 to line 324, col 42 of module three_party_one_cycle: 3860
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  ||||||line 322, col 11 to line 322, col 77 of module three_party_one_cycle: 471570
+  ||||||line 324, col 18 to line 324, col 23 of module three_party_one_cycle: 3860
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |||||||line 322, col 14 to line 322, col 77 of module three_party_one_cycle: 471570
+  |||||||line 323, col 11 to line 323, col 77 of module three_party_one_cycle: 3860
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  ||||||||line 322, col 14 to line 322, col 55 of module three_party_one_cycle: 471570
+  ||||||||line 323, col 14 to line 323, col 77 of module three_party_one_cycle: 3860
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |||||||||line 322, col 14 to line 322, col 33 of module three_party_one_cycle: 471570
+  |||||||||line 323, col 14 to line 323, col 55 of module three_party_one_cycle: 3860
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |||||||||line 322, col 36 to line 322, col 55 of module three_party_one_cycle: 265112
+  ||||||||||line 323, col 14 to line 323, col 33 of module three_party_one_cycle: 3860
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  ||||||||line 322, col 58 to line 322, col 77 of module three_party_one_cycle: 133638
+  ||||||||||line 323, col 36 to line 323, col 55 of module three_party_one_cycle: 680
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |||||line 323, col 24 to line 323, col 40 of module three_party_one_cycle: 71462
+  |||||||||line 323, col 58 to line 323, col 77 of module three_party_one_cycle: 135
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  ||||line 323, col 43 to line 323, col 57 of module three_party_one_cycle: 23428
+  ||||||line 324, col 26 to line 324, col 42 of module three_party_one_cycle: 13
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |||line 323, col 60 to line 323, col 76 of module three_party_one_cycle: 6602
+  |||||line 324, col 45 to line 324, col 59 of module three_party_one_cycle: 6
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 323, col 81 to line 323, col 324 of module three_party_one_cycle: 1650
+  ||||line 324, col 62 to line 324, col 78 of module three_party_one_cycle: 2
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 325, col 31 to line 325, col 274 of module three_party_one_cycle: 1
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2774:0 @!@!@
-<safe_alice line 327, col 1 to line 327, col 10 of module three_party_one_cycle>
+<safe_alice line 329, col 1 to line 329, col 10 of module three_party_one_cycle>
 @!@!@ENDMSG 2774 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 327, col 15 to line 327, col 92 of module three_party_one_cycle: 471570
+  line 329, col 15 to line 329, col 92 of module three_party_one_cycle: 3860
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 327, col 16 to line 327, col 42 of module three_party_one_cycle: 471570
+  |line 329, col 16 to line 329, col 42 of module three_party_one_cycle: 3860
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  ||line 327, col 18 to line 327, col 42 of module three_party_one_cycle: 471570
+  ||line 329, col 18 to line 329, col 42 of module three_party_one_cycle: 3860
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |||line 327, col 18 to line 327, col 23 of module three_party_one_cycle: 471570
+  |||line 329, col 18 to line 329, col 23 of module three_party_one_cycle: 3860
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  ||||line 322, col 11 to line 322, col 77 of module three_party_one_cycle: 471570
+  ||||line 323, col 11 to line 323, col 77 of module three_party_one_cycle: 3860
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |||||line 322, col 14 to line 322, col 77 of module three_party_one_cycle: 471570
+  |||||line 323, col 14 to line 323, col 77 of module three_party_one_cycle: 3860
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  ||||||line 322, col 14 to line 322, col 55 of module three_party_one_cycle: 471570
+  ||||||line 323, col 14 to line 323, col 55 of module three_party_one_cycle: 3860
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |||||||line 322, col 14 to line 322, col 33 of module three_party_one_cycle: 471570
+  |||||||line 323, col 14 to line 323, col 33 of module three_party_one_cycle: 3860
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |||||||line 322, col 36 to line 322, col 55 of module three_party_one_cycle: 265112
+  |||||||line 323, col 36 to line 323, col 55 of module three_party_one_cycle: 680
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  ||||||line 322, col 58 to line 322, col 77 of module three_party_one_cycle: 133638
+  ||||||line 323, col 58 to line 323, col 77 of module three_party_one_cycle: 135
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |||line 327, col 26 to line 327, col 42 of module three_party_one_cycle: 71462
+  |||line 329, col 26 to line 329, col 42 of module three_party_one_cycle: 13
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 327, col 48 to line 327, col 92 of module three_party_one_cycle: 23428
+  |line 329, col 48 to line 329, col 92 of module three_party_one_cycle: 6
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2774:0 @!@!@
-<safe_bob line 328, col 1 to line 328, col 8 of module three_party_one_cycle>
+<safe_bob line 330, col 1 to line 330, col 8 of module three_party_one_cycle>
 @!@!@ENDMSG 2774 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 328, col 13 to line 328, col 84 of module three_party_one_cycle: 471570
+  line 330, col 13 to line 330, col 84 of module three_party_one_cycle: 3860
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 328, col 14 to line 328, col 38 of module three_party_one_cycle: 471570
+  |line 330, col 14 to line 330, col 38 of module three_party_one_cycle: 3860
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  ||line 328, col 16 to line 328, col 38 of module three_party_one_cycle: 471570
+  ||line 330, col 16 to line 330, col 38 of module three_party_one_cycle: 3860
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |||line 328, col 16 to line 328, col 21 of module three_party_one_cycle: 471570
+  |||line 330, col 16 to line 330, col 21 of module three_party_one_cycle: 3860
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  ||||line 322, col 11 to line 322, col 77 of module three_party_one_cycle: 471570
+  ||||line 323, col 11 to line 323, col 77 of module three_party_one_cycle: 3860
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |||||line 322, col 14 to line 322, col 77 of module three_party_one_cycle: 471570
+  |||||line 323, col 14 to line 323, col 77 of module three_party_one_cycle: 3860
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  ||||||line 322, col 14 to line 322, col 55 of module three_party_one_cycle: 471570
+  ||||||line 323, col 14 to line 323, col 55 of module three_party_one_cycle: 3860
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |||||||line 322, col 14 to line 322, col 33 of module three_party_one_cycle: 471570
+  |||||||line 323, col 14 to line 323, col 33 of module three_party_one_cycle: 3860
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |||||||line 322, col 36 to line 322, col 55 of module three_party_one_cycle: 265112
+  |||||||line 323, col 36 to line 323, col 55 of module three_party_one_cycle: 680
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  ||||||line 322, col 58 to line 322, col 77 of module three_party_one_cycle: 133638
+  ||||||line 323, col 58 to line 323, col 77 of module three_party_one_cycle: 135
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |||line 328, col 24 to line 328, col 38 of module three_party_one_cycle: 71462
+  |||line 330, col 24 to line 330, col 38 of module three_party_one_cycle: 13
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 328, col 44 to line 328, col 84 of module three_party_one_cycle: 18510
+  |line 330, col 44 to line 330, col 84 of module three_party_one_cycle: 5
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2774:0 @!@!@
-<safe_carol line 329, col 1 to line 329, col 10 of module three_party_one_cycle>
+<safe_carol line 331, col 1 to line 331, col 10 of module three_party_one_cycle>
 @!@!@ENDMSG 2774 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 329, col 15 to line 329, col 92 of module three_party_one_cycle: 471570
+  line 331, col 15 to line 331, col 92 of module three_party_one_cycle: 3860
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 329, col 16 to line 329, col 42 of module three_party_one_cycle: 471570
+  |line 331, col 16 to line 331, col 42 of module three_party_one_cycle: 3860
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  ||line 329, col 18 to line 329, col 42 of module three_party_one_cycle: 471570
+  ||line 331, col 18 to line 331, col 42 of module three_party_one_cycle: 3860
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |||line 329, col 18 to line 329, col 23 of module three_party_one_cycle: 471570
+  |||line 331, col 18 to line 331, col 23 of module three_party_one_cycle: 3860
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  ||||line 322, col 11 to line 322, col 77 of module three_party_one_cycle: 471570
+  ||||line 323, col 11 to line 323, col 77 of module three_party_one_cycle: 3860
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |||||line 322, col 14 to line 322, col 77 of module three_party_one_cycle: 471570
+  |||||line 323, col 14 to line 323, col 77 of module three_party_one_cycle: 3860
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  ||||||line 322, col 14 to line 322, col 55 of module three_party_one_cycle: 471570
+  ||||||line 323, col 14 to line 323, col 55 of module three_party_one_cycle: 3860
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |||||||line 322, col 14 to line 322, col 33 of module three_party_one_cycle: 471570
+  |||||||line 323, col 14 to line 323, col 33 of module three_party_one_cycle: 3860
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |||||||line 322, col 36 to line 322, col 55 of module three_party_one_cycle: 265112
+  |||||||line 323, col 36 to line 323, col 55 of module three_party_one_cycle: 680
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  ||||||line 322, col 58 to line 322, col 77 of module three_party_one_cycle: 133638
+  ||||||line 323, col 58 to line 323, col 77 of module three_party_one_cycle: 135
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |||line 329, col 26 to line 329, col 42 of module three_party_one_cycle: 71462
+  |||line 331, col 26 to line 331, col 42 of module three_party_one_cycle: 13
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 329, col 48 to line 329, col 92 of module three_party_one_cycle: 21074
+  |line 331, col 48 to line 331, col 92 of module three_party_one_cycle: 6
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2774:0 @!@!@
-<compensated_alice line 324, col 1 to line 324, col 17 of module three_party_one_cycle>
+<compensated_alice line 326, col 1 to line 326, col 17 of module three_party_one_cycle>
 @!@!@ENDMSG 2774 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 324, col 22 to line 324, col 141 of module three_party_one_cycle: 471570
+  line 326, col 22 to line 326, col 141 of module three_party_one_cycle: 3860
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 324, col 23 to line 324, col 89 of module three_party_one_cycle: 471570
+  |line 326, col 23 to line 326, col 89 of module three_party_one_cycle: 3860
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  ||line 324, col 25 to line 324, col 89 of module three_party_one_cycle: 471570
+  ||line 326, col 25 to line 326, col 89 of module three_party_one_cycle: 3860
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |||line 324, col 25 to line 324, col 49 of module three_party_one_cycle: 471570
+  |||line 326, col 25 to line 326, col 49 of module three_party_one_cycle: 3860
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  ||||line 324, col 25 to line 324, col 30 of module three_party_one_cycle: 471570
+  ||||line 326, col 25 to line 326, col 30 of module three_party_one_cycle: 3860
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |||||line 322, col 11 to line 322, col 77 of module three_party_one_cycle: 471570
+  |||||line 323, col 11 to line 323, col 77 of module three_party_one_cycle: 3860
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  ||||||line 322, col 14 to line 322, col 77 of module three_party_one_cycle: 471570
+  ||||||line 323, col 14 to line 323, col 77 of module three_party_one_cycle: 3860
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |||||||line 322, col 14 to line 322, col 55 of module three_party_one_cycle: 471570
+  |||||||line 323, col 14 to line 323, col 55 of module three_party_one_cycle: 3860
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  ||||||||line 322, col 14 to line 322, col 33 of module three_party_one_cycle: 471570
+  ||||||||line 323, col 14 to line 323, col 33 of module three_party_one_cycle: 3860
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  ||||||||line 322, col 36 to line 322, col 55 of module three_party_one_cycle: 265112
+  ||||||||line 323, col 36 to line 323, col 55 of module three_party_one_cycle: 680
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |||||||line 322, col 58 to line 322, col 77 of module three_party_one_cycle: 133638
+  |||||||line 323, col 58 to line 323, col 77 of module three_party_one_cycle: 135
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  ||||line 324, col 33 to line 324, col 49 of module three_party_one_cycle: 71462
+  ||||line 326, col 33 to line 326, col 49 of module three_party_one_cycle: 13
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |||line 324, col 52 to line 324, col 89 of module three_party_one_cycle: 23428
-@!@!@ENDMSG 2221 @!@!@
-@!@!@STARTMSG 2221:0 @!@!@
-  |line 324, col 95 to line 324, col 141 of module three_party_one_cycle: 3372
+  |||line 326, col 52 to line 326, col 89 of module three_party_one_cycle: 6
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2774:0 @!@!@
-<compensated_bob line 325, col 1 to line 325, col 15 of module three_party_one_cycle>
+<compensated_bob line 327, col 1 to line 327, col 15 of module three_party_one_cycle>
 @!@!@ENDMSG 2774 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 325, col 20 to line 325, col 131 of module three_party_one_cycle: 471570
+  line 327, col 20 to line 327, col 131 of module three_party_one_cycle: 3860
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 325, col 21 to line 325, col 83 of module three_party_one_cycle: 471570
+  |line 327, col 21 to line 327, col 83 of module three_party_one_cycle: 3860
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  ||line 325, col 23 to line 325, col 83 of module three_party_one_cycle: 471570
+  ||line 327, col 23 to line 327, col 83 of module three_party_one_cycle: 3860
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |||line 325, col 23 to line 325, col 45 of module three_party_one_cycle: 471570
+  |||line 327, col 23 to line 327, col 45 of module three_party_one_cycle: 3860
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  ||||line 325, col 23 to line 325, col 28 of module three_party_one_cycle: 471570
+  ||||line 327, col 23 to line 327, col 28 of module three_party_one_cycle: 3860
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |||||line 322, col 11 to line 322, col 77 of module three_party_one_cycle: 471570
+  |||||line 323, col 11 to line 323, col 77 of module three_party_one_cycle: 3860
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  ||||||line 322, col 14 to line 322, col 77 of module three_party_one_cycle: 471570
+  ||||||line 323, col 14 to line 323, col 77 of module three_party_one_cycle: 3860
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |||||||line 322, col 14 to line 322, col 55 of module three_party_one_cycle: 471570
+  |||||||line 323, col 14 to line 323, col 55 of module three_party_one_cycle: 3860
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  ||||||||line 322, col 14 to line 322, col 33 of module three_party_one_cycle: 471570
+  ||||||||line 323, col 14 to line 323, col 33 of module three_party_one_cycle: 3860
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  ||||||||line 322, col 36 to line 322, col 55 of module three_party_one_cycle: 265112
+  ||||||||line 323, col 36 to line 323, col 55 of module three_party_one_cycle: 680
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |||||||line 322, col 58 to line 322, col 77 of module three_party_one_cycle: 133638
+  |||||||line 323, col 58 to line 323, col 77 of module three_party_one_cycle: 135
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  ||||line 325, col 31 to line 325, col 45 of module three_party_one_cycle: 71462
+  ||||line 327, col 31 to line 327, col 45 of module three_party_one_cycle: 13
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |||line 325, col 48 to line 325, col 83 of module three_party_one_cycle: 18510
-@!@!@ENDMSG 2221 @!@!@
-@!@!@STARTMSG 2221:0 @!@!@
-  |line 325, col 89 to line 325, col 131 of module three_party_one_cycle: 5160
+  |||line 327, col 48 to line 327, col 83 of module three_party_one_cycle: 5
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2774:0 @!@!@
-<compensated_carol line 326, col 1 to line 326, col 17 of module three_party_one_cycle>
+<compensated_carol line 328, col 1 to line 328, col 17 of module three_party_one_cycle>
 @!@!@ENDMSG 2774 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 326, col 22 to line 326, col 141 of module three_party_one_cycle: 471570
+  line 328, col 22 to line 328, col 141 of module three_party_one_cycle: 3860
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 326, col 23 to line 326, col 89 of module three_party_one_cycle: 471570
+  |line 328, col 23 to line 328, col 89 of module three_party_one_cycle: 3860
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  ||line 326, col 25 to line 326, col 89 of module three_party_one_cycle: 471570
+  ||line 328, col 25 to line 328, col 89 of module three_party_one_cycle: 3860
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |||line 326, col 25 to line 326, col 49 of module three_party_one_cycle: 471570
+  |||line 328, col 25 to line 328, col 49 of module three_party_one_cycle: 3860
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  ||||line 326, col 25 to line 326, col 30 of module three_party_one_cycle: 471570
+  ||||line 328, col 25 to line 328, col 30 of module three_party_one_cycle: 3860
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |||||line 322, col 11 to line 322, col 77 of module three_party_one_cycle: 471570
+  |||||line 323, col 11 to line 323, col 77 of module three_party_one_cycle: 3860
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  ||||||line 322, col 14 to line 322, col 77 of module three_party_one_cycle: 471570
+  ||||||line 323, col 14 to line 323, col 77 of module three_party_one_cycle: 3860
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |||||||line 322, col 14 to line 322, col 55 of module three_party_one_cycle: 471570
+  |||||||line 323, col 14 to line 323, col 55 of module three_party_one_cycle: 3860
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  ||||||||line 322, col 14 to line 322, col 33 of module three_party_one_cycle: 471570
+  ||||||||line 323, col 14 to line 323, col 33 of module three_party_one_cycle: 3860
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  ||||||||line 322, col 36 to line 322, col 55 of module three_party_one_cycle: 265112
+  ||||||||line 323, col 36 to line 323, col 55 of module three_party_one_cycle: 680
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |||||||line 322, col 58 to line 322, col 77 of module three_party_one_cycle: 133638
+  |||||||line 323, col 58 to line 323, col 77 of module three_party_one_cycle: 135
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  ||||line 326, col 33 to line 326, col 49 of module three_party_one_cycle: 71462
+  ||||line 328, col 33 to line 328, col 49 of module three_party_one_cycle: 13
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |||line 326, col 52 to line 326, col 89 of module three_party_one_cycle: 21074
+  |||line 328, col 52 to line 328, col 89 of module three_party_one_cycle: 6
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2774:0 @!@!@
+<inv_1620692028587237000 line 5, col 1 to line 5, col 23 of module MC>
+@!@!@ENDMSG 2774 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 6, col 1 to line 6, col 13 of module MC: 3860
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  |line 326, col 95 to line 326, col 141 of module three_party_one_cycle: 6868
+  |line 6, col 2 to line 6, col 13 of module MC: 3860
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||line 324, col 16 to line 324, col 78 of module three_party_one_cycle: 3860
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |||line 324, col 18 to line 324, col 78 of module three_party_one_cycle: 3860
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||||line 324, col 18 to line 324, col 59 of module three_party_one_cycle: 3860
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |||||line 324, col 18 to line 324, col 42 of module three_party_one_cycle: 3860
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||||||line 324, col 18 to line 324, col 23 of module three_party_one_cycle: 3860
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |||||||line 323, col 11 to line 323, col 77 of module three_party_one_cycle: 3860
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||||||||line 323, col 14 to line 323, col 77 of module three_party_one_cycle: 3860
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |||||||||line 323, col 14 to line 323, col 55 of module three_party_one_cycle: 3860
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||||||||||line 323, col 14 to line 323, col 33 of module three_party_one_cycle: 3860
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||||||||||line 323, col 36 to line 323, col 55 of module three_party_one_cycle: 680
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |||||||||line 323, col 58 to line 323, col 77 of module three_party_one_cycle: 135
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||||||line 324, col 26 to line 324, col 42 of module three_party_one_cycle: 13
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |||||line 324, col 45 to line 324, col 59 of module three_party_one_cycle: 6
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||||line 324, col 62 to line 324, col 78 of module three_party_one_cycle: 2
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2202:0 @!@!@
 End of statistics.
 @!@!@ENDMSG 2202 @!@!@
 @!@!@STARTMSG 2200:0 @!@!@
-Progress(29) at 2021-05-10 13:45:05: 1,095,420 states generated (5,415,275 s/min), 471,570 distinct states found (2,331,235 ds/min), 0 states left on queue.
+Progress(11) at 2021-05-10 20:13:50: 7,387 states generated (207,597 s/min), 3,860 distinct states found (108,477 ds/min), 1,747 states left on queue.
 @!@!@ENDMSG 2200 @!@!@
 @!@!@STARTMSG 2199:0 @!@!@
-1095420 states generated, 471570 distinct states found, 0 states left on queue.
+7387 states generated, 3860 distinct states found, 1747 states left on queue.
 @!@!@ENDMSG 2199 @!@!@
 @!@!@STARTMSG 2194:0 @!@!@
-The depth of the complete state graph search is 29.
+The depth of the complete state graph search is 11.
 @!@!@ENDMSG 2194 @!@!@
 @!@!@STARTMSG 2268:0 @!@!@
-The average outdegree of the complete state graph is 1 (minimum is 0, the maximum 4 and the 95th percentile is 2).
+The average outdegree of the complete state graph is 2 (minimum is 0, the maximum 4 and the 95th percentile is 3).
 @!@!@ENDMSG 2268 @!@!@
 @!@!@STARTMSG 2186:0 @!@!@
-Finished in 12163ms at (2021-05-10 13:45:05)
+Finished in 2142ms at (2021-05-10 20:13:50)
 @!@!@ENDMSG 2186 @!@!@
