@@ -1,0 +1,47 @@
+@!@!@STARTMSG 2262:0 @!@!@
+TLC2 Version 2.15 of Day Month 20?? (rev: eb3ff99)
+@!@!@ENDMSG 2262 @!@!@
+@!@!@STARTMSG 2187:0 @!@!@
+Running breadth-first search Model-Checking with fp 52 and seed -7501241086231562483 with 4 workers on 8 cores with 1214MB heap and 2730MB offheap memory [pid: 47998] (Mac OS X 10.16 x86_64, AdoptOpenJDK 14.0.1 x86_64, OffHeapDiskFPSet, DiskStateQueue).
+@!@!@ENDMSG 2187 @!@!@
+@!@!@STARTMSG 2220:0 @!@!@
+Starting SANY...
+@!@!@ENDMSG 2220 @!@!@
+Parsing file /Users/yingjie/Documents/GitHub/model_checking_on_hedged_atomic_swaps/three_party_two_cycles.toolbox/Model_1/MC.tla
+Parsing file /Users/yingjie/Documents/GitHub/model_checking_on_hedged_atomic_swaps/three_party_two_cycles.toolbox/Model_1/three_party_two_cycles.tla
+Parsing file /private/var/folders/pd/j6c2d3397rn1ql_nlj6ylttc0000gp/T/AppTranslocation/1DF41042-80B1-4BD2-B898-45F118A63F70/d/TLA+ Toolbox.app/Contents/Eclipse/plugins/org.lamport.tlatools_1.0.0.202004251858/tla2sany/StandardModules/TLC.tla
+Parsing file /private/var/folders/pd/j6c2d3397rn1ql_nlj6ylttc0000gp/T/AppTranslocation/1DF41042-80B1-4BD2-B898-45F118A63F70/d/TLA+ Toolbox.app/Contents/Eclipse/plugins/org.lamport.tlatools_1.0.0.202004251858/tla2sany/StandardModules/Integers.tla
+Parsing file /private/var/folders/pd/j6c2d3397rn1ql_nlj6ylttc0000gp/T/AppTranslocation/1DF41042-80B1-4BD2-B898-45F118A63F70/d/TLA+ Toolbox.app/Contents/Eclipse/plugins/org.lamport.tlatools_1.0.0.202004251858/tla2sany/StandardModules/Naturals.tla
+Parsing file /private/var/folders/pd/j6c2d3397rn1ql_nlj6ylttc0000gp/T/AppTranslocation/1DF41042-80B1-4BD2-B898-45F118A63F70/d/TLA+ Toolbox.app/Contents/Eclipse/plugins/org.lamport.tlatools_1.0.0.202004251858/tla2sany/StandardModules/Sequences.tla
+Parsing file /private/var/folders/pd/j6c2d3397rn1ql_nlj6ylttc0000gp/T/AppTranslocation/1DF41042-80B1-4BD2-B898-45F118A63F70/d/TLA+ Toolbox.app/Contents/Eclipse/plugins/org.lamport.tlatools_1.0.0.202004251858/tla2sany/StandardModules/FiniteSets.tla
+Semantic processing of module Naturals
+Semantic processing of module Integers
+Semantic processing of module Sequences
+Semantic processing of module FiniteSets
+Semantic processing of module TLC
+Semantic processing of module three_party_two_cycles
+Semantic processing of module MC
+@!@!@STARTMSG 2219:0 @!@!@
+SANY finished.
+@!@!@ENDMSG 2219 @!@!@
+@!@!@STARTMSG 2185:0 @!@!@
+Starting... (2021-05-13 22:22:43)
+@!@!@ENDMSG 2185 @!@!@
+@!@!@STARTMSG 2212:0 @!@!@
+Implied-temporal checking--satisfiability problem has 1 branches.
+@!@!@ENDMSG 2212 @!@!@
+@!@!@STARTMSG 2189:0 @!@!@
+Computing initial states...
+@!@!@ENDMSG 2189 @!@!@
+@!@!@STARTMSG 2190:0 @!@!@
+Finished computing initial states: 1 distinct state generated at 2021-05-13 22:22:44.
+@!@!@ENDMSG 2190 @!@!@
+@!@!@STARTMSG 2192:0 @!@!@
+Checking temporal properties for the current state space with 23541 total distinct states at (2021-05-13 22:22:47)
+@!@!@ENDMSG 2192 @!@!@
+@!@!@STARTMSG 2267:0 @!@!@
+Finished checking temporal properties in 00s at 2021-05-13 22:22:47
+@!@!@ENDMSG 2267 @!@!@
+@!@!@STARTMSG 2200:0 @!@!@
+Progress(16) at 2021-05-13 22:22:47: 79,378 states generated (79,378 s/min), 23,543 distinct states found (23,543 ds/min), 6,654 states left on queue.
+@!@!@ENDMSG 2200 @!@!@

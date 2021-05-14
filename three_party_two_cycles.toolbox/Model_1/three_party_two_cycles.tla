@@ -113,6 +113,7 @@ end define;
 
 \* A2B process =======================================================================================================
 fair process a2b = A2B begin 
+
 \* step 0
 P_E_AB: \*clock =0, Alice deposits premium_escrow on A2B
     
@@ -132,6 +133,7 @@ P_E_AB: \*clock =0, Alice deposits premium_escrow on A2B
     
   \* step 4
 P_R_SA_BA_ON_AB: \* clock =4, Bob deposits premium_redeem(sa,ba) on ab
+\* P_R_SA_BA_ON_AB can only be taken after step_taken[SP_E_AB]
  if  step_taken[SP_E_AB]/\clock<= premium_redeem_contract_sa["BA_ON_AB"].deadline /\ premium_redeem_contract_sa["BA_ON_AB"].state=INIT then 
                premium_redeem_contract_sa["BA_ON_AB"].state:=ESCROW 
               ||premium_redeem_contract_sa["BA_ON_AB"].timeout:=path_signature_sa["BA_ON_AB"].timeout;\*the path sig should be published before 10
@@ -142,11 +144,15 @@ P_R_SA_BA_ON_AB: \* clock =4, Bob deposits premium_redeem(sa,ba) on ab
               end if;
   end if;
  
+ 
   \* determine conformity
+  \* precondition1: incoming premium_redeem deposited
   if ~ step_taken[SP_R_SA_A_ON_BA] /\ step_taken[SP_R_SA_BA_ON_AB] then 
       conforming["BOB"]:=FALSE||conforming["ALICE"]:=FALSE;
+  \* precondition 2: consider taking this step after the previous step taken or it timeouts
   elsif  ~step_considered[SP_R_SA_A_ON_BA]/\clock<=premium_redeem_contract_sa["A_ON_BA"].deadline then
      conforming["BOB"]:=FALSE;
+  \* precondition 3: if previous step is taken and the same chain allows this step to be taken
   elsif step_taken[SP_R_SA_A_ON_BA]/\step_taken[SP_E_AB]/\~step_taken[SP_R_SA_BA_ON_AB] then
       conforming["BOB"]:=FALSE;
   end if;
@@ -169,12 +175,20 @@ P_R_SA_BCA_ON_AB: \* clock =5, bob deposits premium_redeem(sa,bca) on AB
   end if;
   
   \*determining conformity
+  \* first rule out some cases when other parties are not conforming
+  \* if carol does not release a path signature but bob can release an extended one, carol is not conforming
+  \* whether alice is conforming depends on whether alice releases her pathsig
+  \* in practice, if the other parties are conforming, the following two predicate will not be true
   if step_taken[SP_R_SA_A_ON_CA]/\~step_taken[SP_R_SA_CA_ON_BC]/\step_taken[SP_R_SA_BCA_ON_AB] then
       conforming["BOB"]:=FALSE||conforming["CAROL"]:=FALSE;
   elsif ~step_taken[SP_R_SA_A_ON_CA]/\~step_taken[SP_R_SA_CA_ON_BC]/\step_taken[SP_R_SA_BCA_ON_AB] then
       conforming["ALICE"]:=FALSE|| conforming["BOB"]:=FALSE||conforming["CAROL"]:=FALSE;
+  
+ \* precondition 1: consider this step at a proper time
   elsif ~step_considered[SP_R_SA_CA_ON_BC]/\clock<=premium_redeem_contract_sa["CA_ON_BC"].deadline then
       conforming["BOB"]:=FALSE;
+  \* precondition 2: if previous step is taken and this chain allows you to take this step
+  \* the party should take this step
   elsif step_taken[SP_R_SA_CA_ON_BC]/\step_taken[SP_E_AB]/\~step_taken[SP_R_SA_BCA_ON_AB] then
        conforming["BOB"]:=FALSE;
   end if;
@@ -184,7 +198,7 @@ P_R_SA_BCA_ON_AB: \* clock =5, bob deposits premium_redeem(sa,bca) on AB
 \* step 6
 
 AB: \*clock =6, Alice escrows asset on (A,B)
-    
+    \* relies on premium_escrow_contract["A2B"].state=ACTIVATED to be activated
     if premium_escrow_contract["A2B"].state=ACTIVATED/\clock<= asset_contract["A2B"].deadline /\  asset_contract["A2B"].state=INIT then 
        asset_contract["A2B"].state:=ESCROW 
               || asset_contract["A2B"].timeout:=path_signature_sa["BCA_ON_AB"].timeout;
@@ -198,6 +212,7 @@ AB: \*clock =6, Alice escrows asset on (A,B)
     end if;
     
     \* determine conformity
+    \* precondition 1: if premium_escrow_contract["A2B"].state is ever activated, and this step is not taken
     if premium_escrow_contract["A2B"].state>=ACTIVATED /\~step_taken[SAB] then 
        conforming["ALICE"]:=FALSE;
     end if;
@@ -207,6 +222,9 @@ AB: \*clock =6, Alice escrows asset on (A,B)
       
   \* step 10 
 SA_BA_ON_AB: \* clock =10, BOB releases (sa,Ba) on AB
+\* does not rely on any previous steps taken on the same chain
+\* in fact, it only changes the state of asset_contract and premium_redeem_contract_sa,
+\* thus we only to place this step in the end
  if  clock<= path_signature_sa["BA_ON_AB"].timeout /\ path_signature_sa["BA_ON_AB"].state=INIT then 
        path_signature_sa["BA_ON_AB"].state:=RELEASED;
               step_taken[SSA_BA_ON_AB]:= TRUE;
@@ -227,10 +245,13 @@ SA_BA_ON_AB: \* clock =10, BOB releases (sa,Ba) on AB
     end if;
  
  \* determine conformity
+ \* precondition 1:  previous step is taken, take this step anyway
  if ~step_taken[SSA_A_ON_BA]/\step_taken[SSA_BA_ON_AB] then
     conforming["ALICE"]:=FALSE;
+  \* precondition 2: consider this step at a proper time
  elsif ~step_considered[SSA_A_ON_BA]/\clock<=path_signature_sa["A_ON_BA"].timeout then
     conforming["BOB"]:=FALSE;
+    \* precondition 3: if previous step is taken and premium_redeem is escrowed, do not skip this step
  elsif  step_taken[SP_R_SA_BA_ON_AB]/\step_taken[SSA_A_ON_BA] /\ ~step_taken[SSA_BA_ON_AB] then
      conforming["BOB"]:=FALSE;
  end if;
@@ -263,12 +284,17 @@ SA_BCA_ON_AB: \* clock =11, bob publishes premium_redeem(sa,bca) on AB
     end if;
 
  \* determine comformity
+ \* if carol does not release her pathsig, but bob is able to release an extended one
+ \* carol is not conforming;
+ \* whether alice is conforming or not depend on whether alice releases hers
  if step_taken[SSA_BCA_ON_AB]/\~step_taken[SSA_CA_ON_BC]/\step_taken[SSA_A_ON_CA] then
     conforming["CAROL"]:=FALSE;
  elsif step_taken[SSA_BCA_ON_AB]/\~step_taken[SSA_CA_ON_BC]/\~step_taken[SSA_A_ON_CA] then
     conforming["CAROL"]:=FALSE || conforming["ALICE"]:=FALSE;
+  \* time restriction
  elsif  step_considered[SSA_CA_ON_BC]/\clock<= path_signature_sa["CA_ON_BC"].timeout then
     conforming["BOB"]:=FALSE;
+    \* if premium_redeem is deposited and previous step is taken, do not skip this step
  elsif   step_taken[SP_R_SA_BCA_ON_AB] /\step_taken[SSA_CA_ON_BC] /\ ~step_taken[SSA_BCA_ON_AB] then
     conforming["BOB"]:=FALSE;
  end if; 
@@ -288,8 +314,10 @@ P_E_BC: \* clock =1, Bob publishes premium_escrow on B2C
   end if;
    
    \*determine conformity
+   \* time constraint
    if ~step_considered[SP_E_AB] /\ clock<=premium_escrow_contract["A2B"].deadline then
        conforming["BOB"]:=FALSE;
+    \* precondition should be satisfied
    elsif ~step_taken[SP_E_AB]/\step_taken[SP_E_BC] then
      conforming["BOB"]:=FALSE;
    elsif step_taken[SP_E_AB]/\~step_taken[SP_E_BC] then
@@ -315,10 +343,14 @@ P_R_SA_CA_ON_BC: \* clock =4, carol deposits premium_redeem(sa,ca) on bc
 
   
   \* determine conformity
+  \* if alice does not deposit her premium_redeem, carol should not take this step
   if ~step_taken[SP_R_SA_A_ON_CA]/\step_taken[SP_R_SA_CA_ON_BC] then \* Carol should not deposit premium_redeem before Alice does so
      conforming["CAROL"]:=FALSE||conforming["ALICE"]:=FALSE;
+   \* time constraint
   elsif ~step_considered[SP_R_SA_A_ON_CA]/\clock<=premium_redeem_contract_sa["A_ON_CA"].deadline then 
      conforming["CAROL"]:=FALSE;
+     \* if previous step is taken, and the same chain allows the party to take this step
+     \* do not skip this step
   elsif step_taken[SP_R_SA_A_ON_CA]/\step_taken[SP_E_BC]/\~step_taken[SP_R_SA_CA_ON_BC] then
       conforming["CAROL"]:=FALSE;
   end if;
@@ -374,6 +406,7 @@ SA_CA_ON_BC: \* clock =10, carol releases (sa,ca) on bc
     end if;
 
  \* determine conformity
+ \* if carol is able to take this step before alice releases her pathsig
  if ~step_taken[SSA_A_ON_CA]/\step_taken[SSA_CA_ON_BC] then
     conforming["ALICE"]:=FALSE;
 elsif ~step_considered[SSA_A_ON_CA]/\clock<=path_signature_sa["A_ON_CA"].timeout then
@@ -459,6 +492,7 @@ CA: \*clock =8, Carol escrows asset on (C,A)
        conforming["CAROL"]:=FALSE;
     end if;
 \* then go to SA_A_ON_CA on process c2a
+
 \* step 9
 SA_A_ON_CA: \* clock =9, Alice releases (sa,a) on CA
  if clock<= path_signature_sa["A_ON_CA"].timeout /\ path_signature_sa["A_ON_CA"].state=INIT then 
@@ -487,12 +521,13 @@ SA_A_ON_CA: \* clock =9, Alice releases (sa,a) on CA
      conforming["ALICE"]:=FALSE;
  elsif  step_taken[SP_R_SA_A_ON_CA]/\(step_taken[SCA]/\step_taken[SBA])/\~step_taken[SSA_A_ON_CA] then \* should release the pathsig if all incoming assets are escrowed                                                                       \* or it does not escrow any outgoing assets
      conforming["ALICE"]:=FALSE; 
- elsif ~step_considered[SAB] then
+ elsif ~step_considered[SAB]/\clock<=asset_contract["A2B"].deadline then \* decide whether to release the secret bases on whether it escrows outgoing asset
      conforming["ALICE"]:=FALSE;
+     \* should release the pathsig if step_taken[SP_R_SA_A_ON_CA] /\ ~step_taken[SAB]
  elsif step_taken[SP_R_SA_A_ON_CA] /\ ~step_taken[SAB] /\~step_taken[SSA_A_ON_CA] then
      conforming["ALICE"]:=FALSE;
- elsif ~step_taken[SP_R_SA_A_ON_CA]/\ step_taken[SSA_A_ON_CA] then 
-       conforming["ALICE"]:=FALSE;
+     \* if some incoming asset is not escrowed and step_taken[SAB]
+     \* do not release the pathsig
  elsif ~(step_taken[SCA]/\step_taken[SBA])/\ step_taken[SAB]/\step_taken[SSA_A_ON_CA] then 
      conforming["ALICE"]:=FALSE;
  end if;
@@ -602,12 +637,10 @@ P_R_SA_A_ON_BA: \* clock =3, Alice deposits premium_redeem(sa,a) on BA
     conforming["ALICE"]:=FALSE;
   elsif  step_taken[SP_R_SA_A_ON_BA]/\(step_taken[SCA]/\step_taken[SBA])/\~step_taken[SSA_A_ON_BA] then \* should release the pathsig if all incoming assets are escrowed                                                                       \* or it does not escrow any outgoing assets
      conforming["ALICE"]:=FALSE; 
- elsif ~step_considered[SAB] then
+ elsif ~step_considered[SAB] /\clock<=asset_contract["A2B"].deadline then
      conforming["ALICE"]:=FALSE;
  elsif step_taken[SP_R_SA_A_ON_BA] /\ ~step_taken[SAB] /\~step_taken[SSA_A_ON_CA] then
      conforming["ALICE"]:=FALSE;
- elsif ~step_taken[SP_R_SA_A_ON_BA]/\ step_taken[SSA_A_ON_BA] then 
-       conforming["ALICE"]:=FALSE;
  elsif ~(step_taken[SCA]/\step_taken[SBA])/\ step_taken[SAB]/\step_taken[SSA_A_ON_BA] then 
      conforming["ALICE"]:=FALSE;
  end if;
@@ -625,7 +658,7 @@ fair process Clock = CLOCK begin tick:
 
 
 end algorithm; *)
-\* BEGIN TRANSLATION - the hash of the PCal code: PCal-afc4c25df2689fd80a1549294db45fdb
+\* BEGIN TRANSLATION - the hash of the PCal code: PCal-cfda5fc014c7cd8dd72a2bf74d8c894b
 VARIABLES asset_contract, premium_escrow_contract, premium_redeem_contract_sa, 
           path_signature_sa, wallet, compensation, clock, step_considered, 
           conforming, step_taken, ending, party_contract_map, pc
@@ -1132,16 +1165,14 @@ SA_A_ON_CA == /\ pc[C2A] = "SA_A_ON_CA"
                     THEN /\ conforming' = [conforming EXCEPT !["ALICE"] = FALSE]
                     ELSE /\ IF step_taken'[SP_R_SA_A_ON_CA]/\(step_taken'[SCA]/\step_taken'[SBA])/\~step_taken'[SSA_A_ON_CA]
                                THEN /\ conforming' = [conforming EXCEPT !["ALICE"] = FALSE]
-                               ELSE /\ IF ~step_considered[SAB]
+                               ELSE /\ IF ~step_considered[SAB]/\clock<=asset_contract'["A2B"].deadline
                                           THEN /\ conforming' = [conforming EXCEPT !["ALICE"] = FALSE]
                                           ELSE /\ IF step_taken'[SP_R_SA_A_ON_CA] /\ ~step_taken'[SAB] /\~step_taken'[SSA_A_ON_CA]
                                                      THEN /\ conforming' = [conforming EXCEPT !["ALICE"] = FALSE]
-                                                     ELSE /\ IF ~step_taken'[SP_R_SA_A_ON_CA]/\ step_taken'[SSA_A_ON_CA]
+                                                     ELSE /\ IF ~(step_taken'[SCA]/\step_taken'[SBA])/\ step_taken'[SAB]/\step_taken'[SSA_A_ON_CA]
                                                                 THEN /\ conforming' = [conforming EXCEPT !["ALICE"] = FALSE]
-                                                                ELSE /\ IF ~(step_taken'[SCA]/\step_taken'[SBA])/\ step_taken'[SAB]/\step_taken'[SSA_A_ON_CA]
-                                                                           THEN /\ conforming' = [conforming EXCEPT !["ALICE"] = FALSE]
-                                                                           ELSE /\ TRUE
-                                                                                /\ UNCHANGED conforming
+                                                                ELSE /\ TRUE
+                                                                     /\ UNCHANGED conforming
               /\ step_considered' = [step_considered EXCEPT ![SSA_A_ON_CA] = TRUE]
               /\ ending' = [ending EXCEPT ![C2A] = TRUE]
               /\ pc' = [pc EXCEPT ![C2A] = "Done"]
@@ -1258,16 +1289,14 @@ SA_A_ON_BA == /\ pc[B2A] = "SA_A_ON_BA"
                     THEN /\ conforming' = [conforming EXCEPT !["ALICE"] = FALSE]
                     ELSE /\ IF step_taken'[SP_R_SA_A_ON_BA]/\(step_taken'[SCA]/\step_taken'[SBA])/\~step_taken'[SSA_A_ON_BA]
                                THEN /\ conforming' = [conforming EXCEPT !["ALICE"] = FALSE]
-                               ELSE /\ IF ~step_considered[SAB]
+                               ELSE /\ IF ~step_considered[SAB] /\clock<=asset_contract'["A2B"].deadline
                                           THEN /\ conforming' = [conforming EXCEPT !["ALICE"] = FALSE]
                                           ELSE /\ IF step_taken'[SP_R_SA_A_ON_BA] /\ ~step_taken'[SAB] /\~step_taken'[SSA_A_ON_CA]
                                                      THEN /\ conforming' = [conforming EXCEPT !["ALICE"] = FALSE]
-                                                     ELSE /\ IF ~step_taken'[SP_R_SA_A_ON_BA]/\ step_taken'[SSA_A_ON_BA]
+                                                     ELSE /\ IF ~(step_taken'[SCA]/\step_taken'[SBA])/\ step_taken'[SAB]/\step_taken'[SSA_A_ON_BA]
                                                                 THEN /\ conforming' = [conforming EXCEPT !["ALICE"] = FALSE]
-                                                                ELSE /\ IF ~(step_taken'[SCA]/\step_taken'[SBA])/\ step_taken'[SAB]/\step_taken'[SSA_A_ON_BA]
-                                                                           THEN /\ conforming' = [conforming EXCEPT !["ALICE"] = FALSE]
-                                                                           ELSE /\ TRUE
-                                                                                /\ UNCHANGED conforming
+                                                                ELSE /\ TRUE
+                                                                     /\ UNCHANGED conforming
               /\ step_considered' = [step_considered EXCEPT ![SSA_A_ON_BA] = TRUE]
               /\ ending' = [ending EXCEPT ![B2A] = TRUE]
               /\ pc' = [pc EXCEPT ![B2A] = "Done"]
@@ -1311,5 +1340,5 @@ Spec == /\ Init /\ [][Next]_vars
 
 Termination == <>(\A self \in ProcSet: pc[self] = "Done")
 
-\* END TRANSLATION - the hash of the generated TLA code (remove to silence divergence warnings): TLA-8d9ac510f3d1d2f07f8eee0112a8a9b3
+\* END TRANSLATION - the hash of the generated TLA code (remove to silence divergence warnings): TLA-2bd868900c15e5c60f5e0f70c71fa4f9
 ====

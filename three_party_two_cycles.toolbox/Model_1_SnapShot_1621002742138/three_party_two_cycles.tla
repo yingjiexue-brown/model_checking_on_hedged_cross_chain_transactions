@@ -526,6 +526,8 @@ SA_A_ON_CA: \* clock =9, Alice releases (sa,a) on CA
      \* should release the pathsig if step_taken[SP_R_SA_A_ON_CA] /\ ~step_taken[SAB]
  elsif step_taken[SP_R_SA_A_ON_CA] /\ ~step_taken[SAB] /\~step_taken[SSA_A_ON_CA] then
      conforming["ALICE"]:=FALSE;
+\* elsif ~step_taken[SP_R_SA_A_ON_CA]/\ step_taken[SSA_A_ON_CA] then 
+       \*conforming["ALICE"]:=FALSE;
      \* if some incoming asset is not escrowed and step_taken[SAB]
      \* do not release the pathsig
  elsif ~(step_taken[SCA]/\step_taken[SBA])/\ step_taken[SAB]/\step_taken[SSA_A_ON_CA] then 
@@ -641,6 +643,8 @@ P_R_SA_A_ON_BA: \* clock =3, Alice deposits premium_redeem(sa,a) on BA
      conforming["ALICE"]:=FALSE;
  elsif step_taken[SP_R_SA_A_ON_BA] /\ ~step_taken[SAB] /\~step_taken[SSA_A_ON_CA] then
      conforming["ALICE"]:=FALSE;
+ \*elsif ~step_taken[SP_R_SA_A_ON_BA]/\ step_taken[SSA_A_ON_BA] then 
+       \*conforming["ALICE"]:=FALSE;
  elsif ~(step_taken[SCA]/\step_taken[SBA])/\ step_taken[SAB]/\step_taken[SSA_A_ON_BA] then 
      conforming["ALICE"]:=FALSE;
  end if;

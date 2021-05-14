@@ -526,6 +526,8 @@ SA_A_ON_CA: \* clock =9, Alice releases (sa,a) on CA
      \* should release the pathsig if step_taken[SP_R_SA_A_ON_CA] /\ ~step_taken[SAB]
  elsif step_taken[SP_R_SA_A_ON_CA] /\ ~step_taken[SAB] /\~step_taken[SSA_A_ON_CA] then
      conforming["ALICE"]:=FALSE;
+ elsif ~step_taken[SP_R_SA_A_ON_CA]/\ step_taken[SSA_A_ON_CA] then 
+       conforming["ALICE"]:=FALSE;
      \* if some incoming asset is not escrowed and step_taken[SAB]
      \* do not release the pathsig
  elsif ~(step_taken[SCA]/\step_taken[SBA])/\ step_taken[SAB]/\step_taken[SSA_A_ON_CA] then 
@@ -641,6 +643,8 @@ P_R_SA_A_ON_BA: \* clock =3, Alice deposits premium_redeem(sa,a) on BA
      conforming["ALICE"]:=FALSE;
  elsif step_taken[SP_R_SA_A_ON_BA] /\ ~step_taken[SAB] /\~step_taken[SSA_A_ON_CA] then
      conforming["ALICE"]:=FALSE;
+ elsif ~step_taken[SP_R_SA_A_ON_BA]/\ step_taken[SSA_A_ON_BA] then 
+       conforming["ALICE"]:=FALSE;
  elsif ~(step_taken[SCA]/\step_taken[SBA])/\ step_taken[SAB]/\step_taken[SSA_A_ON_BA] then 
      conforming["ALICE"]:=FALSE;
  end if;
@@ -658,7 +662,7 @@ fair process Clock = CLOCK begin tick:
 
 
 end algorithm; *)
-\* BEGIN TRANSLATION - the hash of the PCal code: PCal-cfda5fc014c7cd8dd72a2bf74d8c894b
+\* BEGIN TRANSLATION - the hash of the PCal code: PCal-b41780f0accdda92ba5af9502a763197
 VARIABLES asset_contract, premium_escrow_contract, premium_redeem_contract_sa, 
           path_signature_sa, wallet, compensation, clock, step_considered, 
           conforming, step_taken, ending, party_contract_map, pc
@@ -1169,10 +1173,12 @@ SA_A_ON_CA == /\ pc[C2A] = "SA_A_ON_CA"
                                           THEN /\ conforming' = [conforming EXCEPT !["ALICE"] = FALSE]
                                           ELSE /\ IF step_taken'[SP_R_SA_A_ON_CA] /\ ~step_taken'[SAB] /\~step_taken'[SSA_A_ON_CA]
                                                      THEN /\ conforming' = [conforming EXCEPT !["ALICE"] = FALSE]
-                                                     ELSE /\ IF ~(step_taken'[SCA]/\step_taken'[SBA])/\ step_taken'[SAB]/\step_taken'[SSA_A_ON_CA]
+                                                     ELSE /\ IF ~step_taken'[SP_R_SA_A_ON_CA]/\ step_taken'[SSA_A_ON_CA]
                                                                 THEN /\ conforming' = [conforming EXCEPT !["ALICE"] = FALSE]
-                                                                ELSE /\ TRUE
-                                                                     /\ UNCHANGED conforming
+                                                                ELSE /\ IF ~(step_taken'[SCA]/\step_taken'[SBA])/\ step_taken'[SAB]/\step_taken'[SSA_A_ON_CA]
+                                                                           THEN /\ conforming' = [conforming EXCEPT !["ALICE"] = FALSE]
+                                                                           ELSE /\ TRUE
+                                                                                /\ UNCHANGED conforming
               /\ step_considered' = [step_considered EXCEPT ![SSA_A_ON_CA] = TRUE]
               /\ ending' = [ending EXCEPT ![C2A] = TRUE]
               /\ pc' = [pc EXCEPT ![C2A] = "Done"]
@@ -1293,10 +1299,12 @@ SA_A_ON_BA == /\ pc[B2A] = "SA_A_ON_BA"
                                           THEN /\ conforming' = [conforming EXCEPT !["ALICE"] = FALSE]
                                           ELSE /\ IF step_taken'[SP_R_SA_A_ON_BA] /\ ~step_taken'[SAB] /\~step_taken'[SSA_A_ON_CA]
                                                      THEN /\ conforming' = [conforming EXCEPT !["ALICE"] = FALSE]
-                                                     ELSE /\ IF ~(step_taken'[SCA]/\step_taken'[SBA])/\ step_taken'[SAB]/\step_taken'[SSA_A_ON_BA]
+                                                     ELSE /\ IF ~step_taken'[SP_R_SA_A_ON_BA]/\ step_taken'[SSA_A_ON_BA]
                                                                 THEN /\ conforming' = [conforming EXCEPT !["ALICE"] = FALSE]
-                                                                ELSE /\ TRUE
-                                                                     /\ UNCHANGED conforming
+                                                                ELSE /\ IF ~(step_taken'[SCA]/\step_taken'[SBA])/\ step_taken'[SAB]/\step_taken'[SSA_A_ON_BA]
+                                                                           THEN /\ conforming' = [conforming EXCEPT !["ALICE"] = FALSE]
+                                                                           ELSE /\ TRUE
+                                                                                /\ UNCHANGED conforming
               /\ step_considered' = [step_considered EXCEPT ![SSA_A_ON_BA] = TRUE]
               /\ ending' = [ending EXCEPT ![B2A] = TRUE]
               /\ pc' = [pc EXCEPT ![B2A] = "Done"]
@@ -1340,5 +1348,5 @@ Spec == /\ Init /\ [][Next]_vars
 
 Termination == <>(\A self \in ProcSet: pc[self] = "Done")
 
-\* END TRANSLATION - the hash of the generated TLA code (remove to silence divergence warnings): TLA-2bd868900c15e5c60f5e0f70c71fa4f9
+\* END TRANSLATION - the hash of the generated TLA code (remove to silence divergence warnings): TLA-dfce10a660f7626d39915c17fc85f2ff
 ====

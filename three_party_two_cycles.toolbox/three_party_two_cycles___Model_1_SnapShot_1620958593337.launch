@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <launchConfiguration type="org.lamport.tla.toolbox.tool.tlc.modelCheck">
-    <stringAttribute key="configurationName" value="Model_1"/>
+    <stringAttribute key="configurationName" value="Model_1_SnapShot_1620958593337"/>
     <intAttribute key="distributedFPSetCount" value="0"/>
     <stringAttribute key="distributedNetworkInterface" value="192.168.1.153"/>
     <intAttribute key="distributedNodesCount" value="1"/>
     <stringAttribute key="distributedTLC" value="off"/>
-    <intAttribute key="fpIndex" value="62"/>
+    <intAttribute key="fpIndex" value="127"/>
     <intAttribute key="maxHeapSize" value="25"/>
     <stringAttribute key="modelBehaviorInit" value=""/>
     <stringAttribute key="modelBehaviorNext" value=""/>
@@ -15,7 +15,7 @@
     <stringAttribute key="modelComments" value=""/>
     <booleanAttribute key="modelCorrectnessCheckDeadlock" value="true"/>
     <listAttribute key="modelCorrectnessInvariants">
-        <listEntry value="1~conformingliveness"/>
+        <listEntry value="0~conformingliveness"/>
         <listEntry value="0~(all_steps_taken /\ conforming[&quot;ALICE&quot;]/\ conforming[&quot;BOB&quot;]/\conforming[&quot;CAROL&quot;])"/>
         <listEntry value="0contractliveness"/>
         <listEntry value="0walletliveness"/>
@@ -23,12 +23,12 @@
         <listEntry value="0compensated_partial"/>
         <listEntry value="0compensated_BA"/>
         <listEntry value="0compensated_both"/>
-        <listEntry value="1constant_hold"/>
     </listAttribute>
     <listAttribute key="modelCorrectnessProperties">
         <listEntry value="0Termination"/>
         <listEntry value="0(step_considered[0]/\~conforming[&quot;ALICE&quot;])~&gt;(~conforming[&quot;BOB&quot;])"/>
-        <listEntry value="0(step_considered[1]/\~conforming[&quot;ALICE&quot;])~&gt;(~conforming[&quot;BOB&quot;])"/>
+        <listEntry value="1(step_considered[1]/\~conforming[&quot;ALICE&quot;])~&gt;(~conforming[&quot;BOB&quot;])"/>
+        <listEntry value="0(step_considered[3]/\~conforming[&quot;ALICE&quot;])~&gt;(~conforming[&quot;BOB&quot;])"/>
     </listAttribute>
     <intAttribute key="modelEditorOpenTabs" value="8"/>
     <stringAttribute key="modelExpressionEval" value=""/>
